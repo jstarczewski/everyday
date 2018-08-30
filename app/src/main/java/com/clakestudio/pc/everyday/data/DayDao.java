@@ -8,8 +8,6 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
-import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
-
 
 /**
  * Created by Jan on 8/30/2018.
@@ -21,12 +19,11 @@ public interface DayDao {
     @Query("SELECT * FROM Days")
     List<Day> getDays();
 
-
     @Query("SELECT * FROM Days WHERE dayId= :dayId")
-    Day getDayById();
+    Day getDayById(String dayId);
 
     @Query("SELECT * FROM Days WHERE date= :date")
-    Day getDayByDate();
+    Day getDayByDate(String date);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDay(Day day);
@@ -36,5 +33,8 @@ public interface DayDao {
 
     @Query("UPDATE Days SET title = :title, note = :note WHERE dayId = :dayId")
     void updateDay(String title, String note);
+
+    @Query("DELETE FROM Days WHERE dayId = :dayId")
+    int detelteByDayId(String dayId);
 
 }
