@@ -17,7 +17,7 @@ import java.util.List;
 public interface DayDao {
 
     @Query("SELECT * FROM Days")
-    List<Day> getDays();
+    List<Day> getDayList();
 
     @Query("SELECT * FROM Days WHERE dayId= :dayId")
     Day getDayById(String dayId);
@@ -35,6 +35,6 @@ public interface DayDao {
     void updateDay(String title, String note);
 
     @Query("DELETE FROM Days WHERE dayId = :dayId")
-    int detelteByDayId(String dayId);
+    int deleteByDayId(String dayId);
 
 }
