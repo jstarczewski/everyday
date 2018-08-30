@@ -18,7 +18,7 @@ import com.clakestudio.pc.everyday.R;
  * Use the {@link ShowDaysFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowDaysFragment extends Fragment {
+public class ShowDaysFragment extends Fragment implements ShowDaysContract.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,18 +38,11 @@ public class ShowDaysFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ShowDaysFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowDaysFragment newInstance(String param1, String param2) {
-        ShowDaysFragment fragment = new ShowDaysFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static ShowDaysFragment newInstance() {
+        return new ShowDaysFragment();
     }
 
     @Override
@@ -90,6 +83,11 @@ public class ShowDaysFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void setPresenter(ShowDaysContract.Presenter presenter) {
+
     }
 
     /**

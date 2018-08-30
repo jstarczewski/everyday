@@ -25,6 +25,9 @@ public class ShowDaysContract {
  //       void openDayDetails(@NonNull Day requestedDay);
 
 
+    }
+
+    interface View extends BaseView<Presenter> {
 
     }
 
