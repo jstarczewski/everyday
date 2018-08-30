@@ -1,4 +1,4 @@
-package com.clakestudio.pc.everyday;
+package com.clakestudio.pc.everyday.showdays;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ShowDaysActivity extends AppCompatActivity {
+import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.utils.BaseActivity;
+
+public class ShowDaysActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
