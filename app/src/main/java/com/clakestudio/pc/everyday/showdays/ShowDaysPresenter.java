@@ -38,7 +38,13 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void loadDays() {
-        daysView.showDays((ArrayList<Day>) dayRepository.getDayList());
+        (new Thread() {
+
+            @Override
+            public void run() {
+                daysView.showDays((ArrayList<Day>) dayRepository.getDays());
+            }
+        }).start();
     }
 
 

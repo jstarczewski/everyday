@@ -14,28 +14,26 @@ public class DayRepository {
 
     private final DayDao dayDao;
     private List<Day> daysList;
+    private Boolean isUpdated = false;
 
     @Inject
     public DayRepository(DayDao dayDao) {
         this.dayDao = dayDao;
     }
 
-    public List<Day> getDayList() {
-        (new Thread() {
+
+    public List<Day> getDays() {
+        return dayDao.getDayList();
+
+
+     /*   (new Thread() {
 
             @Override
             public void run() {
-
-                Log.e("Elo", "No i nie chuj");
                 daysList = dayDao.getDayList();
-
+                isUpdated = true;
             }
-
-
-        }).start();
-        if (daysList == null || daysList.isEmpty())
-            Log.e("Elo", "No i chuj");
-        return daysList;
+        }).start();*/
     }
 
 
@@ -51,7 +49,6 @@ public class DayRepository {
         (new Thread() {
             @Override
             public void run() {
-                Log.e("Inserting", "inserting");
                 dayDao.insertDay(day);
             }
         }).start();
