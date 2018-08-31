@@ -27,6 +27,15 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class ShowDaysFragment extends Fragment implements ShowDaysContract.View {
+
+    //
+
+    private View noDaysView;
+
+    private ShowDaysContract.Presenter daysPresenter;
+
+    private ShowDaysAdapter showDaysAdapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -68,9 +77,9 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_show_days, container, false);
+        View v = inflater.inflate(R.layout.fragment_show_days, container, false);
 
-        recyclerView = (RecyclerView)v.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
 
 
         return v;
@@ -82,11 +91,13 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         ArrayList<Day> days = new ArrayList<>();
-        days.add(new Day("1", "30.08.2018", "Whats your why is", "This time mate"));
-        ShowDaysAdapter showDaysAdapter = new ShowDaysAdapter(days);
+        showDaysAdapter = new ShowDaysAdapter(days);
         recyclerView.setAdapter(showDaysAdapter);
+        daysPresenter.addNewDay();
+        daysPresenter.start();
 
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -113,6 +124,12 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
             }
         }
     */
+
+    /**
+     * Methods from Contract interface
+     */
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -120,13 +137,14 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
     }
 
     @Override
-    public void setPresenter(ShowDaysContract.Presenter presenter) {
-
+    public void setPresenter(@NonNull ShowDaysContract.Presenter presenter) {
+        daysPresenter = presenter;
     }
 
-    @Override
-    public void loadDays() {
 
+    @Override
+    public void showDays(ArrayList<Day> days) {
+        showDaysAdapter.replaceData(days);
     }
 
     @Override
@@ -172,6 +190,21 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         public ShowDaysAdapter(ArrayList<Day> days) {
             this.days = days;
         }
+
+
+        public ArrayList<Day> getDays() {
+            return days;
+        }
+
+        public void setDays(ArrayList<Day> days) {
+            this.days = days;
+        }
+
+        public void replaceData(ArrayList<Day> days) {
+            setDays(days);
+            notifyDataSetChanged();
+        }
+
 
         @NonNull
         @Override

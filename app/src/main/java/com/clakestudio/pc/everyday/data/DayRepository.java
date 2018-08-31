@@ -11,6 +11,7 @@ import javax.inject.Inject;
 public class DayRepository {
 
     private final DayDao dayDao;
+    private List<Day> daysList;
 
     @Inject
     public DayRepository(DayDao dayDao) {
@@ -18,8 +19,17 @@ public class DayRepository {
     }
 
     public List<Day> getDayList() {
-        return dayDao.getDayList();
+        (new Thread() {
+
+            @Override
+            public void run() {
+                daysList = dayDao.getDayList();
+
+            }
+        }).start();
+        return daysList;
     }
+
 
     public Day getDayById(String dayId) {
         return dayDao.getDayById(dayId);
@@ -29,8 +39,14 @@ public class DayRepository {
         return dayDao.getDayByDate(date);
     }
 
-    public void addNewDay(Day day) {
-        dayDao.insertDay(day);
+    public void addNewDay(final Day day) {
+
+        (new Thread() {
+            @Override
+            public void run() {
+                dayDao.insertDay(day);
+            }
+        }).start();
     }
 
     public int deleteDayById(String dayId) {
@@ -38,7 +54,7 @@ public class DayRepository {
     }
 
     public void updateDay(String title, String note, String dayId) {
-        dayDao.updateDay(title,note, dayId);
+        dayDao.updateDay(title, note, dayId);
     }
 
 }

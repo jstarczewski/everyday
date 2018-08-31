@@ -4,13 +4,26 @@ import android.support.annotation.NonNull;
 
 import com.clakestudio.pc.everyday.BasePresenter;
 import com.clakestudio.pc.everyday.BaseView;
+import com.clakestudio.pc.everyday.data.Day;
+
+import java.util.ArrayList;
 
 /**
  * Created by Jan on 8/30/2018.
  */
 
-public class ShowDaysContract {
+public interface ShowDaysContract {
 
+
+    interface View extends BaseView<Presenter> {
+
+
+        void showDays(ArrayList<Day> days);
+
+        void addNewDay();
+
+
+    }
 
     interface Presenter extends BasePresenter {
 
@@ -21,21 +34,9 @@ public class ShowDaysContract {
         void addNewDay();
 
 
-
         // start with database
 
  //       void openDayDetails(@NonNull Day requestedDay);
-
-
-    }
-
-    interface View extends BaseView<Presenter> {
-
-
-        void loadDays();
-
-        void addNewDay();
-
 
 
     }
