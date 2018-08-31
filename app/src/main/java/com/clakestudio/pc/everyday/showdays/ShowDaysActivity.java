@@ -1,6 +1,5 @@
 package com.clakestudio.pc.everyday.showdays;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,8 +32,6 @@ public class ShowDaysActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
 
         ShowDaysFragment showDaysFragment = (ShowDaysFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (showDaysFragment == null) {

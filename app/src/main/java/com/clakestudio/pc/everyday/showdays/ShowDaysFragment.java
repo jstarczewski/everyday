@@ -67,7 +67,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
             mListener.onFragmentInteraction(uri);
         }
     }
-
+/*
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -78,7 +78,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
+*/
     @Override
     public void onDetach() {
         super.onDetach();

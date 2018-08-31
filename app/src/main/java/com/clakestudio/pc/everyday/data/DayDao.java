@@ -32,7 +32,7 @@ public interface DayDao {
     int updateDay(Day day);
 
     @Query("UPDATE Days SET title = :title, note = :note WHERE dayId = :dayId")
-    void updateDay(String title, String note);
+    void updateDay(String title, String note, String dayId);
 
     @Query("DELETE FROM Days WHERE dayId = :dayId")
     int deleteByDayId(String dayId);

@@ -37,8 +37,8 @@ public class DayRepository {
         return dayDao.deleteByDayId(dayId);
     }
 
-    public void updateDay(String title, String note) {
-        dayDao.updateDay(title,note);
+    public void updateDay(String title, String note, String dayId) {
+        dayDao.updateDay(title,note, dayId);
     }
 
 }

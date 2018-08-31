@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 @Entity(tableName = "Days")
 public final class Day {
 
+
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "dayId") // dayId
@@ -54,5 +55,15 @@ public final class Day {
     @NonNull
     public String getNote() {
         return note;
+    }
+
+
+    @NonNull
+    public String getDayId() {
+        return dayId;
+    }
+
+    public void setDayId(@NonNull String dayId) {
+        this.dayId = dayId;
     }
 }
