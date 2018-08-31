@@ -3,12 +3,18 @@ package com.clakestudio.pc.everyday.showdays;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.Day;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,18 +73,19 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
             mListener.onFragmentInteraction(uri);
         }
     }
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+
+    /*
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+            if (context instanceof OnFragmentInteractionListener) {
+                mListener = (OnFragmentInteractionListener) context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + " must implement OnFragmentInteractionListener");
+            }
         }
-    }
-*/
+    */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -114,4 +121,49 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    class ShowDaysAdapter extends RecyclerView.Adapter<ShowDaysAdapter.ShowDaysViewHolder> {
+
+        private ArrayList<Day> days;
+
+
+        class ShowDaysViewHolder extends RecyclerView.ViewHolder {
+
+            private TextView tvTitel;
+            private TextView tvNote;
+
+
+            ShowDaysViewHolder(View itemView) {
+                super(itemView);
+
+                tvTitel = (TextView) itemView.findViewById(R.id.tvTitle);
+                tvNote = (TextView) itemView.findViewById(R.id.tvNote);
+
+            }
+        }
+
+        public ShowDaysAdapter(ArrayList<Day> days) {
+            this.days = days;
+        }
+
+        @NonNull
+        @Override
+        public ShowDaysViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.day, parent, false);
+            ShowDaysViewHolder showDaysViewHolder = new ShowDaysViewHolder(view);
+            return showDaysViewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ShowDaysViewHolder holder, int position) {
+            holder.tvTitel.setText(days.get(position).getTitle());
+            holder.tvNote.setText(days.get(position).getNote());
+        }
+
+        @Override
+        public int getItemCount() {
+            return days.size();
+        }
+    }
 }
+
