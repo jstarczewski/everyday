@@ -35,6 +35,7 @@ public final class Day {
         this.dayId = dayId;
         this.date = date;
         this.title = title;
+        this.note = note;
     }
 
     @NonNull

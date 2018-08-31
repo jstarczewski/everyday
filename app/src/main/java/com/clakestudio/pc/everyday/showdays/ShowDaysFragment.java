@@ -4,7 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +62,36 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         }
     }
 
+    RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_days, container, false);
+        View v =  inflater.inflate(R.layout.fragment_show_days, container, false);
+
+        recyclerView = (RecyclerView)v.findViewById(R.id.recyclerView);
+
+
+        return v;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        ArrayList<Day> days = new ArrayList<>();
+        days.add(new Day("1", "30.08.2018", "Whats your why is", "This time mate"));
+        ShowDaysAdapter showDaysAdapter = new ShowDaysAdapter(days);
+        recyclerView.setAdapter(showDaysAdapter);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -129,14 +156,14 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
         class ShowDaysViewHolder extends RecyclerView.ViewHolder {
 
-            private TextView tvTitel;
+            private TextView tvTitle;
             private TextView tvNote;
 
 
             ShowDaysViewHolder(View itemView) {
                 super(itemView);
 
-                tvTitel = (TextView) itemView.findViewById(R.id.tvTitle);
+                tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
                 tvNote = (TextView) itemView.findViewById(R.id.tvNote);
 
             }
@@ -156,7 +183,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
         @Override
         public void onBindViewHolder(@NonNull ShowDaysViewHolder holder, int position) {
-            holder.tvTitel.setText(days.get(position).getTitle());
+            holder.tvTitle.setText(days.get(position).getTitle());
             holder.tvNote.setText(days.get(position).getNote());
         }
 
