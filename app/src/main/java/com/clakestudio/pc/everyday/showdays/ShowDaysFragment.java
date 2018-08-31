@@ -90,6 +90,16 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
     }
 
+    @Override
+    public void loadDays() {
+
+    }
+
+    @Override
+    public void addNewDay() {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

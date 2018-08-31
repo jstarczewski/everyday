@@ -20,6 +20,8 @@ public class ShowDaysContract {
 
         void addNewDay();
 
+
+
         // start with database
 
  //       void openDayDetails(@NonNull Day requestedDay);
@@ -28,6 +30,13 @@ public class ShowDaysContract {
     }
 
     interface View extends BaseView<Presenter> {
+
+
+        void loadDays();
+
+        void addNewDay();
+
+
 
     }
 
