@@ -1,5 +1,7 @@
 package com.clakestudio.pc.everyday.data;
 
+import android.util.Log;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,10 +25,16 @@ public class DayRepository {
 
             @Override
             public void run() {
+
+                Log.e("Elo", "No i nie chuj");
                 daysList = dayDao.getDayList();
 
             }
+
+
         }).start();
+        if (daysList == null || daysList.isEmpty())
+            Log.e("Elo", "No i chuj");
         return daysList;
     }
 
@@ -40,10 +48,10 @@ public class DayRepository {
     }
 
     public void addNewDay(final Day day) {
-
         (new Thread() {
             @Override
             public void run() {
+                Log.e("Inserting", "inserting");
                 dayDao.insertDay(day);
             }
         }).start();

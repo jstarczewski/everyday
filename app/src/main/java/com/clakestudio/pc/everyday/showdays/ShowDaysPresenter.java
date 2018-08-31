@@ -28,10 +28,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void start() {
-
-
-
-
+        loadDays();
     }
 
     @Override
