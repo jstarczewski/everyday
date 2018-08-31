@@ -1,7 +1,8 @@
 package com.clakestudio.pc.everyday.data;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,18 +23,14 @@ public class DayRepository {
     }
 
 
-    public List<Day> getDays() {
-        return dayDao.getDayList();
-
-
-     /*   (new Thread() {
-
+    public void getDays(@NonNull final Daysable daysable) {
+        new Thread() {
             @Override
             public void run() {
-                daysList = dayDao.getDayList();
-                isUpdated = true;
+                ArrayList<Day> days = (ArrayList<Day>) dayDao.getDayList();
+                daysable.onDaysLoader(days);
             }
-        }).start();*/
+        }.run();
     }
 
 
@@ -63,3 +60,5 @@ public class DayRepository {
     }
 
 }
+
+

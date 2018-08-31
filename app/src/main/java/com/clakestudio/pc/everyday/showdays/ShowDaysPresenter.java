@@ -1,18 +1,19 @@
 package com.clakestudio.pc.everyday.showdays;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
+import com.clakestudio.pc.everyday.data.Daysable;
 
-import java.util.ArrayList;
+import java.lang.reflect.Executable;
+import java.util.List;
 
 /**
  * Created by Jan on 8/30/2018.
  */
 
-public class ShowDaysPresenter implements ShowDaysContract.Presenter {
+public class ShowDaysPresenter implements ShowDaysContract.Presenter, Daysa {
 
 
     private final DayRepository dayRepository;
@@ -38,13 +39,23 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void loadDays() {
+
+        dayRepository.getDays(new Daysable() {
+            @Override
+            public void onDaysLoader(List<Day> days) {
+
+            }
+        });
+
+        /*
         (new Thread() {
 
             @Override
             public void run() {
                 daysView.showDays((ArrayList<Day>) dayRepository.getDays());
             }
-        }).start();
+        }).start();*/
+
     }
 
 
@@ -55,3 +66,5 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
 
 }
+
+
