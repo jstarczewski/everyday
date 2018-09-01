@@ -8,8 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.utils.BaseActivity;
 
-public class AddDayActivity extends AppCompatActivity {
+public class AddDayActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

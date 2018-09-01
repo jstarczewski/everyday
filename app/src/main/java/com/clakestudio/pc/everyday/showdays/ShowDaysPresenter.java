@@ -69,7 +69,8 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void addNewDay() {
-        dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
+        daysView.showAddNewDay();
+        //dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
     }
 
 

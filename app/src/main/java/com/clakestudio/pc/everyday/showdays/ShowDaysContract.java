@@ -20,7 +20,7 @@ public interface ShowDaysContract {
 
         void showDays(ArrayList<Day> days);
 
-        void addNewDay();
+        void showAddNewDay();
 
 
     }

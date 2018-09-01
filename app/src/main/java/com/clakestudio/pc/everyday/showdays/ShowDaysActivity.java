@@ -24,23 +24,16 @@ public class ShowDaysActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                showDaysPresenter.start();
-            }
-        });
-
         ShowDaysFragment showDaysFragment = (ShowDaysFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (showDaysFragment == null) {
             showDaysFragment = ShowDaysFragment.newInstance();
             BaseActivity.addFragmentToActivity(getSupportFragmentManager(), showDaysFragment, R.id.contentFrame);
         }
 
+
+
         showDaysPresenter = new ShowDaysPresenter((new DayRepository(DayDatabase.getInstance(getApplicationContext()).dayDao())), showDaysFragment);
+        showDaysPresenter.start();
     }
 
 
