@@ -34,13 +34,10 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
     //
 
-    private View noDaysView;
-
     private ShowDaysContract.Presenter daysPresenter;
 
     private ShowDaysAdapter showDaysAdapter;
 
-    private FloatingActionButton fab;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,37 +81,21 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_show_days, container, false);
 
-        fab = (FloatingActionButton)v.findViewById(R.id.fab);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
 
 
         return v;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         ArrayList<Day> days = new ArrayList<>();
         showDaysAdapter = new ShowDaysAdapter(days);
         recyclerView.setAdapter(showDaysAdapter);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            //    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-              //          .setAction("Action", null).show();
-                showAddNewDay();
-            }
-        });
 
-    }
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+        daysPresenter.start();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
