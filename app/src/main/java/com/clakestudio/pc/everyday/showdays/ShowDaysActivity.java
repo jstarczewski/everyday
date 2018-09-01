@@ -40,6 +40,12 @@ public class ShowDaysActivity extends BaseActivity {
             public void onClick(View view) {
                 //    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //          .setAction("Action", null).show();
+
+                /**
+                 * No the right way to naviget to other activity cuz Fragment is so called VIEW
+                 *
+                 * */
+
                 showDaysPresenter.addNewDay();
             }
         });
