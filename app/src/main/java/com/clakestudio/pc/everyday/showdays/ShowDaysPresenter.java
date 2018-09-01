@@ -1,23 +1,25 @@
 package com.clakestudio.pc.everyday.showdays;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.clakestudio.pc.everyday.data.Accessible;
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
-import com.clakestudio.pc.everyday.data.Daysable;
 
-import java.lang.reflect.Executable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jan on 8/30/2018.
  */
 
-public class ShowDaysPresenter implements ShowDaysContract.Presenter, Daysa {
+public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
 
     private final DayRepository dayRepository;
 
+    private List<Day> days;
     private final ShowDaysContract.View daysView;
 
     public ShowDaysPresenter(@NonNull DayRepository dayRepository, @NonNull ShowDaysContract.View daysView) {
@@ -40,13 +42,19 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, Daysa {
     @Override
     public void loadDays() {
 
-        dayRepository.getDays(new Daysable() {
+        Log.e("Here", "o i am");
+        dayRepository.setAccessible(new Accessible() {
             @Override
-            public void onDaysLoader(List<Day> days) {
+            public void getAccessDays(final List<Day> dayList) {
+                Log.e("Here", "elo i am");
+                      daysView.showDays((ArrayList<Day>) dayList);
+            }
+            @Override
+            public void getAccessDaysById(List<Day> dayList) {
 
             }
         });
-
+        dayRepository.getAccessToDays();
         /*
         (new Thread() {
 

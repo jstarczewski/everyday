@@ -1,8 +1,5 @@
 package com.clakestudio.pc.everyday.data;
 
-import android.support.annotation.NonNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,11 +8,13 @@ import javax.inject.Inject;
  * Created by Jan on 8/30/2018.
  */
 
-public class DayRepository {
+public class DayRepository implements Runnable {
 
     private final DayDao dayDao;
     private List<Day> daysList;
+    private Accessible accessible;
     private Boolean isUpdated = false;
+
 
     @Inject
     public DayRepository(DayDao dayDao) {
@@ -23,16 +22,9 @@ public class DayRepository {
     }
 
 
-    public void getDays(@NonNull final Daysable daysable) {
-        new Thread() {
-            @Override
-            public void run() {
-                ArrayList<Day> days = (ArrayList<Day>) dayDao.getDayList();
-                daysable.onDaysLoader(days);
-            }
-        }.run();
+    private List<Day> getDays() {
+        return dayDao.getDayList();
     }
-
 
     public Day getDayById(String dayId) {
         return dayDao.getDayById(dayId);
@@ -59,6 +51,22 @@ public class DayRepository {
         dayDao.updateDay(title, note, dayId);
     }
 
+    public void setAccessible(Accessible accessible) {
+        this.accessible = accessible;
+    }
+
+    public void getAccessToDays() {
+        new Thread() {
+            @Override
+            public void run() {
+                accessible.getAccessDays(getDays());
+            }
+        }.start();
+    }
+
+
+    @Override
+    public void run() {
+
+    }
 }
-
-
