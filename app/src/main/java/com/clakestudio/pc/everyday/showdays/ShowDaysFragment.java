@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,7 +93,15 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         ArrayList<Day> days = new ArrayList<>();
-        showDaysAdapter = new ShowDaysAdapter(days);
+
+        DayItemListener dayItemListener = new DayItemListener() {
+            @Override
+            public void onDayClicked(Day day) {
+                daysPresenter.editTodaysDay(day);
+            }
+        };
+
+        showDaysAdapter = new ShowDaysAdapter(days, dayItemListener);
         recyclerView.setAdapter(showDaysAdapter);
 
         daysPresenter.start();
@@ -145,6 +154,13 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         startActivity(new Intent(getContext(), AddDayActivity.class));
     }
 
+    @Override
+    public void showEditTodaysDay(int dayId) {
+        Intent intent = new Intent(getContext(), AddDayActivity.class);
+        intent.putExtra("dayId", dayId);
+        startActivity(intent);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -163,12 +179,13 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
     class ShowDaysAdapter extends RecyclerView.Adapter<ShowDaysAdapter.ShowDaysViewHolder> {
 
         private ArrayList<Day> days;
-
+        private DayItemListener dayItemListener;
 
         class ShowDaysViewHolder extends RecyclerView.ViewHolder {
 
             private TextView tvTitle;
             private TextView tvNote;
+            private CardView cvDay;
 
 
             ShowDaysViewHolder(View itemView) {
@@ -176,12 +193,14 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
                 tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
                 tvNote = (TextView) itemView.findViewById(R.id.tvNote);
+                cvDay = (CardView) itemView.findViewById(R.id.day);
 
             }
         }
 
-        public ShowDaysAdapter(ArrayList<Day> days) {
+        public ShowDaysAdapter(ArrayList<Day> days, DayItemListener dayItemListener) {
             this.days = days;
+            this.dayItemListener = dayItemListener;
         }
 
 
@@ -203,7 +222,15 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         @Override
         public ShowDaysViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.day, parent, false);
-            ShowDaysViewHolder showDaysViewHolder = new ShowDaysViewHolder(view);
+            final ShowDaysViewHolder showDaysViewHolder = new ShowDaysViewHolder(view);
+
+            showDaysViewHolder.cvDay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()));
+                }
+            });
+
             return showDaysViewHolder;
         }
 
@@ -218,5 +245,12 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
             return days.size();
         }
     }
+
+    public interface DayItemListener {
+
+        void onDayClicked(Day day);
+
+    }
+
 }
 
