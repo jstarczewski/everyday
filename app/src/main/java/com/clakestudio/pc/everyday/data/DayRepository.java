@@ -14,13 +14,20 @@ public class DayRepository implements Runnable {
     private List<Day> daysList;
     private Accessible accessible;
     private Boolean isUpdated = false;
-
+    private static DayRepository INSTANCE = null;
 
     @Inject
-    public DayRepository(DayDao dayDao) {
+    private DayRepository(DayDao dayDao) {
         this.dayDao = dayDao;
     }
 
+    public DayRepository getInstance(DayDao dayDao) {
+
+        if (INSTANCE == null) {
+            INSTANCE = new DayRepository(dayDao);
+        }
+        return INSTANCE;
+    }
 
     private List<Day> getDays() {
         return dayDao.getDayList();

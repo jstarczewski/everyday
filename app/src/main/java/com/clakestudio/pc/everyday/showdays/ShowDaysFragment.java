@@ -1,13 +1,10 @@
 package com.clakestudio.pc.everyday.showdays;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -97,7 +94,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         DayItemListener dayItemListener = new DayItemListener() {
             @Override
             public void onDayClicked(Day day) {
-                daysPresenter.editTodaysDay(day);
+                daysPresenter.editCurrentDay(day);
             }
         };
 
@@ -155,7 +152,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
     }
 
     @Override
-    public void showEditTodaysDay(int dayId) {
+    public void showEditCurrentDay(int dayId) {
         Intent intent = new Intent(getContext(), AddDayActivity.class);
         intent.putExtra("dayId", dayId);
         startActivity(intent);

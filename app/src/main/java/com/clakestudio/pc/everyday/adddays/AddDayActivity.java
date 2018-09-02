@@ -3,6 +3,7 @@ package com.clakestudio.pc.everyday.adddays;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,6 +12,8 @@ import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
 public class AddDayActivity extends BaseActivity {
+
+    private AddDayPresenter addDayPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,14 @@ public class AddDayActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        AddDayFragment addDayFragment = (AddDayFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (addDayFragment==null) {
+            addDayFragment = AddDayFragment.newInstance();
+            BaseActivity.addFragmentToActivity(getSupportFragmentManager(), addDayFragment, R.id.contentFrame);
+        }
+
+        addDayPresenter = new 
     }
 
 }

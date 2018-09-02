@@ -22,7 +22,7 @@ public interface ShowDaysContract {
 
         void showAddNewDay();
 
-        void showEditTodaysDay(int dayId);
+        void showEditCurrentDay(int dayId);
 
 
     }
@@ -35,7 +35,7 @@ public interface ShowDaysContract {
 
         void addNewDay();
 
-        void editTodaysDay(Day day);
+        void editCurrentDay(Day day);
         // start with database
 
  //       void openDayDetails(@NonNull Day requestedDay);
