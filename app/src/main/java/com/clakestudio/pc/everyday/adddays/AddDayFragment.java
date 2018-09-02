@@ -61,7 +61,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
 
         etTitle = (EditText)v.findViewById(R.id.etTitle);
         etNote = (EditText)v.findViewById(R.id.etNote);
-        floatingActionButton = (FloatingActionButton)v.findViewById(R.id.fab);
+        floatingActionButton = (FloatingActionButton)getActivity().findViewById(R.id.fab);
 
 
         return v;

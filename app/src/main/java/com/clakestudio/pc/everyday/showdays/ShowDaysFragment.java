@@ -239,6 +239,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         public void onBindViewHolder(@NonNull ShowDaysViewHolder holder, int position) {
             holder.tvTitle.setText(days.get(position).getTitle());
             holder.tvNote.setText(days.get(position).getNote());
+            holder.tvDayInfo.setText("Day " + days.get(position).getDayId() + " / " + days.get(position).getDate());
         }
 
         @Override
