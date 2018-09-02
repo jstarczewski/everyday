@@ -1,6 +1,7 @@
 package com.clakestudio.pc.everyday.adddays;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
@@ -39,6 +40,7 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     @Override
     public void saveDay(String[] dayInfoArray) {
+        Log.e("Day", dayInfoArray[0] + "   " + dayInfoArray[1]);
         dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
         view.showDays();
     }
