@@ -1,14 +1,20 @@
 package com.clakestudio.pc.everyday.adddays;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,16 +25,12 @@ import com.clakestudio.pc.everyday.R;
  * create an instance of this fragment.
  */
 public class AddDayFragment extends Fragment implements AddDayContract.View {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private AddDayContract.Presenter addDayPresenter;
+    private FloatingActionButton floatingActionButton;
+    private EditText etTitle;
+    private EditText etNote;
+    private String toolbarTitle;
 
     public AddDayFragment() {
         // Required empty public constructor
@@ -48,24 +50,34 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_day, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_add_day, container, false);
+
+        etTitle = (EditText)v.findViewById(R.id.etTitle);
+        etNote = (EditText)v.findViewById(R.id.etNote);
+        floatingActionButton = (FloatingActionButton)v.findViewById(R.id.fab);
+
+
+        return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        addDayPresenter.loadCurrentDayInfo(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE).getInt("currentDay", 0));
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addDayPresenter.saveDay(DaysDataFormatter.getDayInfo(toolbarTitle, etTitle.getText().toString(), etNote.getText().toString()));
+            }
+        });
     }
 
     @Override
@@ -76,22 +88,27 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
     public void setPresenter(AddDayContract.Presenter presenter) {
-
+        this.addDayPresenter = presenter;
     }
 
     @Override
-    public void showCurrentDayInfo() {
-
+    public void showCurrentDayInfo(String dayInfo) {
+        AddDayActivity addDayActivity = (AddDayActivity) getActivity();
+        if (addDayActivity != null && addDayActivity.getSupportActionBar() != null && addDayActivity.getSupportActionBar().getTitle() != null) {
+            toolbarTitle = addDayActivity.getSupportActionBar().getTitle().toString();
+            addDayActivity.getSupportActionBar().setTitle(dayInfo);
+        }
     }
 
     @Override
     public void showDays() {
-
+        startActivity(new Intent(getContext(), ShowDaysActivity.class));
+        if (getActivity() != null)
+            getActivity().finish();
     }
 
     /**

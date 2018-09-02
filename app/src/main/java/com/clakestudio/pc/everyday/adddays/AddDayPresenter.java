@@ -2,13 +2,19 @@ package com.clakestudio.pc.everyday.adddays;
 
 import android.support.annotation.NonNull;
 
+import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Jan on 9/1/2018.
  */
 
 public class AddDayPresenter implements AddDayContract.Presenter {
+
+    private static final String pattern = "dd MM yyyy";
 
     private DayRepository dayRepository;
     private AddDayContract.View view;
@@ -26,12 +32,14 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     }
 
     @Override
-    public void loadCurrentDayInfo() {
-
+    public void loadCurrentDayInfo(int day) {
+        String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
+        view.showCurrentDayInfo("Day " + day + " / " + date);
     }
 
     @Override
-    public void saveDay(String dayId, String date, String title, String note) {
-
+    public void saveDay(String[] dayInfoArray) {
+        dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
+        view.showDays();
     }
 }

@@ -18,6 +18,8 @@ import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.adddays.AddDayActivity;
 import com.clakestudio.pc.everyday.data.Day;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -183,6 +185,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
             private TextView tvTitle;
             private TextView tvNote;
             private CardView cvDay;
+            private TextView tvDayInfo;
 
 
             ShowDaysViewHolder(View itemView) {
@@ -190,6 +193,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
                 tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
                 tvNote = (TextView) itemView.findViewById(R.id.tvNote);
+                tvDayInfo = (TextView) itemView.findViewById(R.id.tvDayInfo);
                 cvDay = (CardView) itemView.findViewById(R.id.day);
 
             }
