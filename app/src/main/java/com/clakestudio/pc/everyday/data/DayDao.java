@@ -25,6 +25,7 @@ public interface DayDao {
     @Query("SELECT * FROM Days WHERE date= :date")
     Day getDayByDate(String date);
 
+    // auto editing support -> Days with same Id (note added for current day replace itself with its previous version)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertDay(Day day);
 
