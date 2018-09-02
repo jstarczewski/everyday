@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.DayDatabase;
+import com.clakestudio.pc.everyday.data.DayRepository;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
 public class AddDayActivity extends BaseActivity {
@@ -22,22 +24,17 @@ public class AddDayActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         AddDayFragment addDayFragment = (AddDayFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (addDayFragment==null) {
             addDayFragment = AddDayFragment.newInstance();
             BaseActivity.addFragmentToActivity(getSupportFragmentManager(), addDayFragment, R.id.contentFrame);
         }
 
-        addDayPresenter = new 
+        addDayPresenter = new AddDayPresenter(DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao()), addDayFragment);
+
+
+
+
     }
 
 }

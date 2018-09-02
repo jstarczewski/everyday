@@ -32,7 +32,7 @@ public class ShowDaysActivity extends BaseActivity {
 
 
 
-        showDaysPresenter = new ShowDaysPresenter((new DayRepository(DayDatabase.getInstance(getApplicationContext()).dayDao())), showDaysFragment);
+        showDaysPresenter = new ShowDaysPresenter((DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao())), showDaysFragment);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

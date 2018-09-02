@@ -18,7 +18,7 @@ import com.clakestudio.pc.everyday.R;
  * Use the {@link AddDayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddDayFragment extends Fragment {
+public class AddDayFragment extends Fragment implements AddDayContract.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -71,18 +71,27 @@ public class AddDayFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void setPresenter(AddDayContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void showCurrentDayInfo() {
+
+    }
+
+    @Override
+    public void showDays() {
+
     }
 
     /**

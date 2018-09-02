@@ -16,12 +16,12 @@ public class DayRepository implements Runnable {
     private Boolean isUpdated = false;
     private static DayRepository INSTANCE = null;
 
-    @Inject
+  //  @Inject
     private DayRepository(DayDao dayDao) {
         this.dayDao = dayDao;
     }
 
-    public DayRepository getInstance(DayDao dayDao) {
+    public static DayRepository getInstance(DayDao dayDao) {
 
         if (INSTANCE == null) {
             INSTANCE = new DayRepository(dayDao);

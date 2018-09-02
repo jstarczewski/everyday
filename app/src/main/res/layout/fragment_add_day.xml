@@ -1,4 +1,5 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,43 +13,24 @@
         android:layout_margin="@dimen/fab_margin"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Day 2 / 2.09.2018"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/colorPrimaryDark">
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="2dp" />
-
-        </LinearLayout>
-
         <EditText
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/what_your_why_is"
+            android:maxLines="1"
             android:textColor="@color/colorAccent" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_gravity="center"
-            android:inputType="textMultiLine" />
-
+            android:inputType="textMultiLine"
+            android:layout_gravity="top" />
 
     </LinearLayout>
 
 
-</FrameLayout>
+</ScrollView>
+
+
+
