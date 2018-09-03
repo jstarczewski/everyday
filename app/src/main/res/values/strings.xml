@@ -6,4 +6,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_add_day">AddDayActivity</string>
     <string name="what_your_why_is">What your why is !?</string>
+    <string name="before">Before you start, read the text below</string>
+    <string name="app_info">This application does not guarantee that you will achieve your goal, but can help you do it. You will work on changing your mindset towards your goal, and your life.</string>
+    <string name="method">According to Earl Nightingales, "Strangest Secret of success", the key to achieving your goal is changing your mindset towards it. Focus on your goal everyday. Spend 3 minutes (or more) every day focusing on your goal, thinking about it, thinking what you can do today to be a step closer to your dream. Plan you actions and save everything in a short note, that you can add every day. Create an overview of everything you have done since beginning. Make your life better by applying this simple habit of -focus, plan, action- and see how your life changes!   </string>
+    <string name="how_to">Focus everyday</string>
+    <string name="goal">Now define you goal and go further</string>
+    <string name="goin">To make your journey better remember to educate yourself (considering your goal), card-notes are free to fill, not only with your feelings, but also knowledge you will get everyday. You cannot delete "cardnotes", only starting from zero can clear your path,  but remember we are only humans, and do not let this "one day" destroy all your progress you have made. Remember to keep goin forward and as long as you keep going and making progress you have not failed.</string>
+    <string name="your_goal">your goal</string>
+    <string name="describe_your_goal_clearly">describe your goal clearly</string>
+    <string name="understood">understood</string>
 </resources>

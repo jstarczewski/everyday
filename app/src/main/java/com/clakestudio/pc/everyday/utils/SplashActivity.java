@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.info.InfoActivity;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -12,7 +13,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, ShowDaysActivity.class));
+        startActivity(new Intent(this, InfoActivity.class));
         finish();
     }
 }
