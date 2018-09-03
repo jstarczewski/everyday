@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context="com.clakestudio.pc.everyday.adddays.AddDayFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -18,16 +19,20 @@
             android:layout_height="wrap_content"
             android:hint="@string/what_your_why_is"
             android:maxLines="1"
+            android:shadowColor="@color/colorText"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorPrimary"
+            android:textColorHighlight="@color/colorText"
+            android:textColorHint="@color/colorText"
+            android:textColorLink="@color/colorText" />
 
         <EditText
             android:id="@+id/etNote"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:gravity="top"
-            android:inputType="textMultiLine"
-            android:hint="go go" />
+            android:hint="go go"
+            android:inputType="textMultiLine" />
 
     </LinearLayout>
 
