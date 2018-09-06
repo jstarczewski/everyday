@@ -17,6 +17,6 @@ public class InfoContract {
 
     interface Presenter extends BasePresenter {
 
-        boolean
+
     }
 }
