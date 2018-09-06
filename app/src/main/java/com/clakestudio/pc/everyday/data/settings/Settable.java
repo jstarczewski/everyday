@@ -8,11 +8,11 @@ public interface Settable {
 
     void setInfoRead();
 
-    void setPassword();
+    void setPassword(String password);
 
     void setFocusDurationTime(int time);
 
-    void setGoal();
+    void setGoal(String goal);
 
     boolean isInfoRead();
 
