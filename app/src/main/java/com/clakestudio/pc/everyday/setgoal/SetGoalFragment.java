@@ -10,13 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
-import com.clakestudio.pc.everyday.data.Day;
-import com.clakestudio.pc.everyday.showdays.ShowDaysContract;
-import com.clakestudio.pc.everyday.showdays.ShowDaysPresenter;
-
-import java.util.ArrayList;
+import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,11 +26,11 @@ import java.util.ArrayList;
 public class SetGoalFragment extends Fragment implements SetGoalContract.View, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
+    
     private EditText etGoal;
     private Button btSetGoal;
+    private TextView tvGoal;
 
     // TODO: Rename and change types of parameters
 
@@ -65,8 +62,9 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_set_goal, container, false);
 
-        EditText etGoal = (EditText)view.findViewById(R.id.etGoal);
-        Button btSetGoal = (Button)view.findViewById(R.id.btSetGoal);
+        etGoal = (EditText)view.findViewById(R.id.etGoal);
+        btSetGoal = (Button)view.findViewById(R.id.btSetGoal);
+        tvGoal = (TextView)view.findViewById(R.id.tvGoal);
         btSetGoal.setOnClickListener(this);
 
         return view;
@@ -91,12 +89,27 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
 
     @Override
     public void showSettingsActivity() {
-        startActivity(new Intent(getActivity(), SettingsA));
+        startActivity(new Intent(getActivity(), SettingsActivity.class));
+        getActivity().finish();
+    }
+
+    @Override
+    public void determineGoalTextViewVisibility() {
+        if (tvGoal.getVisibility()==View.VISIBLE) {
+            etGoal.setVisibility(View.VISIBLE);
+            btSetGoal.setVisibility(View.VISIBLE);
+            tvGoal.setVisibility(View.GONE);
+        }
+        else {
+            tvGoal.setVisibility(View.VISIBLE);
+            btSetGoal.setVisibility(View.GONE);
+            etGoal.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void onClick(View v) {
-
+        setGoalPresenter.setPassword(etGoal.getText().toString());
     }
 
 

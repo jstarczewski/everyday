@@ -13,12 +13,15 @@ public interface SetGoalContract {
 
         void showSettingsActivity();
 
+        void determineGoalTextViewVisibility();
 
     }
 
     interface Presenter extends BasePresenter {
 
         void setPassword(String string);
+
+        void displayGoalForThreeSeconds();
 
     }
 
