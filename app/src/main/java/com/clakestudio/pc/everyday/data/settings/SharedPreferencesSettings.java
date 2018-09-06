@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
  * Created by Jan on 9/6/2018.
  */
 
-public class SharedPreferencesSettings {
+public class SharedPreferencesSettings implements Settable {
 
     /**
      * Could have been an dependency inejction but passing only a Context makes it easier to store data
@@ -18,10 +18,10 @@ public class SharedPreferencesSettings {
      * */
 
     private Context context;
-    private SharedPreferencesSettings sharedPreferencesSettings;
+    private static SharedPreferencesSettings sharedPreferencesSettings;
     private SharedPreferences sharedPreferences;
 
-    public SharedPreferencesSettings getInstance(Context context) {
+    public static SharedPreferencesSettings getInstance(Context context) {
         if (sharedPreferencesSettings==null) {
             sharedPreferencesSettings = new SharedPreferencesSettings(context);
         }
@@ -32,4 +32,38 @@ public class SharedPreferencesSettings {
         this.sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
     }
 
+    @Override
+    public void setInfoRead() {
+
+    }
+
+    @Override
+    public void setPassword() {
+
+    }
+
+    @Override
+    public void setFocusDurationTime(int time) {
+
+    }
+
+    @Override
+    public void setGoal() {
+
+    }
+
+    @Override
+    public boolean isInfoRead() {
+        return false;
+    }
+
+    @Override
+    public boolean isPasswordSet() {
+        return false;
+    }
+
+    @Override
+    public int getFocusDurationTime() {
+        return 0;
+    }
 }

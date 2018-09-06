@@ -1,0 +1,25 @@
+package com.clakestudio.pc.everyday.data.settings;
+
+/**
+ * Created by Jan on 9/6/2018.
+ */
+
+public interface Settable {
+
+    void setInfoRead();
+
+    void setPassword();
+
+    void setFocusDurationTime(int time);
+
+    void setGoal();
+
+    boolean isInfoRead();
+
+    boolean isPasswordSet();
+
+    int getFocusDurationTime();
+    
+
+
+}

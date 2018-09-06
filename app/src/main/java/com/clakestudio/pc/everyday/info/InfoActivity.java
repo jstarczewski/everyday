@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.settings.Settable;
+import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
 public class InfoActivity extends BaseActivity {
