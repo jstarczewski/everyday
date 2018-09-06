@@ -9,8 +9,17 @@ import android.content.Context;
 public class SettingsRepository {
 
     private Settable settable;
+    private static SettingsRepository settingsRepository;
 
-    public SettingsRepository(Settable settable) {
+    public static SettingsRepository getInstance(Settable settable) {
+
+        if (settingsRepository == null) {
+            settingsRepository = new SettingsRepository(settable);
+        }
+        return settingsRepository;
+    }
+
+    private SettingsRepository(Settable settable) {
         this.settable = settable;
     }
 
