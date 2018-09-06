@@ -13,10 +13,12 @@ public class InfoContract {
 
         void showSetGoalActivity();
 
+
     }
 
     interface Presenter extends BasePresenter {
 
+        void setAppInfoUnderstood();
 
     }
 }

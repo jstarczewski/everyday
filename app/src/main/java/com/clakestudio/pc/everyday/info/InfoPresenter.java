@@ -22,4 +22,10 @@ public class InfoPresenter implements InfoContract.Presenter {
     public void start() {
 
     }
+
+    @Override
+    public void setAppInfoUnderstood() {
+        settingsRepository.setInfoRead();
+        view.showSetGoalActivity();
+    }
 }

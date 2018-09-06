@@ -25,6 +25,7 @@ public class InfoFragment extends Fragment implements InfoContract.View {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
+    private InfoPresenter infoPresenter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,7 +76,7 @@ public class InfoFragment extends Fragment implements InfoContract.View {
 
     @Override
     public void setPresenter(InfoContract.Presenter presenter) {
-
+        this.infoPresenter = (InfoPresenter) presenter;
     }
 
     @Override
