@@ -18,11 +18,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this));
-        if (settingsRepository.isInfoRead()) {
-            if (settingsRepository.isGoalSet()) {
-                startActivity(new Intent(this, SetGoalActivity.class));
-            }
+
+        if (!settingsRepository.isInfoRead()) {
+
             startActivity(new Intent(this, InfoActivity.class));
+        } else if (!settingsRepository.isGoalSet()) {
+            startActivity(new Intent(this, SetGoalActivity.class));
         } else {
             startActivity(new Intent(this, ShowDaysActivity.class));
         }

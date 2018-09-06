@@ -29,8 +29,8 @@ public class SettingsRepository {
     }
 
 
-    public void setPassword() {
-        settable.setPassword();
+    public void setPassword(String password) {
+        settable.setPassword(password);
     }
 
 
@@ -39,10 +39,9 @@ public class SettingsRepository {
     }
 
 
-    public void setGoal() {
-        settable.setGoal();
+    public void setGoal(String goal) {
+        settable.setGoal(goal);
     }
-
 
     public boolean isInfoRead() {
         return settable.isInfoRead();
