@@ -1,0 +1,23 @@
+package com.clakestudio.pc.everyday.setgoal;
+
+import com.clakestudio.pc.everyday.BasePresenter;
+import com.clakestudio.pc.everyday.BaseView;
+
+/**
+ * Created by Jan on 9/6/2018.
+ */
+
+public interface SetGoalContract {
+
+    interface View extends BaseView<Presenter> {
+
+
+    }
+
+    interface Presenter extends BasePresenter {
+
+
+    }
+
+
+}
