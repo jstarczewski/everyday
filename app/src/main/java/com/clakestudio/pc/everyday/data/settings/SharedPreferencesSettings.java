@@ -76,6 +76,6 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public boolean isGoalSet() {
-        return (sharedPreferences.getStringSet(GOAL, null) != null);
+        return (sharedPreferences.getString(GOAL, null) != null);
     }
 }

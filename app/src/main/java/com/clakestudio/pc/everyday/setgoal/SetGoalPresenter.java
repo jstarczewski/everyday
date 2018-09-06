@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
+import java.util.concurrent.CountDownLatch;
+
 /**
  * Created by Jan on 9/6/2018.
  */
@@ -28,19 +30,8 @@ public class SetGoalPresenter implements SetGoalContract.Presenter {
     @Override
     public void setPassword(String string) {
         settingsRepository.setPassword(string);
-        setGoalView.showSettingsActivity();
+        setGoalView.determineGoalTextViewVisibility();
+        setGoalView.showGoalForThreeSeconds();
     }
 
-    @Override
-    public void displayGoalForThreeSeconds() {
-        setGoalView.determineGoalTextViewVisibility();
-        Thread waitingThread = new Thread();
-        waitingThread.start();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        setGoalView.determineGoalTextViewVisibility();
-    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +30,7 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    
+
     private EditText etGoal;
     private Button btSetGoal;
     private TextView tvGoal;
@@ -105,6 +108,23 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
             btSetGoal.setVisibility(View.GONE);
             etGoal.setVisibility(View.GONE);
         }
+
+    }
+
+    @Override
+    public void showGoalForThreeSeconds() {
+        tvGoal.setText(etGoal.getText().toString());
+        new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                showSettingsActivity();
+            }
+        }.start();
     }
 
     @Override
