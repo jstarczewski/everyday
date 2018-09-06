@@ -11,11 +11,14 @@ public interface SetGoalContract {
 
     interface View extends BaseView<Presenter> {
 
+        void showSettingsActivity();
+
 
     }
 
     interface Presenter extends BasePresenter {
 
+        void setPassword(String string);
 
     }
 

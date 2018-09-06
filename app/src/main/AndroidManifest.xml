@@ -29,7 +29,10 @@
         <activity
             android:name=".info.InfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".setgoal.SetGoalActivity"></activity>
+        <activity
+            android:name=".setgoal.SetGoalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".settings.SettingsActivity"></activity>
     </application>
 
 </manifest>
