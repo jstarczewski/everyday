@@ -10,12 +10,13 @@ import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
 public class InfoPresenter implements InfoContract.Presenter {
 
-    private InfoContract.View view;
+    private InfoContract.View infoView;
     private SettingsRepository settingsRepository;
 
-    public InfoPresenter(@NonNull SettingsRepository settingsRepository, @NonNull InfoContract.View view) {
+    public InfoPresenter(@NonNull SettingsRepository settingsRepository, @NonNull InfoContract.View infoView) {
         this.settingsRepository = settingsRepository;
-        this.view = view;
+        this.infoView = infoView;
+        infoView.setPresenter(this);
     }
 
     @Override
@@ -26,6 +27,6 @@ public class InfoPresenter implements InfoContract.Presenter {
     @Override
     public void setAppInfoUnderstood() {
         settingsRepository.setInfoRead();
-        view.showSetGoalActivity();
+        infoView.showSetGoalActivity();
     }
 }
