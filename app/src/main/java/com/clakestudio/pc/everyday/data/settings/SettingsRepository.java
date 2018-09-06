@@ -56,4 +56,8 @@ public class SettingsRepository {
     public int getFocusDurationTime() {
         return settable.getFocusDurationTime();
     }
+
+    public boolean isGoalSet() {
+        return settable.isGoalSet();
+    }
 }

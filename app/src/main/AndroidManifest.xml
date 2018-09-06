@@ -29,6 +29,7 @@
         <activity
             android:name=".info.InfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".setgoal.SetGoalActivity"></activity>
     </application>
 
 </manifest>

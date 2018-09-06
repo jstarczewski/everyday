@@ -66,4 +66,9 @@ public class SharedPreferencesSettings implements Settable {
     public int getFocusDurationTime() {
         return 0;
     }
+
+    @Override
+    public boolean isGoalSet() {
+        return false;
+    }
 }

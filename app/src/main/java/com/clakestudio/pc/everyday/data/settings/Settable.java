@@ -19,7 +19,8 @@ public interface Settable {
     boolean isPasswordSet();
 
     int getFocusDurationTime();
-    
+
+    boolean isGoalSet();
 
 
 }
