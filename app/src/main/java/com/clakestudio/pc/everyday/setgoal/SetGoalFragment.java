@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
@@ -65,9 +67,9 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_set_goal, container, false);
 
-        etGoal = (EditText)view.findViewById(R.id.etGoal);
-        btSetGoal = (Button)view.findViewById(R.id.btSetGoal);
-        tvGoal = (TextView)view.findViewById(R.id.tvGoal);
+        etGoal = (EditText) view.findViewById(R.id.etGoal);
+        btSetGoal = (Button) view.findViewById(R.id.btSetGoal);
+        tvGoal = (TextView) view.findViewById(R.id.tvGoal);
         btSetGoal.setOnClickListener(this);
 
         return view;
@@ -98,12 +100,11 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
 
     @Override
     public void determineGoalTextViewVisibility() {
-        if (tvGoal.getVisibility()==View.VISIBLE) {
+        if (tvGoal.getVisibility() == View.VISIBLE) {
             etGoal.setVisibility(View.VISIBLE);
             btSetGoal.setVisibility(View.VISIBLE);
             tvGoal.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             tvGoal.setVisibility(View.VISIBLE);
             btSetGoal.setVisibility(View.GONE);
             etGoal.setVisibility(View.GONE);
@@ -129,7 +130,11 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
 
     @Override
     public void onClick(View v) {
-        setGoalPresenter.setPassword(etGoal.getText().toString());
+        if (!etGoal.getText().toString().isEmpty())
+            setGoalPresenter.setPassword(etGoal.getText().toString());
+        else {
+            Toast.makeText(getContext(), "Goal cannot be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

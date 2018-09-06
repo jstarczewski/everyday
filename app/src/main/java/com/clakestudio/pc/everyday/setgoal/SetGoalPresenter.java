@@ -34,4 +34,5 @@ public class SetGoalPresenter implements SetGoalContract.Presenter {
         setGoalView.showGoalForThreeSeconds();
     }
 
+
 }
