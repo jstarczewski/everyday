@@ -21,6 +21,7 @@ public class SharedPreferencesSettings implements Settable {
     private static final String PASSWORD = "PASSWORD";
     private static final String FOCUS_DURATION = "FOCUS_DURATION";
     private static final String GOAL = "GOAL";
+    private static final String NOT_SET = "NOT_SET";
 
 
     private Context context;
@@ -66,7 +67,7 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public boolean isPasswordSet() {
-        return (sharedPreferences.getString(PASSWORD, null) != null);
+        return (sharedPreferences.getString(PASSWORD, NOT_SET).equals(NOT_SET));
     }
 
     @Override
@@ -76,12 +77,12 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public boolean isGoalSet() {
-    return (sharedPreferences.getString(GOAL, null) != null);
+        return (sharedPreferences.getString(GOAL,   NOT_SET).equals(NOT_SET));
     }
 
     @Override
     public String getPassword() {
-        return sharedPreferences.getString(PASSWORD, null);
+        return sharedPreferences.getString(PASSWORD, NOT_SET);
     }
 
 }

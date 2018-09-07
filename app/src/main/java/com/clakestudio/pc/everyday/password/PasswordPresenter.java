@@ -23,8 +23,10 @@ public class PasswordPresenter implements PasswordContract.Presenter {
     }
 
     @Override
-    public boolean isPasswordCorrect(String password) {
-        // no need to check whether password is null cuz when it is gonna be false
-        return password.equals(settingsRepository.getPassword());
+    public void checkPasswordCorrectness(String password) {
+        if (password.equals(settingsRepository.getPassword()))
+            view.showShowDaysActivity();
+        else
+            view.showWrongPasswordToast();
     }
 }

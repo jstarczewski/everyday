@@ -22,7 +22,7 @@ public interface PasswordContract {
 
     interface Presenter extends BasePresenter {
 
-        boolean isPasswordCorrect(String password);
+        void checkPasswordCorrectness(String password);
 
     }
 
