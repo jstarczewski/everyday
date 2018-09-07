@@ -11,5 +11,9 @@ public class PasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
+
+        PasswordFragment passwordFragment = (PasswordFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+
+
     }
 }
