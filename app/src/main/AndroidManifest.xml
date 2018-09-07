@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.clakestudio.pc.everyday">
 
+    <uses-permission android:name="android.permission.SET_ALARM"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,7 +38,8 @@
         <activity
             android:name=".password.PasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".forgotpassword.ForgotPasswordActivity"></activity>
+        <activity android:name=".forgotpassword.ForgotPasswordActivity" />
+        <receiver android:name=".reminder.NotificationReceiver"/>
     </application>
 
 </manifest>

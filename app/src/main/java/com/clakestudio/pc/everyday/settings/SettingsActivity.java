@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
@@ -31,6 +32,6 @@ public class SettingsActivity extends BaseActivity implements TimePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        System.out.print("hour"  + hourOfDay + "minut " + minute);
+        Toast.makeText(this, "horu" + hourOfDay, Toast.LENGTH_SHORT).show();
     }
 }
