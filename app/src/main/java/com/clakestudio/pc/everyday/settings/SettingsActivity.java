@@ -1,14 +1,18 @@
 package com.clakestudio.pc.everyday.settings;
 
+import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TimePicker;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener {
+
+    private SettingsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,12 @@ public class SettingsActivity extends BaseActivity {
             BaseActivity.addFragmentToActivity(getSupportFragmentManager(), settingsFragment, R.id.contentFrame);
 
         }
-        SettingsPresenter presenter = new SettingsPresenter(SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(getApplicationContext())), settingsFragment);
+        presenter = new SettingsPresenter(SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(getApplicationContext())), settingsFragment);
+    }
+
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        System.out.print("hour"  + hourOfDay + "minut " + minute);
     }
 }

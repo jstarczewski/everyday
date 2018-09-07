@@ -17,6 +17,10 @@ public interface SettingsContract {
 
     interface Presenter extends BasePresenter {
 
+        int getCurrentHour();
+
+        int getCurrentMinute();
+
 
 
     }
