@@ -7,16 +7,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.utils.SplashActivity;
 
 /**
  * Created by Jan on 9/7/2018.
+ * added some if clauses to
  */
 
 public class NotificationReceiver extends BroadcastReceiver {
+
+    private static final String CHANNEL_ID = "REMINDER";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -24,25 +27,15 @@ public class NotificationReceiver extends BroadcastReceiver {
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 24, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification = new NotificationCompat.Builder(context, "Ovo")
-                .setSmallIcon(R.drawable.logosplash)
-                .setContentTitle("Alarm")
-                .setContentText("elooo")
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Focus time !")
+                .setContentText("It is time to focus on your goal")
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .build();
-        notificationManager.notify(24, notification);
-        /*
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "NOT_MSG")
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.logosplash)
-                .setContentTitle("Alarm")
-                .setContentText("elooo")
-                .setAutoCancel(true);
-
-
-            notificationManager.notify(24, builder.build());*/
-
+        if (notificationManager != null) {
+            notificationManager.notify(24, notification);
+        }
     }
 }
