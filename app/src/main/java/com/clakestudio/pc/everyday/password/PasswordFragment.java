@@ -84,10 +84,13 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     @Override
     public void onClick(View v) {
         if (v.getTag().equals("btProcceed")) {
-
+            if (passwordPresenter.isPasswordCorrect(etPassword.getText().toString()))
+                showShowDaysActivity();
+            else
+                showWrongPasswordToast();
         }
         else {
-
+            showForgotPasswordActivity();
         }
     }
 
@@ -102,7 +105,7 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     }
 
     @Override
-    public void showWrongPasswordToas() {
+    public void showWrongPasswordToast() {
 
     }
 

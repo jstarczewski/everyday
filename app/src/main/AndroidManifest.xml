@@ -33,8 +33,10 @@
             android:name=".setgoal.SetGoalActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".settings.SettingsActivity" />
-        <activity android:name=".password.PasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".password.PasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".forgotpassword.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

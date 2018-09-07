@@ -15,7 +15,7 @@ public interface PasswordContract {
 
         void showForgotPasswordActivity();
 
-        void showWrongPasswordToas();
+        void showWrongPasswordToast();
 
 
     }
