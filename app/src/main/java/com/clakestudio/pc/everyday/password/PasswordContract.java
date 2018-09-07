@@ -9,13 +9,23 @@ import com.clakestudio.pc.everyday.BaseView;
 
 public interface PasswordContract {
 
-    interface Presenter extends BasePresenter {
-
-    }
     interface View extends BaseView<Presenter> {
 
+        void showShowDaysActivity();
+
+        void showForgotPasswordActivity();
+
+        void showWrongPasswordToas();
+
 
     }
+
+    interface Presenter extends BasePresenter {
+
+        boolean isPasswordCorrect(String password);
+
+    }
+
 
 
 }

@@ -18,4 +18,7 @@
     <string name="set_your_goal">set your goal</string>
     <string name="procceed">tap to procceed</string>
     <string name="enter_your_goal_here">Enter your goal here</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="tap_to_procceed">tap to Procceed</string>
+    <string name="enter_your_password_here">Enter your password here</string>
 </resources>

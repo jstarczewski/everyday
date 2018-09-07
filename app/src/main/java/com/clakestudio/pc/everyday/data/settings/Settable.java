@@ -22,5 +22,5 @@ public interface Settable {
 
     boolean isGoalSet();
 
-
+    String getPassword();
 }

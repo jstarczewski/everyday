@@ -59,4 +59,9 @@ public class SettingsRepository {
     public boolean isGoalSet() {
         return settable.isGoalSet();
     }
+
+    public String getPassword(){
+        return settable.getPassword();
+    }
+
 }
