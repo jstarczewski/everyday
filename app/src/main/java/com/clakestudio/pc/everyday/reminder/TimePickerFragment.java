@@ -1,15 +1,14 @@
 package com.clakestudio.pc.everyday.reminder;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -17,7 +16,8 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
-import com.clakestudio.pc.everyday.notification.NotificationHelper;
+
+import com.clakestudio.pc.everyday.notification.AlarmReceiver;
 
 import java.util.Calendar;
 
@@ -44,7 +44,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     Intent intent;
     PendingIntent pendingIntent;
     AlarmManager alarmManager;
-
+    private Context context;
 
     private static final String CHANNEL_ID = "REMINDER";
 
@@ -54,7 +54,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         calendar = Calendar.getInstance();
 
-        return new TimePickerDialog(getActivity(), this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(getContext()));
+        return new TimePickerDialog(getContext(), this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(getContext()));
     }
 
     @Override
@@ -73,8 +73,24 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         alarmManager = (AlarmManager) getActivity().getSystemService(getActivity().ALARM_SERVICE);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);*/
 
-        NotificationHelper.scheduleRepeatingRTCNotification(getContext(), String.valueOf(hourOfDay), String.valueOf(minute));
-        NotificationHelper.enableBootReceiver(getContext());
+
+        /**
+         *
+         * Seting the alarmmanager
+         *
+         *
+         * */
+        context = getContext();
+
+        intent = new Intent(context, AlarmReceiver.class);
+        boolean alarmRunning = (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE) != null);
+        if (!alarmRunning) {
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 15000, pendingIntent);
+        }
+
+
 
 
     }

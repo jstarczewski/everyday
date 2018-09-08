@@ -41,19 +41,14 @@
         <activity android:name=".forgotpassword.ForgotPasswordActivity" />
 
         <receiver android:name=".reminder.NotificationReceiver" />
+
         <service
             android:name=".reminder.NotificationService"
             android:enabled="true" />
 
-        <receiver android:name=".notification.AlarmReceiver" />
-        <receiver
-            android:name=".notification.AlarmBootReceiver"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+        <service android:name=".notification.BackgroundService" />
 
+        <receiver android:name=".notification.AlarmReceiver" />
     </application>
 
 </manifest>
