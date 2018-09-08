@@ -1,5 +1,6 @@
 package com.clakestudio.pc.everyday.reminder;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.Notification;
@@ -16,25 +17,25 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
+import com.clakestudio.pc.everyday.notification.NotificationHelper;
+
 import java.util.Calendar;
 
 
 /**
  * Created by Jan on 9/7/2018.
- *
+ * <p>
  * This fragment is not sticking to MVP architecture because
  * it is easier to implement it the <rubbish>
- *
- *    <not the way it should>
- *        <I know>
- *            <That im using commenting wrong>
- *                </That>
- *            </I>
- *        </not>
- *
+ * <p>
+ * <not the way it should>
+ * <I know>
+ * <That im using commenting wrong>
+ * </That>
+ * </I>
+ * </not>
+ * <p>
  * </rubbish> way
- *
- *
  */
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
@@ -58,35 +59,44 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-
+/*
+        setCalendar(hourOfDay,minute);
+       createNotificationChannel();
+        intent = new Intent(getContext(), NotificationService.class);
+        pendingIntent = PendingIntent.getService(getContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);*/
+/*
         setCalendar(hourOfDay, minute);
-        createNotificationChannel();
+        intent = new Intent(getActivity(), NotificationReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager = (AlarmManager) getActivity().getSystemService(getActivity().ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);*/
 
-        intent = new Intent(getContext(), NotificationReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 24, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        NotificationHelper.scheduleRepeatingRTCNotification(getContext(), String.valueOf(hourOfDay), String.valueOf(minute));
+        NotificationHelper.enableBootReceiver(getContext());
+
+
     }
 
     private void createNotificationChannel() {
 
-        if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
-                    CHANNEL_ID, "REMINDER_CHANNEL",
+                    CHANNEL_ID, "REMINDER",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
             NotificationManager manager = getActivity().getSystemService(NotificationManager.class);
-            if (manager != null) {
-                manager.createNotificationChannel(notificationChannel);
-            }
+            manager.createNotificationChannel(notificationChannel);
 
         }
 
     }
+
     private void setCalendar(int hourOfDay, int minute) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.SECOND, 10);
+
     }
 }

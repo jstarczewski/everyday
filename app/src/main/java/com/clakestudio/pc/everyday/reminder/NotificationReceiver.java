@@ -25,17 +25,16 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent repeatingIntent = new Intent(context, SplashActivity.class);
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 24, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.logosplash)
                 .setContentTitle("Focus time !")
                 .setContentText("It is time to focus on your goal")
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
+                .setWhen(System.currentTimeMillis())
                 .build();
-        if (notificationManager != null) {
-            notificationManager.notify(24, notification);
-        }
+            notificationManager.notify(100, notification);
     }
 }

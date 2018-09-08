@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.clakestudio.pc.everyday">
 
-    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -39,7 +39,21 @@
             android:name=".password.PasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".forgotpassword.ForgotPasswordActivity" />
-        <receiver android:name=".reminder.NotificationReceiver"/>
+
+        <receiver android:name=".reminder.NotificationReceiver" />
+        <service
+            android:name=".reminder.NotificationService"
+            android:enabled="true" />
+
+        <receiver android:name=".notification.AlarmReceiver" />
+        <receiver
+            android:name=".notification.AlarmBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
