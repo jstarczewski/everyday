@@ -35,6 +35,6 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setWhen(System.currentTimeMillis())
                 .build();
-            notificationManager.notify(100, notification);
+            notificationManager.notify(0, notification);
     }
 }

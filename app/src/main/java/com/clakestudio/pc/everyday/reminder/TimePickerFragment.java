@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 
 
 import com.clakestudio.pc.everyday.notification.AlarmReceiver;
+import com.clakestudio.pc.everyday.utils.SplashActivity;
 
 import java.util.Calendar;
 
@@ -66,7 +67,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         pendingIntent = PendingIntent.getService(getContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);*/
-
+/*
         setCalendar(hourOfDay, minute);
         intent = new Intent(getActivity(), NotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -82,9 +83,9 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     }*/
 
 
-    /**
-     * Seting the alarmmanager
-     */
+        /**
+         * Seting the alarmmanager
+         */
    /*     setCalendar(hourOfDay, minute);
         context = getContext();
         intent = new Intent(context, AlarmReceiver.class);
@@ -98,9 +99,35 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             }
         }
 
+*/
+        setCalendar(hourOfDay, minute);
+        context = getContext();
+        intent = new Intent(context, NotificationReceiver.class);
+        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {        // KITKAT and later
+                am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+            } else {
+                am.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+            }
+            intent = new Intent("android.intent.action.ALARM_CHANGED");
+            intent.putExtra("alarmSet", true);
+            context.sendBroadcast(intent);
+          /*  SimpleDateFormat fmt = new SimpleDateFormat("E HH:mm");
+            Settings.System.putString(context.getContentResolver(),
+                    Settings.System.NEXT_ALARM_FORMATTED,
+                    fmt.format(c.getTime()));*/
+        } else {
+            Intent showIntent = new Intent(context, SplashActivity.class);
+            PendingIntent showOperation = PendingIntent.getActivity(context, 0, showIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), showOperation);
+            am.setAlarmClock(alarmClockInfo, sender);
+        }
 
     }
-*/
+
     private void createNotificationChannel() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
