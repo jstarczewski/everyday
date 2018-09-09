@@ -40,15 +40,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".forgotpassword.ForgotPasswordActivity" />
 
-        <receiver android:name=".reminder.NotificationReceiver" />
+        <receiver android:name=".reminder.ReminderReceiver" />
 
-        <service
-            android:name=".reminder.NotificationService"
-            android:enabled="true" />
-
-        <service android:name=".notification.BackgroundService" />
-
-        <receiver android:name=".notification.AlarmReceiver" />
     </application>
 
 </manifest>

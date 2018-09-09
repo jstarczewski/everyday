@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.clakestudio.pc.everyday.R;
-import com.clakestudio.pc.everyday.reminder.TimePickerFragment;
+import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
 
 /**
  * A simple {@link Fragment} subclass.

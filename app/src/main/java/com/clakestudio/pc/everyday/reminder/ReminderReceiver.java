@@ -16,7 +16,7 @@ import com.clakestudio.pc.everyday.utils.SplashActivity;
  * added some if clauses to
  */
 
-public class NotificationReceiver extends BroadcastReceiver {
+public class ReminderReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "REMINDER";
 
@@ -35,6 +35,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setWhen(System.currentTimeMillis())
                 .build();
+        if (notificationManager != null) {
             notificationManager.notify(0, notification);
+        }
     }
 }
