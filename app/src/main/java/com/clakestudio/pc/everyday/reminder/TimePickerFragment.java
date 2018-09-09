@@ -66,21 +66,26 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         pendingIntent = PendingIntent.getService(getContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);*/
-/*
+
         setCalendar(hourOfDay, minute);
         intent = new Intent(getActivity(), NotificationReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager = (AlarmManager) getActivity().getSystemService(getActivity().ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);*/
+        //  alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
+    }
+      /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
+    }*/
 
 
-        /**
-         *
-         * Seting the alarmmanager
-         *
-         *
-         * */
-        setCalendar(hourOfDay, minute);
+    /**
+     * Seting the alarmmanager
+     */
+   /*     setCalendar(hourOfDay, minute);
         context = getContext();
         intent = new Intent(context, AlarmReceiver.class);
         boolean alarmRunning = (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE) != null);
@@ -95,7 +100,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
 
     }
-
+*/
     private void createNotificationChannel() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
