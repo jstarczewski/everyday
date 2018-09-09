@@ -80,17 +80,18 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
          *
          *
          * */
+        setCalendar(hourOfDay, minute);
         context = getContext();
-
         intent = new Intent(context, AlarmReceiver.class);
         boolean alarmRunning = (PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_NO_CREATE) != null);
         if (!alarmRunning) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 15000, pendingIntent);
+            alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            // alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 15000, pendingIntent);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            }
         }
-
-
 
 
     }
