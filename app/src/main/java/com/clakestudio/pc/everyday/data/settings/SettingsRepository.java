@@ -67,5 +67,10 @@ public class SettingsRepository {
     public String getGoal() {
         return settable.getGoal();
     }
-
+    public boolean isReminderSet() {
+        return settable.isReminderSet();
+    }
+    public void setReminder(boolean isSet) {
+       settable.setReminder(isSet);
+    }
 }

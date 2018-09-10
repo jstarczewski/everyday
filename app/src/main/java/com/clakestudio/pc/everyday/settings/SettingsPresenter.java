@@ -1,6 +1,7 @@
 package com.clakestudio.pc.everyday.settings;
 
 
+import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 
@@ -25,7 +26,8 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void start() {
-
+          checkIfPasswordIsSet();
+          checkIfReminderIsSet();
     }
 
 
@@ -40,22 +42,25 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void saveIsPasswordSet() {
-
+    public void saveIsPasswordSet(boolean isSet) {
+        if (!isSet)
+            settingsRepository.setPassword(Settings.NOT_SET.toString());
     }
 
     @Override
-    public void saveIsReminderSet() {
+    public void saveIsReminderSet(boolean isSet) {
+        if (!isSet)
+            settingsRepository.setReminder(false);
     }
 
     @Override
-    public void saveNewPassword() {
-
+    public void saveNewPassword(String password) {
+        settingsRepository.setPassword(password);
     }
 
     @Override
-    public void saveNewGoal() {
-
+    public void saveNewGoal(String goal) {
+        settingsRepository.setGoal(goal);
     }
 
     @Override
@@ -66,5 +71,17 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void saveFocusReminderTime() {
 
+    }
+
+    @Override
+    public void checkIfPasswordIsSet() {
+        if (settingsRepository.isPasswordSet())
+            view.showPasswordChangeOption();
+    }
+
+    @Override
+    public void checkIfReminderIsSet() {
+        if (settingsRepository.isReminderSet())
+            view.showReminderTimeChangeOption();
     }
 }

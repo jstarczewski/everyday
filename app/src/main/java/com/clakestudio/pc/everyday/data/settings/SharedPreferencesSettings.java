@@ -16,13 +16,14 @@ public class SharedPreferencesSettings implements Settable {
      * The cons are problems with testing
      */
 
-
+    /*
     private static final String INFO_READ = "INFO_READ";
     private static final String PASSWORD = "PASSWORD";
     private static final String FOCUS_DURATION = "FOCUS_DURATION";
     private static final String GOAL = "GOAL";
     private static final String NOT_SET = "NOT_SET";
-
+    private static final String REMINDER = "REMINDER";
+    */
 
     private Context context;
     private static SharedPreferencesSettings sharedPreferencesSettings;
@@ -42,52 +43,62 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public void setInfoRead() {
-        sharedPreferences.edit().putBoolean(INFO_READ, true).apply();
+        sharedPreferences.edit().putBoolean(Settings.INFO_RED.toString(), true).apply();
     }
 
     @Override
     public void setPassword(String password) {
-        sharedPreferences.edit().putString(PASSWORD, password).apply();
+        sharedPreferences.edit().putString(Settings.PASSWORD.toString(), password).apply();
     }
 
     @Override
     public void setFocusDurationTime(int time) {
-        sharedPreferences.edit().putInt(FOCUS_DURATION, time).apply();
+        sharedPreferences.edit().putInt(Settings.FOCUS_DURATION.toString(), time).apply();
     }
 
     @Override
     public void setGoal(String goal) {
-        sharedPreferences.edit().putString(GOAL, goal).apply();
+        sharedPreferences.edit().putString(Settings.GOAL.toString(), goal).apply();
     }
 
     @Override
     public boolean isInfoRead() {
-        return (sharedPreferences.getBoolean(INFO_READ, false));
+        return (sharedPreferences.getBoolean(Settings.INFO_RED.toString(), false));
     }
 
     @Override
     public boolean isPasswordSet() {
-        return (sharedPreferences.getString(PASSWORD, NOT_SET).equals(NOT_SET));
+        return (sharedPreferences.getString(Settings.PASSWORD.toString(), Settings.NOT_SET.toString()).equals(Settings.NOT_SET.toString()));
     }
 
     @Override
     public int getFocusDurationTime() {
-        return sharedPreferences.getInt(FOCUS_DURATION, 3);
+        return sharedPreferences.getInt(Settings.FOCUS_DURATION.toString(), 3);
     }
 
     @Override
     public boolean isGoalSet() {
-        return (sharedPreferences.getString(GOAL,   NOT_SET).equals(NOT_SET));
+        return (sharedPreferences.getString(Settings.GOAL.toString(),   Settings.NOT_SET.toString()).equals(Settings.NOT_SET.toString()));
     }
 
     @Override
     public String getPassword() {
-        return sharedPreferences.getString(PASSWORD, NOT_SET);
+        return sharedPreferences.getString(Settings.PASSWORD.toString(), Settings.NOT_SET.toString());
     }
 
     @Override
     public String getGoal() {
-        return sharedPreferences.getString(GOAL, NOT_SET);
+        return sharedPreferences.getString(Settings.GOAL.toString(), Settings.NOT_SET.toString());
+    }
+
+    @Override
+    public void setReminder(boolean isSet) {
+        sharedPreferences.edit().putBoolean(Settings.REMINDER.toString(), isSet).apply();
+    }
+
+    @Override
+    public boolean isReminderSet() {
+        return sharedPreferences.getBoolean(Settings.REMINDER.toString(), false);
     }
 
 }

@@ -1,15 +1,21 @@
 package com.clakestudio.pc.everyday.settings;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
@@ -30,9 +36,18 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     // TODO: Rename and change types of parameters
 
+    AlertDialog alertDialog;
 
     private SettingsContract.Presenter presenter;
     private Button btShowTimePicker;
+    private EditText etNewPasswordOrGoal;
+    private Toolbar dialogToolbar;
+    private Switch sPassword;
+    private Switch sReminder;
+    private ConstraintLayout clPassword;
+    private ConstraintLayout clGoal;
+    private ConstraintLayout clReminder;
+    private Button btConfirmChange;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,6 +79,23 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        sPassword = (Switch) view.findViewById(R.id.sPassword);
+        sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
+
+        clPassword = (ConstraintLayout) view.findViewById(R.id.clChangePassword);
+        clGoal = (ConstraintLayout) view.findViewById(R.id.clChangeGoal);
+        clReminder = (ConstraintLayout) view.findViewById(R.id.clChangeReminderTime);
+
+
+        // Alert dialog
+        alertDialog = new AlertDialog.Builder(view.getContext()).create();
+        View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, container);
+        dialogToolbar = (Toolbar) alertDialogView.findViewById(R.id.toolbar);
+        etNewPasswordOrGoal = (EditText) alertDialogView.findViewById(R.id.etChange);
+        btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
+        alertDialog.setView(alertDialogView);
+
 
 //        btShowTimePicker = (Button) view.findViewById(R.id.btTurnOnOffNotification);
 
@@ -115,11 +147,18 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     @Override
     public void showFocusReminderOnOff() {
-
+        if (clReminder.getVisibility() == View.VISIBLE)
+            clReminder.setVisibility(View.GONE);
+        else
+            clReminder.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showPasswordChangeOption() {
+        if (clPassword.getVisibility() == View.VISIBLE)
+            clPassword.setVisibility(View.GONE);
+        else
+            clPassword.setVisibility(View.VISIBLE);
 
     }
 
@@ -140,11 +179,16 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     @Override
     public void showChangeGoalDialog() {
-
+        setDialogInfo("Change password", "Enter new password here");
     }
 
     @Override
     public void showChangeFocusDurationTime() {
+
+    }
+
+    @Override
+    public void setDialogInfo(String toolbarTitle, String editTextHint) {
 
     }
 

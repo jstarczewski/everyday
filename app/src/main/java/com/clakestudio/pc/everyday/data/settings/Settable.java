@@ -25,4 +25,8 @@ public interface Settable {
     String getPassword();
 
     String getGoal();
+
+    void setReminder(boolean isSet);
+
+    boolean isReminderSet();
 }

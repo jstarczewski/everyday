@@ -29,7 +29,7 @@ public interface SettingsContract {
 
         void showChangeFocusDurationTime();
 
-
+        void setDialogInfo(String toolbarTitle, String editTextHint);
     }
 
     interface Presenter extends BasePresenter {
@@ -38,17 +38,21 @@ public interface SettingsContract {
 
         int getCurrentMinute();
 
-        void saveIsPasswordSet();
+        void saveIsPasswordSet(boolean isSet);
 
-        void saveIsReminderSet();
+        void saveIsReminderSet(boolean isSet);
 
-        void saveNewPassword();
+        void saveNewPassword(String password);
 
-        void saveNewGoal();
+        void saveNewGoal(String goal);
 
         void saveNewFocusDurationTime();
 
         void saveFocusReminderTime();
+
+        void checkIfPasswordIsSet();
+
+        void checkIfReminderIsSet();
     }
 
 }
