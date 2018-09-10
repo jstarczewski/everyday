@@ -9,14 +9,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toolbar;
+import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
@@ -29,7 +32,7 @@ import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
  * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends Fragment implements SettingsContract.View {
+public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,16 +90,13 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         clPassword = (ConstraintLayout) view.findViewById(R.id.clChangePassword);
         clGoal = (ConstraintLayout) view.findViewById(R.id.clChangeGoal);
         clReminder = (ConstraintLayout) view.findViewById(R.id.clChangeReminderTime);
-
-
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
-        View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, container);
+        View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, null);
         dialogToolbar = (Toolbar) alertDialogView.findViewById(R.id.toolbar);
         etNewPasswordOrGoal = (EditText) alertDialogView.findViewById(R.id.etChange);
         btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
         alertDialog.setView(alertDialogView);
-
 
 //        btShowTimePicker = (Button) view.findViewById(R.id.btTurnOnOffNotification);
 
@@ -195,6 +195,27 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         etNewPasswordOrGoal.setHint(editTextHint);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialogToolbar.setTitle(toolbarTitle);
+        }
+    }
+ 
+    @Override
+    public void onClick(View v) {
+
+        Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
+        if (v.getTag().toString().equals(sPassword.getTag().toString())) {
+            Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
+            presenter.checkIfPasswordIsSet();
+        }
+    }
+
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
+        if (buttonView.getId()==sPassword.getId()) {
+            Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
+            presenter.checkIfPasswordIsSet();
         }
     }
 
