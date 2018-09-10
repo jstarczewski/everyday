@@ -32,4 +32,9 @@ public class CountdownPresenter implements CountdownContract.Presenter {
     public void loadAddDayActivity() {
         view.startAddDayActivity();
     }
+
+    @Override
+    public void updateRemainingTime(int timeLeft) {
+        view.updateTextViewCountDown(timeLeft);
+    }
 }

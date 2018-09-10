@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.clakestudio.pc.everyday.countdown.CountdownActivity;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.info.InfoActivity;
@@ -25,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(this, SetGoalActivity.class));
         }
         else if(!settingsRepository.isPasswordSet()) {
-            startActivity(new Intent(this, SettingsActivity.class));
+            startActivity(new Intent(this, CountdownActivity.class));
         } else {
             startActivity(new Intent(this, ShowDaysActivity.class));
         }

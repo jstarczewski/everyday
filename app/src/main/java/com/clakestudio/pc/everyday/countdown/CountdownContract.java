@@ -27,6 +27,8 @@ public interface CountdownContract {
 
         void loadAddDayActivity();
 
+        void updateRemainingTime(int timeLeft);
+
     }
 
 

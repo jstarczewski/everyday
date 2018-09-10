@@ -52,7 +52,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_countdown, container, false);
-        tvCountdown = (TextView)view.findViewById(R.id.tvCountdown);
+        tvCountdown = (TextView) view.findViewById(R.id.tvCountdown);
 
         return view;
     }
@@ -86,17 +86,20 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
 
     @Override
     public void startCountdownTimer(int min) {
-       countDownTimer = new CountDownTimer(min * 1000, 1000) {
-           @Override
-           public void onTick(long millisUntilFinished) {
-                updateTextViewCountDown((int)millisUntilFinished/1000);
-           }
+        countDownTimer = new CountDownTimer(min * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                presenter.updateRemainingTime((int) millisUntilFinished / 1000);
+            }
 
-           @Override
-           public void onFinish() {
-              presenter.loadAddDayActivity();
-           }
-       }.start();
+            @Override
+            public void onFinish() {
+                /**
+                 * Don't know whether it is good to call view methods directly
+                 * */
+                fireMediaPlayer();
+            }
+        }.start();
     }
 
     @Override
@@ -112,7 +115,9 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
 
     @Override
     public void fireMediaPlayer() {
-
+        if (mediaPlayer != null)
+            mediaPlayer.start();
+        presenter.loadAddDayActivity();
     }
 
     /**
