@@ -15,7 +15,9 @@ public interface CountdownContract {
 
         void startAddDayActivity();
 
-        void updateTextViewCountDown();
+        void updateTextViewCountDown(int timeLeft);
+
+        void fireMediaPlayer();
 
     }
 

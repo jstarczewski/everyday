@@ -1,6 +1,8 @@
 package com.clakestudio.pc.everyday.countdown;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.adddays.AddDayActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +31,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     private CountDownTimer countDownTimer;
     private TextView tvCountdown;
     private int countdownDuration;
+    private MediaPlayer mediaPlayer;
 
     public CountdownFragment() {
         // Required empty public constructor
@@ -57,6 +61,8 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         countdownDuration = presenter.getFocusDuration();
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.sound);
+        startCountdownTimer(countdownDuration);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -83,7 +89,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
        countDownTimer = new CountDownTimer(min * 1000, 1000) {
            @Override
            public void onTick(long millisUntilFinished) {
-
+                updateTextViewCountDown((int)millisUntilFinished/1000);
            }
 
            @Override
@@ -95,11 +101,17 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
 
     @Override
     public void startAddDayActivity() {
-
+        startActivity(new Intent(getActivity(), AddDayActivity.class));
+        getActivity().finish();
     }
 
     @Override
-    public void updateTextViewCountDown() {
+    public void updateTextViewCountDown(int timeLeft) {
+        tvCountdown.setText(timeLeft);
+    }
+
+    @Override
+    public void fireMediaPlayer() {
 
     }
 
