@@ -42,6 +42,7 @@
 
         <receiver android:name=".reminder.ReminderReceiver" />
 
+        <activity android:name=".countdown.CountdownActivity"></activity>
     </application>
 
 </manifest>
