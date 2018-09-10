@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         if (!settingsRepository.isInfoRead()) {
             startActivity(new Intent(this, InfoActivity.class));
         } else if (!settingsRepository.isGoalSet()) {
-            startActivity(new Intent(this, SetGoalActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
         }
         else if(!settingsRepository.isPasswordSet()) {
             startActivity(new Intent(this, CountdownActivity.class));

@@ -23,9 +23,8 @@ import com.clakestudio.pc.everyday.R;
  */
 public class ForgotPasswordFragment extends Fragment implements ForgotPasswordContract.View, View.OnClickListener {
 
-    private ForgotPasswordPresenter presenter;
+    private ForgotPasswordContract.Presenter presenter;
     private EditText etGoal;
-    private Button btCheckGoal
 
     public ForgotPasswordFragment() {
         // Required empty public constructor
@@ -45,8 +44,8 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forgot_password, container, false);
 
-        etGoal = (EditText)view.findViewById(R.id.etEnterGoal);
-        btCheckGoal = (Button)view.findViewById(R.id.btCheckGoal);
+        etGoal = (EditText) view.findViewById(R.id.etEnterGoal);
+        Button btCheckGoal = (Button) view.findViewById(R.id.btCheckGoal);
         btCheckGoal.setOnClickListener(this);
 
         // Inflate the layout for this fragment
@@ -69,7 +68,7 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
 
     @Override
     public void setPresenter(ForgotPasswordContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     @Override
