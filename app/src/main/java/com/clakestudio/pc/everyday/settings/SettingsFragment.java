@@ -3,6 +3,7 @@ package com.clakestudio.pc.everyday.settings;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -109,8 +110,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
             @Override
             public void onClick(View v) {
 
-                TimePickerFragment timePickerFragment = new TimePickerFragment();
-                timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
 
             }
         });
@@ -138,6 +137,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     @Override
     public void showTimePicker() {
 
+        TimePickerFragment timePickerFragment = new TimePickerFragment();
+        timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
     @Override
@@ -147,10 +148,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     @Override
     public void showFocusReminderOnOff() {
-        if (clReminder.getVisibility() == View.VISIBLE)
-            clReminder.setVisibility(View.GONE);
-        else
-            clReminder.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -169,17 +167,22 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     @Override
     public void showReminderTimeChangeOption() {
-
+        if (clReminder.getVisibility() == View.VISIBLE)
+            clReminder.setVisibility(View.GONE);
+        else
+            clReminder.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showChangePasswordDialog() {
-
+        setDialogInfo("Change your goal", "Enter your new goal here");
+        alertDialog.show();
     }
 
     @Override
     public void showChangeGoalDialog() {
         setDialogInfo("Change password", "Enter new password here");
+        alertDialog.show();
     }
 
     @Override
@@ -189,7 +192,10 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     @Override
     public void setDialogInfo(String toolbarTitle, String editTextHint) {
-
+        etNewPasswordOrGoal.setHint(editTextHint);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialogToolbar.setTitle(toolbarTitle);
+        }
     }
 
 
