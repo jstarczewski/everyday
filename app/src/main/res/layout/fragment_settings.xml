@@ -11,14 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btTurnOnOffNotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="TurnNotification" />
-
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clFocusReminder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -31,12 +25,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:padding="@dimen/fab_margin"
-                android:text="Everyday focus reminder"
+                android:text="@string/everyday_focus_reminder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ToggleButton
+            <Switch
+                android:id="@+id/sFocusReminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -48,6 +43,7 @@
 
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -60,12 +56,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:padding="@dimen/fab_margin"
-                android:text="Password"
+                android:text="@string/password"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ToggleButton
+            <Switch
+                android:id="@+id/sPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -76,8 +73,8 @@
 
         </android.support.constraint.ConstraintLayout>
 
-
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clChangeGoal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -90,12 +87,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:padding="@dimen/fab_margin"
-                android:text="Change goal"
+                android:text="@string/settings_goal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/btChangeGoal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -108,6 +106,71 @@
 
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="@dimen/fab_margin"
+                android:text="@string/password"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btChangePassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clChangeReminderTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp">
+
+            <TextView
+                android:id="@+id/tvChangeReminderTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:padding="@dimen/fab_margin"
+                android:text="@string/reminder_time"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btChangeReminderTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clChangeFocusDurationTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -121,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:padding="@dimen/fab_margin"
-                android:text="Focus duration (min)"
+                android:text="@string/focus_duration_min"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

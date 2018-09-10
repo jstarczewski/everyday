@@ -22,4 +22,9 @@
     <string name="tap_to_procceed">tap to Procceed</string>
     <string name="enter_your_password_here">Enter your password here</string>
     <string name="incorrect_goal">Incorrect goal</string>
+    <string name="focus_duration_min">Focus duration (min)</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="settings_goal">Goal</string>
+    <string name="password">Password</string>
+    <string name="everyday_focus_reminder">Everyday focus reminder</string>
 </resources>

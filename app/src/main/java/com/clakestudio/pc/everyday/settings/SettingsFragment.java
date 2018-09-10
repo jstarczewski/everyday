@@ -65,7 +65,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        btShowTimePicker = (Button) view.findViewById(R.id.btTurnOnOffNotification);
+//        btShowTimePicker = (Button) view.findViewById(R.id.btTurnOnOffNotification);
 
         return view;
     }
