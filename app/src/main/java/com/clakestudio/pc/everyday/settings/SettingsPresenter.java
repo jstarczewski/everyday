@@ -73,9 +73,21 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     }
 
+    /**
+     *
+     *
+     * Bugs -> when switch is off first turned on we set password
+     *
+     * Then when turning on acitivty we check if password is set to show change password panel
+     *
+     * when changing switch we insert not set password
+     *
+     *
+     * */
+
     @Override
     public void checkIfPasswordIsSet() {
-        if (settingsRepository.isPasswordSet())
+        if (!settingsRepository.isPasswordSet())
             view.showPasswordChangeOption();
     }
 

@@ -86,6 +86,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
         sPassword = (Switch) view.findViewById(R.id.sPassword);
         sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
+        sPassword.setOnCheckedChangeListener(this);
 
         clPassword = (ConstraintLayout) view.findViewById(R.id.clChangePassword);
         clGoal = (ConstraintLayout) view.findViewById(R.id.clChangeGoal);
@@ -197,7 +198,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             dialogToolbar.setTitle(toolbarTitle);
         }
     }
- 
+
     @Override
     public void onClick(View v) {
 
@@ -215,7 +216,9 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
         if (buttonView.getId()==sPassword.getId()) {
             Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
-            presenter.checkIfPasswordIsSet();
+            showChangePasswordDialog();
+
+          //  presenter.checkIfPasswordIsSet();
         }
     }
 
