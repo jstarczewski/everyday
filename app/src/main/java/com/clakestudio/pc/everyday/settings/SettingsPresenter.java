@@ -38,4 +38,33 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     public int getCurrentMinute() {
         return 0;
     }
+
+    @Override
+    public void saveIsPasswordSet() {
+
+    }
+
+    @Override
+    public void saveIsReminderSet() {
+    }
+
+    @Override
+    public void saveNewPassword() {
+
+    }
+
+    @Override
+    public void saveNewGoal() {
+
+    }
+
+    @Override
+    public void saveNewFocusDurationTime() {
+
+    }
+
+    @Override
+    public void saveFocusReminderTime() {
+
+    }
 }

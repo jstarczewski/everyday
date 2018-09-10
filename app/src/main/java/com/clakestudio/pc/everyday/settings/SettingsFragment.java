@@ -73,7 +73,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btShowTimePicker.setOnClickListener(new View.OnClickListener() {
+/*        btShowTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -82,7 +82,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
             }
         });
-
+*/
     }
 // TODO: Rename method, update argument and hook method into UI event
 
@@ -105,6 +105,46 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
 
     @Override
     public void showTimePicker() {
+
+    }
+
+    @Override
+    public void showSwitchPasswordOnOff() {
+
+    }
+
+    @Override
+    public void showFocusReminderOnOff() {
+
+    }
+
+    @Override
+    public void showPasswordChangeOption() {
+
+    }
+
+    @Override
+    public void showGoalChangeOption() {
+
+    }
+
+    @Override
+    public void showReminderTimeChangeOption() {
+
+    }
+
+    @Override
+    public void showChangePasswordDialog() {
+
+    }
+
+    @Override
+    public void showChangeGoalDialog() {
+
+    }
+
+    @Override
+    public void showChangeFocusDurationTime() {
 
     }
 

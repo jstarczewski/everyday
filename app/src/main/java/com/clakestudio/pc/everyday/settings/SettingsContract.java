@@ -13,6 +13,23 @@ public interface SettingsContract {
 
         void showTimePicker();
 
+        void showSwitchPasswordOnOff();
+
+        void showFocusReminderOnOff();
+
+        void showPasswordChangeOption();
+
+        void showGoalChangeOption();
+
+        void showReminderTimeChangeOption();
+
+        void showChangePasswordDialog();
+
+        void showChangeGoalDialog();
+
+        void showChangeFocusDurationTime();
+
+
     }
 
     interface Presenter extends BasePresenter {
@@ -21,8 +38,17 @@ public interface SettingsContract {
 
         int getCurrentMinute();
 
+        void saveIsPasswordSet();
 
+        void saveIsReminderSet();
 
+        void saveNewPassword();
+
+        void saveNewGoal();
+
+        void saveNewFocusDurationTime();
+
+        void saveFocusReminderTime();
     }
 
 }
