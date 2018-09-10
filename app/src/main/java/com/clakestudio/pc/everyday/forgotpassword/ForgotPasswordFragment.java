@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 
@@ -18,10 +21,11 @@ import com.clakestudio.pc.everyday.R;
  * Use the {@link ForgotPasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ForgotPasswordFragment extends Fragment implements ForgotPasswordContract.View {
+public class ForgotPasswordFragment extends Fragment implements ForgotPasswordContract.View, View.OnClickListener {
 
     private ForgotPasswordPresenter presenter;
-
+    private EditText etGoal;
+    private Button btCheckGoal
 
     public ForgotPasswordFragment() {
         // Required empty public constructor
@@ -39,8 +43,14 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_forgot_password, container, false);
+
+        etGoal = (EditText)view.findViewById(R.id.etEnterGoal);
+        btCheckGoal = (Button)view.findViewById(R.id.btCheckGoal);
+        btCheckGoal.setOnClickListener(this);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forgot_password, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -60,6 +70,26 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
     @Override
     public void setPresenter(ForgotPasswordContract.Presenter presenter) {
 
+    }
+
+    @Override
+    public void startSettingsActivity() {
+
+    }
+
+    @Override
+    public void showToastAboutGoalIncorrectness() {
+        Toast.makeText(getContext(), R.string.incorrect_goal, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void checkGoal() {
+        presenter.checkGoalCorrectness(etGoal.getText().toString());
+    }
+
+    @Override
+    public void onClick(View v) {
+        checkGoal();
     }
 
     /**

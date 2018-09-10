@@ -85,4 +85,9 @@ public class SharedPreferencesSettings implements Settable {
         return sharedPreferences.getString(PASSWORD, NOT_SET);
     }
 
+    @Override
+    public String getGoal() {
+        return sharedPreferences.getString(GOAL, NOT_SET);
+    }
+
 }

@@ -64,4 +64,8 @@ public class SettingsRepository {
         return settable.getPassword();
     }
 
+    public String getGoal() {
+        return settable.getGoal();
+    }
+
 }

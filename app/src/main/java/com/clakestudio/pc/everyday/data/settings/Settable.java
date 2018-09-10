@@ -23,4 +23,6 @@ public interface Settable {
     boolean isGoalSet();
 
     String getPassword();
+
+    String getGoal();
 }
