@@ -86,7 +86,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
 
     @Override
     public void startCountdownTimer(int min) {
-        countDownTimer = new CountDownTimer(min * 1000, 1000) {
+        countDownTimer = new CountDownTimer(min * 60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 presenter.updateRemainingTime((int) millisUntilFinished / 1000);
@@ -110,7 +110,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
 
     @Override
     public void updateTextViewCountDown(int timeLeft) {
-        tvCountdown.setText(timeLeft);
+        tvCountdown.setText(String.valueOf(timeLeft));
     }
 
     @Override
@@ -118,6 +118,11 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
         if (mediaPlayer != null)
             mediaPlayer.start();
         presenter.loadAddDayActivity();
+    }
+
+    @Override
+    public void stopCountdownTimer() {
+        countDownTimer.cancel();
     }
 
     /**
@@ -133,5 +138,11 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        stopCountdownTimer();
     }
 }

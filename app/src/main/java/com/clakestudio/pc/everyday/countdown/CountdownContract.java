@@ -19,6 +19,8 @@ public interface CountdownContract {
 
         void fireMediaPlayer();
 
+        void stopCountdownTimer();
+
     }
 
     interface Presenter extends BasePresenter {
