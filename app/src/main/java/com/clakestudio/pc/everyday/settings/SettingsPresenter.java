@@ -118,7 +118,8 @@ public class SettingsPresenter implements SettingsContract.Presenter {
         if (saveWhat.equals("Change password"))
             saveNewPassword(value);
         else {
-            saveNewGoal(value);
+            if (!(value.equals(Settings.NOT_SET.toString())))
+                saveNewGoal(value);
         }
         view.showDismissDialog();
     }

@@ -1,7 +1,9 @@
 package com.clakestudio.pc.everyday.settings;
 
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +20,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
 
-public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener, TimePickerDialog.OnKeyListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,6 +47,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     private ConstraintLayout clGoal;
     private Button btConfirmChange;
     private Button btChangeGoal;
+    private Button btCancel;
 
     private CheckBox cbOneMin;
     private CheckBox cbThreeMin;
@@ -95,11 +101,19 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         cbFiveMin = (CheckBox) view.findViewById(R.id.cbDurationFive);
         cbTenMin = (CheckBox) view.findViewById(R.id.cbDurationTen);
 
+
         timePickerFragment = new TimePickerFragment();
+        timePickerFragment.setCancelable(false);
+        timePickerFragment.getDialog().setOnKeyListener(this);
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
         View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, null);
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        btCancel = (Button) alertDialogView.findViewById(R.id.btCancel);
         dialogToolbar = (Toolbar) alertDialogView.findViewById(R.id.toolbar);
+        btCancel.setOnClickListener(this);
         etNewPasswordOrGoal = (EditText) alertDialogView.findViewById(R.id.etChange);
         btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
         btConfirmChange.setOnClickListener(this);
@@ -131,6 +145,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             }
         });
 */
+
     }
 // TODO: Rename method, update argument and hook method into UI event
 
@@ -209,6 +224,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void showDismissDialog() {
         alertDialog.dismiss();
+        presenter.start();
     }
 
     @Override
@@ -233,6 +249,10 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             case R.id.btConfirmChange: {
                 Toast.makeText(getContext(), dialogToolbar.getTitle().toString(), Toast.LENGTH_SHORT).show();
                 presenter.save(dialogToolbar.getTitle().toString(), etNewPasswordOrGoal.getText().toString());
+                break;
+            }
+            case R.id.btCancel: {
+                presenter.save(dialogToolbar.getTitle().toString(), Settings.NOT_SET.toString());
             }
         }
 
@@ -286,6 +306,13 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
 
         }
+    }
+
+
+
+    @Override
+    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+        return false;
     }
 
 

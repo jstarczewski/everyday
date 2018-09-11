@@ -29,15 +29,35 @@
         android:layout_margin="@dimen/fab_margin"
         android:inputType="textShortMessage" />
 
-    <Button
-        android:id="@+id/btConfirmChange"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:background="@color/colorPrimary"
-        android:padding="@dimen/fab_margin"
-        android:text="PROCCEED"
-        android:textColor="@color/colorText"
-        android:layout_margin="@dimen/fab_margin"/>
+        android:gravity="end"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/fab_margin"
+            android:text="Cancel"
+            android:textColor="@color/colorText" />
+
+        <Button
+            android:id="@+id/btConfirmChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/fab_margin"
+            android:text="PROCCEED"
+            android:textColor="@color/colorText" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
