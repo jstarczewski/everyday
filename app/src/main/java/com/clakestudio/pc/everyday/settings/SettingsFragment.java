@@ -49,6 +49,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     private CheckBox cbFiveMin;
     private CheckBox cbTenMin;
 
+    TimePickerFragment timePickerFragment;
+
     private OnFragmentInteractionListener mListener;
 
     public SettingsFragment() {
@@ -84,7 +86,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
 
         sPassword.setOnCheckedChangeListener(this);
-        sReminder.setOnClickListener(this);
+        sReminder.setOnCheckedChangeListener(this);
 
         clPassword = (ConstraintLayout) view.findViewById(R.id.clChangePassword);
 
@@ -104,6 +106,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         cbFiveMin.setOnCheckedChangeListener(this);
         cbTenMin.setOnCheckedChangeListener(this);
 
+        timePickerFragment = new TimePickerFragment();
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
         View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, null);
@@ -151,7 +154,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void showSetReminderTimeDialog() {
-        TimePickerFragment timePickerFragment = new TimePickerFragment();
         timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
@@ -214,7 +216,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
                 break;
             }
         }
-        presenter.saveNewFocusDurationTime(id);
     }
 
     @Override
@@ -267,19 +268,23 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
         switch (buttonView.getId()) {
 
-            case R.id.sPassword: {
-                presenter.saveIsPasswordSet(isChecked);
-                break;
-            }
             case R.id.sFocusReminder: {
                 presenter.saveIsReminderSet(isChecked);
                 break;
             }
-            default: {
-                showChangeFocusDurationTime(Integer.valueOf(buttonView.getTag().toString()));
+            case R.id.sPassword: {
+                presenter.saveIsPasswordSet(isChecked);
+                break;
             }
 
-           /* case R.id.cbDurationOne: {
+            default: {
+                if (isChecked)
+                    presenter.saveNewFocusDurationTime(Integer.valueOf(buttonView.getTag().toString()));
+                if (!isChecked && presenter.getFocusDurationTime() == Integer.valueOf(buttonView.getTag().toString()))
+                    buttonView.setChecked(true);
+            }
+/*
+           case R.id.cbDurationOne: {
                 presenter.saveNewFocusDurationTime(1);
                 break;
             }
@@ -294,7 +299,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             case R.id.cbDurationTen: {
                 presenter.saveNewFocusDurationTime(10);
                 break;
-            } */
+            }*/
 
 
         }

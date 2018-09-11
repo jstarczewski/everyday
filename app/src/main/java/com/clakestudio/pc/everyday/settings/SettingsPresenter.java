@@ -71,7 +71,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void saveNewFocusDurationTime(int time) {
         settingsRepository.setFocusDurationTime(time);
-    //    view.showChangeFocusDurationTime(time);
+        view.showChangeFocusDurationTime(time);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void checkIfPasswordIsSet() {
-        if (!settingsRepository.isPasswordSet())
+        if (settingsRepository.isPasswordSet())
             view.showPasswordChangeOption();
     }
 
