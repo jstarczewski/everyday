@@ -28,8 +28,8 @@ public class SetGoalPresenter implements SetGoalContract.Presenter {
     }
 
     @Override
-    public void setPassword(String string) {
-        settingsRepository.setPassword(string);
+    public void setGoal(String string) {
+        settingsRepository.setGoal(string);
         setGoalView.determineGoalTextViewVisibility();
         setGoalView.showGoalForThreeSeconds();
     }

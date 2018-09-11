@@ -131,7 +131,7 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
     @Override
     public void onClick(View v) {
         if (!etGoal.getText().toString().isEmpty())
-            setGoalPresenter.setPassword(etGoal.getText().toString());
+            setGoalPresenter.setGoal(etGoal.getText().toString());
         else {
             Toast.makeText(getContext(), "Goal cannot be empty", Toast.LENGTH_SHORT).show();
         }

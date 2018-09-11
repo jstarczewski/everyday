@@ -21,7 +21,7 @@ public interface SetGoalContract {
 
     interface Presenter extends BasePresenter {
 
-        void setPassword(String string);
+        void setGoal(String string);
 
 
     }

@@ -1,6 +1,8 @@
 package com.clakestudio.pc.everyday.settings;
 
 
+import android.util.Log;
+
 import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
@@ -88,14 +90,12 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void checkIfPasswordIsSet() {
-        if (settingsRepository.isPasswordSet())
-            view.showSetPasswordSwitchOnOrOff(settingsRepository.isPasswordSet());
+        view.showSetPasswordSwitchOnOrOff(settingsRepository.isPasswordSet());
     }
 
     @Override
     public void checkIfReminderIsSet() {
-        if (settingsRepository.isReminderSet())
-            view.showSetReminderSwitchOnOrOff(settingsRepository.isReminderSet());
+        view.showSetReminderSwitchOnOrOff(settingsRepository.isReminderSet());
     }
 
     @Override
