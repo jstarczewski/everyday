@@ -197,22 +197,24 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         cbTenMin.setChecked(false);
 
         switch (id) {
-
             case 1: {
                 cbOneMin.setChecked(true);
+                break;
             }
             case 3: {
                 cbThreeMin.setChecked(true);
+                break;
             }
             case 5: {
                 cbFiveMin.setChecked(true);
+                break;
             }
             case 10: {
                 cbTenMin.setChecked(true);
+                break;
             }
-
-
         }
+        presenter.saveNewFocusDurationTime(id);
     }
 
     @Override
@@ -267,31 +269,34 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
             case R.id.sPassword: {
                 presenter.saveIsPasswordSet(isChecked);
+                break;
             }
             case R.id.sFocusReminder: {
                 presenter.saveIsReminderSet(isChecked);
+                break;
             }
-            case R.id.cbDurationOne: {
+            default: {
+                showChangeFocusDurationTime(Integer.valueOf(buttonView.getTag().toString()));
+            }
+
+           /* case R.id.cbDurationOne: {
                 presenter.saveNewFocusDurationTime(1);
+                break;
             }
             case R.id.cbDurationThree: {
                 presenter.saveNewFocusDurationTime(3);
+                break;
             }
             case R.id.cbDurationFive: {
                 presenter.saveNewFocusDurationTime(5);
+                break;
             }
             case R.id.cbDurationTen: {
                 presenter.saveNewFocusDurationTime(10);
-            }
+                break;
+            } */
 
 
-        }
-
-        if (buttonView.getId() == sPassword.getId()) {
-            presenter.saveIsPasswordSet(isChecked);
-            //  presenter.checkIfPasswordIsSet();
-        } else {
-            presenter.saveIsReminderSet(isChecked);
         }
     }
 

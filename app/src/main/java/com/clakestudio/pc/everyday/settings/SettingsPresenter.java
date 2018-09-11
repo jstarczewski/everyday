@@ -15,7 +15,6 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     private SettingsContract.View view;
     private SettingsRepository settingsRepository;
-    private Calendar calendar;
 
     public SettingsPresenter(SettingsRepository settingsRepository, SettingsContract.View view) {
         this.settingsRepository = settingsRepository;
@@ -27,6 +26,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     public void start() {
         checkIfPasswordIsSet();
         checkIfReminderIsSet();
+        determineCheckBoxVisibility();
     }
 
 
@@ -71,6 +71,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void saveNewFocusDurationTime(int time) {
         settingsRepository.setFocusDurationTime(time);
+    //    view.showChangeFocusDurationTime(time);
     }
 
     @Override
