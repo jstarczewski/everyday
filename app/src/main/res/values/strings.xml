@@ -27,4 +27,7 @@
     <string name="settings_goal">Goal</string>
     <string name="password">Password</string>
     <string name="everyday_focus_reminder">Everyday focus reminder</string>
+    <string name="change_password">Change password</string>
+    <string name="enter_new_password_here">Enter new password here</string>
+    <string name="change_your_goal">Change your goal</string>
 </resources>

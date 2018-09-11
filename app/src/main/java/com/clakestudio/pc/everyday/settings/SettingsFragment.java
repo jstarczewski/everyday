@@ -14,24 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SettingsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +42,12 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     private ConstraintLayout clGoal;
     private ConstraintLayout clReminder;
     private Button btConfirmChange;
+    private Button btChangeGoal;
+
+    private CheckBox cbOneMin;
+    private CheckBox cbThreeMin;
+    private CheckBox cbFiveMin;
+    private CheckBox cbTenMin;
 
     private OnFragmentInteractionListener mListener;
 
@@ -86,17 +82,35 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
         sPassword = (Switch) view.findViewById(R.id.sPassword);
         sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
+
         sPassword.setOnCheckedChangeListener(this);
+        sReminder.setOnClickListener(this);
 
         clPassword = (ConstraintLayout) view.findViewById(R.id.clChangePassword);
+
         clGoal = (ConstraintLayout) view.findViewById(R.id.clChangeGoal);
+        btChangeGoal = (Button) view.findViewById(R.id.btChangeGoal);
+        btChangeGoal.setOnClickListener(this);
+
         clReminder = (ConstraintLayout) view.findViewById(R.id.clChangeReminderTime);
+
+        cbOneMin = (CheckBox) view.findViewById(R.id.cbDurationOne);
+        cbThreeMin = (CheckBox) view.findViewById(R.id.cbDurationThree);
+        cbFiveMin = (CheckBox) view.findViewById(R.id.cbDurationFive);
+        cbTenMin = (CheckBox) view.findViewById(R.id.cbDurationTen);
+
+        cbOneMin.setOnCheckedChangeListener(this);
+        cbThreeMin.setOnCheckedChangeListener(this);
+        cbFiveMin.setOnCheckedChangeListener(this);
+        cbTenMin.setOnCheckedChangeListener(this);
+
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
         View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, null);
         dialogToolbar = (Toolbar) alertDialogView.findViewById(R.id.toolbar);
         etNewPasswordOrGoal = (EditText) alertDialogView.findViewById(R.id.etChange);
         btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
+        btConfirmChange.setOnClickListener(this);
         alertDialog.setView(alertDialogView);
 
 //        btShowTimePicker = (Button) view.findViewById(R.id.btTurnOnOffNotification);
@@ -136,21 +150,11 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     }
 
     @Override
-    public void showTimePicker() {
-
+    public void showSetReminderTimeDialog() {
         TimePickerFragment timePickerFragment = new TimePickerFragment();
         timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
-    @Override
-    public void showSwitchPasswordOnOff() {
-
-    }
-
-    @Override
-    public void showFocusReminderOnOff() {
-
-    }
 
     @Override
     public void showPasswordChangeOption() {
@@ -161,10 +165,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     }
 
-    @Override
-    public void showGoalChangeOption() {
-
-    }
 
     @Override
     public void showReminderTimeChangeOption() {
@@ -176,19 +176,43 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void showChangePasswordDialog() {
-        setDialogInfo("Change your goal", "Enter your new goal here");
+
+        setDialogInfo(getString(R.string.change_password), getString(R.string.enter_new_password_here));
         alertDialog.show();
     }
 
     @Override
     public void showChangeGoalDialog() {
-        setDialogInfo("Change password", "Enter new password here");
+        setDialogInfo(getString(R.string.change_your_goal), getString(R.string.enter_your_goal_here));
         alertDialog.show();
     }
 
-    @Override
-    public void showChangeFocusDurationTime() {
 
+    @Override
+    public void showChangeFocusDurationTime(int id) {
+
+        cbOneMin.setChecked(false);
+        cbThreeMin.setChecked(false);
+        cbFiveMin.setChecked(false);
+        cbTenMin.setChecked(false);
+
+        switch (id) {
+
+            case 1: {
+                cbOneMin.setChecked(true);
+            }
+            case 3: {
+                cbThreeMin.setChecked(true);
+            }
+            case 5: {
+                cbFiveMin.setChecked(true);
+            }
+            case 10: {
+                cbTenMin.setChecked(true);
+            }
+
+
+        }
     }
 
     @Override
@@ -200,25 +224,74 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     }
 
     @Override
+    public void showDismissDialog() {
+        alertDialog.dismiss();
+    }
+
+    @Override
     public void onClick(View v) {
 
-        Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
-        if (v.getTag().toString().equals(sPassword.getTag().toString())) {
-            Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
-            presenter.checkIfPasswordIsSet();
+        switch (v.getId()) {
+
+            case R.id.btChangeGoal: {
+                showChangeGoalDialog();
+                break;
+            }
+            case R.id.btChangePassword: {
+                showChangePasswordDialog();
+                break;
+            }
+            case R.id.btChangeReminderTime: {
+                showSetReminderTimeDialog();
+                break;
+            }
+            case R.id.btConfirmChange: {
+                presenter.save(dialogToolbar.getTitle().toString(), etNewPasswordOrGoal.getText().toString());
+            }
         }
+
     }
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
-        if (buttonView.getId()==sPassword.getId()) {
-            Toast.makeText(getContext(), "Elooo", Toast.LENGTH_SHORT).show();
-            showChangePasswordDialog();
 
-          //  presenter.checkIfPasswordIsSet();
+        switch (buttonView.getId()) {
+
+            case R.id.sPassword: {
+                presenter.saveIsPasswordSet(isChecked);
+            }
+            case R.id.sFocusReminder: {
+                presenter.saveIsReminderSet(isChecked);
+            }
+            case R.id.cbDurationOne: {
+                presenter.saveNewFocusDurationTime(1);
+            }
+            case R.id.cbDurationThree: {
+                presenter.saveNewFocusDurationTime(3);
+            }
+            case R.id.cbDurationFive: {
+                presenter.saveNewFocusDurationTime(5);
+            }
+            case R.id.cbDurationTen: {
+                presenter.saveNewFocusDurationTime(10);
+            }
+
+
+        }
+
+        if (buttonView.getId() == sPassword.getId()) {
+            presenter.saveIsPasswordSet(isChecked);
+            //  presenter.checkIfPasswordIsSet();
+        } else {
+            presenter.saveIsReminderSet(isChecked);
         }
     }
 

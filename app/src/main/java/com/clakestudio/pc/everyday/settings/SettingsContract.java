@@ -11,15 +11,9 @@ public interface SettingsContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showTimePicker();
-
-        void showSwitchPasswordOnOff();
-
-        void showFocusReminderOnOff();
+        void showSetReminderTimeDialog();
 
         void showPasswordChangeOption();
-
-        void showGoalChangeOption();
 
         void showReminderTimeChangeOption();
 
@@ -27,9 +21,11 @@ public interface SettingsContract {
 
         void showChangeGoalDialog();
 
-        void showChangeFocusDurationTime();
+        void showChangeFocusDurationTime(int id);
 
         void setDialogInfo(String toolbarTitle, String editTextHint);
+
+        void showDismissDialog();
     }
 
     interface Presenter extends BasePresenter {
@@ -46,13 +42,22 @@ public interface SettingsContract {
 
         void saveNewGoal(String goal);
 
-        void saveNewFocusDurationTime();
+        void saveNewFocusDurationTime(int time);
 
         void saveFocusReminderTime();
 
         void checkIfPasswordIsSet();
 
         void checkIfReminderIsSet();
+
+        void setPasswordToNotSet();
+
+        int getFocusDurationTime();
+
+        void determineCheckBoxVisibility();
+
+        void save(String saveWhat, String value);
+
     }
 
 }

@@ -3,7 +3,6 @@ package com.clakestudio.pc.everyday.settings;
 
 import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
-import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 
 import java.util.Calendar;
 
@@ -26,8 +25,8 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void start() {
-          checkIfPasswordIsSet();
-          checkIfReminderIsSet();
+        checkIfPasswordIsSet();
+        checkIfReminderIsSet();
     }
 
 
@@ -45,12 +44,18 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     public void saveIsPasswordSet(boolean isSet) {
         if (!isSet)
             settingsRepository.setPassword(Settings.NOT_SET.toString());
+        else {
+            view.showChangePasswordDialog();
+        }
     }
 
     @Override
     public void saveIsReminderSet(boolean isSet) {
         if (!isSet)
             settingsRepository.setReminder(false);
+        else {
+            view.showSetReminderTimeDialog();
+        }
     }
 
     @Override
@@ -64,8 +69,8 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void saveNewFocusDurationTime() {
-
+    public void saveNewFocusDurationTime(int time) {
+        settingsRepository.setFocusDurationTime(time);
     }
 
     @Override
@@ -74,16 +79,12 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     /**
-     *
-     *
      * Bugs -> when switch is off first turned on we set password
-     *
+     * <p>
      * Then when turning on acitivty we check if password is set to show change password panel
-     *
+     * <p>
      * when changing switch we insert not set password
-     *
-     *
-     * */
+     */
 
     @Override
     public void checkIfPasswordIsSet() {
@@ -96,4 +97,30 @@ public class SettingsPresenter implements SettingsContract.Presenter {
         if (settingsRepository.isReminderSet())
             view.showReminderTimeChangeOption();
     }
+
+    @Override
+    public void setPasswordToNotSet() {
+
+    }
+
+    @Override
+    public int getFocusDurationTime() {
+        return settingsRepository.getFocusDurationTime();
+    }
+
+    @Override
+    public void determineCheckBoxVisibility() {
+        view.showChangeFocusDurationTime(getFocusDurationTime());
+    }
+
+    @Override
+    public void save(String saveWhat, String value) {
+        if (saveWhat.equals("Change password"))
+            saveNewPassword(value);
+        else {
+            saveNewGoal(value);
+        }
+        view.showDismissDialog();
+    }
+
 }
