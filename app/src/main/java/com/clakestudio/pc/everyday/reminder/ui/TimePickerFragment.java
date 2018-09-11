@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
+import com.clakestudio.pc.everyday.reminder.AfterDismissListener;
 import com.clakestudio.pc.everyday.reminder.ReminderReceiver;
 import com.clakestudio.pc.everyday.settings.SettingsPresenter;
 import com.clakestudio.pc.everyday.utils.SplashActivity;
@@ -44,12 +45,9 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     Calendar calendar;
     SettingsRepository settingsRepository;
-
-    public void setSettingsPresenter(SettingsPresenter settingsPresenter) {
-        this.settingsPresenter = settingsPresenter;
-    }
-
     private SettingsPresenter settingsPresenter;
+
+    private AfterDismissListener afterDismissListener;
 
     @NonNull
     @Override
@@ -61,10 +59,18 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         return new TimePickerDialog(getContext(), this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(getContext()));
     }
 
+    /**
+     * Try solving this problem with  simple interface
+     *
+     * */
+
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        settingsPresenter.start();
+        afterDismissListener.afterDismiss();
+     /*   if (settingsPresenter != null) {
+            settingsPresenter.start();
+        }*/
     }
 
     @Override
@@ -117,4 +123,14 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         calendar.set(Calendar.SECOND, 10);
 
     }
+
+    public void setSettingsPresenter(SettingsPresenter settingsPresenter) {
+        this.settingsPresenter = settingsPresenter;
+    }
+
+    public void setAfterDismissListener(AfterDismissListener afterDismissListener) {
+        this.afterDismissListener = afterDismissListener;
+    }
+
+
 }

@@ -26,9 +26,10 @@ import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.Settings;
+import com.clakestudio.pc.everyday.reminder.AfterDismissListener;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
 
-public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener, TimePickerDialog.OnKeyListener {
+public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AfterDismissListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,7 +40,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     AlertDialog alertDialog;
 
     private SettingsContract.Presenter presenter;
-    private Button btShowTimePicker;
     private EditText etNewPasswordOrGoal;
     private Toolbar dialogToolbar;
     private Switch sPassword;
@@ -104,7 +104,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
         timePickerFragment = new TimePickerFragment();
         timePickerFragment.setCancelable(false);
-        timePickerFragment.setSettingsPresenter((SettingsPresenter) presenter);
+        timePickerFragment.setAfterDismissListener(this);
 
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
@@ -309,11 +309,9 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         }
     }
 
-
-
     @Override
-    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-        return false;
+    public void afterDismiss() {
+       presenter.start();
     }
 
 
