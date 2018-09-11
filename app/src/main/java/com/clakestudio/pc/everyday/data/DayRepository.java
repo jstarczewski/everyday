@@ -58,6 +58,17 @@ public class DayRepository implements Runnable {
         dayDao.updateDay(title, note, dayId);
     }
 
+    /**
+     * Synchronization with the main thread if you post back results to the user interface -> we are not updating the UI
+     * No default for canceling the thread -> now a long task, does not take much time gonna test what is going to happen after lots of data
+     * No default thread pooling -> I should create one
+     * No default for handling configuration changes in Android -> that is a problem but in this activity we cannot change the orientation
+     *
+     *
+     * */
+
+
+
     public void setAccessible(Accessible accessible) {
         this.accessible = accessible;
     }

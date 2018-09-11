@@ -43,10 +43,8 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener, DialogInterface.OnDismissListener {
 
-    Calendar calendar;
-    SettingsRepository settingsRepository;
-    private SettingsPresenter settingsPresenter;
-
+    private Calendar calendar;
+    private SettingsRepository settingsRepository;
     private AfterDismissListener afterDismissListener;
 
     @NonNull
@@ -61,8 +59,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     /**
      * Try solving this problem with  simple interface
-     *
-     * */
+     */
 
     @Override
     public void onDismiss(DialogInterface dialog) {
@@ -124,9 +121,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     }
 
-    public void setSettingsPresenter(SettingsPresenter settingsPresenter) {
-        this.settingsPresenter = settingsPresenter;
-    }
 
     public void setAfterDismissListener(AfterDismissListener afterDismissListener) {
         this.afterDismissListener = afterDismissListener;

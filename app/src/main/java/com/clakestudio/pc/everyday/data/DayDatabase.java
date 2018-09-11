@@ -17,10 +17,10 @@ public abstract class DayDatabase extends RoomDatabase {
 
     private static DayDatabase INSTANCE;
 
-    private static final Object slcok = new Object();
+    private static final Object slock = new Object();
 
     public static DayDatabase getInstance(Context context) {
-        synchronized (slcok) {
+        synchronized (slock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(), DayDatabase.class, "Days.db").build();
             }

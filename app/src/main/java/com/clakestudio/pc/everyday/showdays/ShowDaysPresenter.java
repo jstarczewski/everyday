@@ -42,11 +42,9 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
     @Override
     public void loadDays() {
 
-        Log.e("Here", "o i am");
         dayRepository.setAccessible(new Accessible() {
             @Override
             public void getAccessDays(final List<Day> dayList) {
-                Log.e("Here", "elo i am");
                       daysView.showDays((ArrayList<Day>) dayList);
             }
             @Override
