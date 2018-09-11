@@ -38,5 +38,6 @@ public class ReminderReceiver extends BroadcastReceiver {
         if (notificationManager != null) {
             notificationManager.notify(0, notification);
         }
+
     }
 }

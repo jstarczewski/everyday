@@ -4,7 +4,6 @@ package com.clakestudio.pc.everyday.settings;
 import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
-import java.util.Calendar;
 
 /**
  * Created by Jan on 9/6/2018.

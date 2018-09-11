@@ -8,6 +8,7 @@ import com.clakestudio.pc.everyday.countdown.CountdownActivity;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.info.InfoActivity;
+import com.clakestudio.pc.everyday.password.PasswordActivity;
 import com.clakestudio.pc.everyday.setgoal.SetGoalActivity;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
@@ -25,8 +26,8 @@ public class SplashActivity extends AppCompatActivity {
         } else if (!settingsRepository.isGoalSet()) {
             startActivity(new Intent(this, SetGoalActivity.class));
         }
-        else if(!settingsRepository.isPasswordSet()) {
-            startActivity(new Intent(this, SettingsActivity.class));
+        else if(settingsRepository.isPasswordSet()) {
+            startActivity(new Intent(this, PasswordActivity.class));
         } else {
             startActivity(new Intent(this, SettingsActivity.class));
         }

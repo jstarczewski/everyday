@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
@@ -230,6 +231,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
                 break;
             }
             case R.id.btConfirmChange: {
+                Toast.makeText(getContext(), dialogToolbar.getTitle().toString(), Toast.LENGTH_SHORT).show();
                 presenter.save(dialogToolbar.getTitle().toString(), etNewPasswordOrGoal.getText().toString());
             }
         }
