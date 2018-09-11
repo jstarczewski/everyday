@@ -104,7 +104,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
         timePickerFragment = new TimePickerFragment();
         timePickerFragment.setCancelable(false);
-        timePickerFragment.getDialog().setOnKeyListener(this);
+        timePickerFragment.setSettingsPresenter((SettingsPresenter) presenter);
+
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
         View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, null);
