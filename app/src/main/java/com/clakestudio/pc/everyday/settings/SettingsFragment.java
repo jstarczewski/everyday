@@ -38,9 +38,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     private Toolbar dialogToolbar;
     private Switch sPassword;
     private Switch sReminder;
-    private ConstraintLayout clPassword;
     private ConstraintLayout clGoal;
-    private ConstraintLayout clReminder;
     private Button btConfirmChange;
     private Button btChangeGoal;
 
@@ -85,26 +83,16 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         sPassword = (Switch) view.findViewById(R.id.sPassword);
         sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
 
-        sPassword.setOnCheckedChangeListener(this);
-        sReminder.setOnCheckedChangeListener(this);
-
-        clPassword = (ConstraintLayout) view.findViewById(R.id.clChangePassword);
 
         clGoal = (ConstraintLayout) view.findViewById(R.id.clChangeGoal);
         btChangeGoal = (Button) view.findViewById(R.id.btChangeGoal);
         btChangeGoal.setOnClickListener(this);
 
-        clReminder = (ConstraintLayout) view.findViewById(R.id.clChangeReminderTime);
 
         cbOneMin = (CheckBox) view.findViewById(R.id.cbDurationOne);
         cbThreeMin = (CheckBox) view.findViewById(R.id.cbDurationThree);
         cbFiveMin = (CheckBox) view.findViewById(R.id.cbDurationFive);
         cbTenMin = (CheckBox) view.findViewById(R.id.cbDurationTen);
-
-        cbOneMin.setOnCheckedChangeListener(this);
-        cbThreeMin.setOnCheckedChangeListener(this);
-        cbFiveMin.setOnCheckedChangeListener(this);
-        cbTenMin.setOnCheckedChangeListener(this);
 
         timePickerFragment = new TimePickerFragment();
         // Alert dialog
@@ -117,6 +105,16 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         alertDialog.setView(alertDialogView);
 
 //        btShowTimePicker = (Button) view.findViewById(R.id.btTurnOnOffNotification);
+
+        presenter.start();
+
+        sPassword.setOnCheckedChangeListener(this);
+        sReminder.setOnCheckedChangeListener(this);
+
+        cbOneMin.setOnCheckedChangeListener(this);
+        cbThreeMin.setOnCheckedChangeListener(this);
+        cbFiveMin.setOnCheckedChangeListener(this);
+        cbTenMin.setOnCheckedChangeListener(this);
 
         return view;
     }
@@ -155,25 +153,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void showSetReminderTimeDialog() {
         timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
-    }
-
-
-    @Override
-    public void showPasswordChangeOption() {
-        if (clPassword.getVisibility() == View.VISIBLE)
-            clPassword.setVisibility(View.GONE);
-        else
-            clPassword.setVisibility(View.VISIBLE);
-
-    }
-
-
-    @Override
-    public void showReminderTimeChangeOption() {
-        if (clReminder.getVisibility() == View.VISIBLE)
-            clReminder.setVisibility(View.GONE);
-        else
-            clReminder.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -232,20 +211,22 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     }
 
     @Override
+    public void showSetPasswordSwitchOnOrOff(boolean value) {
+        sPassword.setChecked(value);
+    }
+
+    @Override
+    public void showSetReminderSwitchOnOrOff(boolean value) {
+        sReminder.setChecked(value);
+    }
+
+    @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
 
             case R.id.btChangeGoal: {
                 showChangeGoalDialog();
-                break;
-            }
-            case R.id.btChangePassword: {
-                showChangePasswordDialog();
-                break;
-            }
-            case R.id.btChangeReminderTime: {
-                showSetReminderTimeDialog();
                 break;
             }
             case R.id.btConfirmChange: {

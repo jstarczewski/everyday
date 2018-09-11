@@ -13,10 +13,6 @@ public interface SettingsContract {
 
         void showSetReminderTimeDialog();
 
-        void showPasswordChangeOption();
-
-        void showReminderTimeChangeOption();
-
         void showChangePasswordDialog();
 
         void showChangeGoalDialog();
@@ -26,6 +22,11 @@ public interface SettingsContract {
         void setDialogInfo(String toolbarTitle, String editTextHint);
 
         void showDismissDialog();
+
+        void showSetPasswordSwitchOnOrOff(boolean value);
+
+        void showSetReminderSwitchOnOrOff(boolean value);
+
     }
 
     interface Presenter extends BasePresenter {
@@ -57,6 +58,7 @@ public interface SettingsContract {
         void determineCheckBoxVisibility();
 
         void save(String saveWhat, String value);
+
 
     }
 

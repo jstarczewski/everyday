@@ -90,13 +90,13 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void checkIfPasswordIsSet() {
         if (settingsRepository.isPasswordSet())
-            view.showPasswordChangeOption();
+            view.showSetPasswordSwitchOnOrOff(settingsRepository.isPasswordSet());
     }
 
     @Override
     public void checkIfReminderIsSet() {
         if (settingsRepository.isReminderSet())
-            view.showReminderTimeChangeOption();
+            view.showSetReminderSwitchOnOrOff(settingsRepository.isReminderSet());
     }
 
     @Override

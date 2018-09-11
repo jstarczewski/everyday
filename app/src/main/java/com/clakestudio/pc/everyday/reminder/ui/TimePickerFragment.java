@@ -14,6 +14,8 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
+import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.reminder.ReminderReceiver;
 import com.clakestudio.pc.everyday.utils.SplashActivity;
 
@@ -39,19 +41,21 @@ import java.util.Calendar;
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
     Calendar calendar;
-
+    SettingsRepository settingsRepository;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         calendar = Calendar.getInstance();
+        settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(getContext()));
 
         return new TimePickerDialog(getContext(), this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), DateFormat.is24HourFormat(getContext()));
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
 
         setCalendar(hourOfDay, minute);
         Context context = getContext();
@@ -89,6 +93,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
                 am.setAlarmClock(alarmClockInfo, sender);
             }
         }
+        settingsRepository.setReminder(true);
 
     }
 

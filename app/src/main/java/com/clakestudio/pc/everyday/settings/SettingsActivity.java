@@ -32,6 +32,5 @@ public class SettingsActivity extends BaseActivity implements TimePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Toast.makeText(this, "horu" + hourOfDay, Toast.LENGTH_SHORT).show();
     }
 }
