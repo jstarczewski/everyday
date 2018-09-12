@@ -24,7 +24,7 @@ import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
  * Use the {@link ShowGoalFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowGoalFragment extends Fragment implements ShowGoalContract.View  {
+public class ShowGoalFragment extends Fragment implements ShowGoalContract.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -46,7 +46,7 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
         // Required empty public constructor
     }
 
-   public static ShowGoalFragment newInstance() {
+    public static ShowGoalFragment newInstance() {
         return new ShowGoalFragment();
     }
 
@@ -62,8 +62,7 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
 
         View view = inflater.inflate(R.layout.fragment_show_goal, container, false);
 
-        tvGoal = (TextView)view.findViewById(R.id.tvGoal);
-        showGoal();
+        tvGoal = (TextView) view.findViewById(R.id.tvGoal);
         return view;
     }
 
@@ -77,7 +76,7 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-   }
+    }
 
     @Override
     public void onDetach() {
@@ -104,8 +103,9 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
             public void onFinish() {
                 showShowDaysActivity();
             }
-        }.start();
-
+        };
+        presenter.start();
+        
     }
 
     @Override
@@ -116,12 +116,13 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
 
     @Override
     public void startCountDownTimer() {
-
+        if (countDownTimer != null)
+            countDownTimer.start();
     }
 
     @Override
-    public void showGoal() {
-        tvGoal.setText(presenter.getGoal());
+    public void showGoal(String goal) {
+        tvGoal.setText(goal);
     }
 
     /**

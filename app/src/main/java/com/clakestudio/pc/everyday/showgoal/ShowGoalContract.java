@@ -15,12 +15,12 @@ public interface ShowGoalContract {
 
         void startCountDownTimer();
 
-        void showGoal();
+        void showGoal(String goal);
     }
 
     interface Presenter extends BasePresenter {
 
-        String getGoal();
+        void loadGoal();
 
         void loadCountdown();
 
