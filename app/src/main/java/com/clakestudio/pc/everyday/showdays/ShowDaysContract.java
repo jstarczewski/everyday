@@ -21,9 +21,9 @@ public interface ShowDaysContract {
 
         void showDays();
 
-        void showAddNewDay();
+        void showAddNewDay(int currentDay);
 
-        void showEditCurrentDay(int dayId);
+        void showEditCurrentDay(int dayId, String tittle, String note);
 
         void showSettingsActivity();
     }
@@ -39,7 +39,7 @@ public interface ShowDaysContract {
         void editCurrentDay(Day day);
         // start with database
 
- //       void openDayDetails(@NonNull Day requestedDay);
+        //       void openDayDetails(@NonNull Day requestedDay);
         void loadShowSettingsActivity();
 
         List<Day> getDays();

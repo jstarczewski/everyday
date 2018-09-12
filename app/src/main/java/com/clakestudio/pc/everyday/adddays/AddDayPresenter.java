@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,10 +21,12 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     private DayRepository dayRepository;
     private AddDayContract.View view;
+    private SettingsRepository settingsRepository;
 
-    public AddDayPresenter(@NonNull DayRepository dayRepository, @NonNull AddDayContract.View view) {
+    public AddDayPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull AddDayContract.View view) {
         this.dayRepository = dayRepository;
         this.view = view;
+        this.settingsRepository = settingsRepository;
         view.setPresenter(this);
     }
 
@@ -34,20 +37,21 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     }
 
     @Override
-    public void loadCurrentDayInfo(int day) {
-        Day day1 = dayRepository.getDayById(String.valueOf(day));
+    public void loadCurrentDayInfo(int dayId) {
         String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
-        if (day1 != null)
-            view.showCurrentDayInfo("Day " + day + " / " + date, day1.getTitle(), day1.getNote());
-        else {
-            view.showCurrentDayInfo("Day" + day + " / " + date, "", "");
-        }
+        view.showNewDayInfo("Day " + dayId + " / " + date);
+    }
+
+    @Override
+    public void loadCurrentDayInfo(int dayId, String title, String note) {
+        String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
+        view.showCurrentDayInfo("Day " + dayId + " / " + date, title, note);
     }
 
     @Override
     public void saveDay(String[] dayInfoArray) {
-        Random random = new Random();
         dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
+        settingsRepository.increateCurrentDayCount();
         view.showDays();
     }
 }

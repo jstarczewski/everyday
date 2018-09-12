@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.DayDatabase;
 import com.clakestudio.pc.everyday.data.DayRepository;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
+import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
 public class ShowDaysActivity extends BaseActivity {
@@ -32,7 +34,9 @@ public class ShowDaysActivity extends BaseActivity {
 
 
 
-        showDaysPresenter = new ShowDaysPresenter((DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao())), showDaysFragment);
+        showDaysPresenter = new ShowDaysPresenter((DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao())),
+                SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this))
+                ,showDaysFragment);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

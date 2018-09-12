@@ -6,6 +6,6 @@ package com.clakestudio.pc.everyday.data.settings;
 
 public enum Settings {
 
-    INFO_RED, PASSWORD, FOCUS_DURATION, GOAL, NOT_SET, REMINDER
+    INFO_RED, PASSWORD, FOCUS_DURATION, GOAL, NOT_SET, REMINDER, CURRENT_DAY
 
 }

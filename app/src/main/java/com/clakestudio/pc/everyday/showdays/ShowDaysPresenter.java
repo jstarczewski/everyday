@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.clakestudio.pc.everyday.data.Accessible;
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,10 +20,12 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     private List<Day> days;
     private final ShowDaysContract.View daysView;
+    private SettingsRepository settingsRepository;
 
-    public ShowDaysPresenter(@NonNull DayRepository dayRepository, @NonNull ShowDaysContract.View daysView) {
+    public ShowDaysPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull ShowDaysContract.View daysView) {
         this.dayRepository = dayRepository;
         this.daysView = daysView;
+        this.settingsRepository = settingsRepository;
         daysView.setPresenter(this);
     }
 
@@ -46,14 +48,13 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void addNewDay() {
-
         //dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
-        daysView.showAddNewDay();
+        daysView.showAddNewDay(settingsRepository.getCurrentDay());
     }
 
     @Override
     public void editCurrentDay(Day day) {
-        daysView.showEditCurrentDay(Integer.valueOf(day.getDayId()));
+        daysView.showEditCurrentDay(Integer.valueOf(day.getDayId()), day.getTitle(), day.getNote());
     }
 
     @Override

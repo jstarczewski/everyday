@@ -3,6 +3,7 @@ package com.clakestudio.pc.everyday.adddays;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 /**
@@ -59,9 +61,9 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
 
         View v = inflater.inflate(R.layout.fragment_add_day, container, false);
 
-        etTitle = (EditText)v.findViewById(R.id.etTitle);
-        etNote = (EditText)v.findViewById(R.id.etNote);
-        floatingActionButton = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+        etTitle = (EditText) v.findViewById(R.id.etTitle);
+        etNote = (EditText) v.findViewById(R.id.etNote);
+        floatingActionButton = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
 
         return v;
@@ -70,7 +72,15 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addDayPresenter.loadCurrentDayInfo(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE).getInt("currentDay", 0));
+        // addDayPresenter.loadCurrentDayInfo(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE).getInt("currentDay", 0):;
+
+        int dayId = getActivity().getIntent().getExtras().getInt("dayId");
+        String title = getActivity().getIntent().getExtras().getString("title");
+        String note = getActivity().getIntent().getExtras().getString("note");
+        if (title!=null && note!=null)
+            addDayPresenter.loadCurrentDayInfo(dayId, title, note);
+
+        addDayPresenter.loadCurrentDayInfo(dayId);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,14 +106,23 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     }
 
     @Override
-    public void showCurrentDayInfo(String dayInfo, String title, String note) {
-        AddDayActivity addDayActivity = (AddDayActivity) getActivity();
+    public void showCurrentDayInfo(String dayInfo, String tittle, String note) {
+         AddDayActivity addDayActivity = (AddDayActivity) getActivity();
         if (addDayActivity != null && addDayActivity.getSupportActionBar() != null && addDayActivity.getSupportActionBar().getTitle() != null) {
             addDayActivity.getSupportActionBar().setTitle(dayInfo);
             toolbarTitle = dayInfo;
         }
-        etTitle.setText(title);
+        etTitle.setText(tittle);
         etNote.setText(note);
+    }
+
+    @Override
+    public void showNewDayInfo(String dayInfo) {
+       AddDayActivity addDayActivity = (AddDayActivity) getActivity();
+        if (addDayActivity != null && addDayActivity.getSupportActionBar() != null && addDayActivity.getSupportActionBar().getTitle() != null) {
+            addDayActivity.getSupportActionBar().setTitle(dayInfo);
+            toolbarTitle = dayInfo;
+        }
     }
 
     @Override
@@ -128,4 +147,16 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         void onFragmentInteraction(Uri uri);
     }
 }
+/*
+class AsyncGetDayData extends AsyncTask<AddDayContract.Presenter, Void, Day> {
 
+    @Override
+    protected Day doInBackground(AddDayContract.Presenter... presenters) {
+        return presenters[0].loadCurrentDayInfo();
+    }
+
+    @Override
+    protected void onPostExecute(Day day) {
+        super.onPostExecute(day);
+    }
+}*/

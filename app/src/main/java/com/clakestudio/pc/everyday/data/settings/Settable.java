@@ -29,4 +29,8 @@ public interface Settable {
     void setReminder(boolean isSet);
 
     boolean isReminderSet();
+
+    int getCurrentDay();
+
+    void increaseCurrentDay();
 }

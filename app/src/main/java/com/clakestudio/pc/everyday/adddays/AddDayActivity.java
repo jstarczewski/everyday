@@ -2,9 +2,12 @@ package com.clakestudio.pc.everyday.adddays;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.DayDatabase;
 import com.clakestudio.pc.everyday.data.DayRepository;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
+import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
 public class AddDayActivity extends BaseActivity {
@@ -18,18 +21,22 @@ public class AddDayActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        AddDayFragment addDayFragment = (AddDayFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (addDayFragment==null) {
+        AddDayFragment addDayFragment = (AddDayFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (addDayFragment == null) {
             addDayFragment = AddDayFragment.newInstance();
             BaseActivity.addFragmentToActivity(getSupportFragmentManager(), addDayFragment, R.id.contentFrame);
         }
-
-        addDayPresenter = new AddDayPresenter(DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao()), addDayFragment);
         int dayId = getIntent().getExtras().getInt("dayId", -1);
-        if (dayId!=-1)
-            addDayPresenter.loadCurrentDayInfo(dayId);
-
-
+            addDayPresenter = new AddDayPresenter(DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao()),
+                    SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this)), addDayFragment);
+/*
+        if (dayId!=-1) {
+            addDayPresenter.loadCurrentDayInfo(getIntent().getExtras().getString("title"), getIntent().getExtras().getString("note"), dayId);
+        }
+        else {
+            addDayPresenter.loadCurrentDayInfo(getIntent().getExtras().getString("title"), getIntent().getExtras().getString("note"), 0);
+        }
+*/
     }
 
 

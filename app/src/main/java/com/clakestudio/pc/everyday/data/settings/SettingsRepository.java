@@ -73,4 +73,10 @@ public class SettingsRepository {
     public void setReminder(boolean isSet) {
        settable.setReminder(isSet);
     }
+    public int getCurrentDay() {
+        return settable.getCurrentDay();
+    }
+    public void increateCurrentDayCount() {
+        settable.increaseCurrentDay();
+    }
 }
