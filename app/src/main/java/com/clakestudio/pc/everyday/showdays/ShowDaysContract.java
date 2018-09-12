@@ -24,7 +24,7 @@ public interface ShowDaysContract {
 
         void showEditCurrentDay(int dayId);
 
-
+        void showSettingsActivity();
     }
 
     interface Presenter extends BasePresenter {
@@ -39,7 +39,7 @@ public interface ShowDaysContract {
         // start with database
 
  //       void openDayDetails(@NonNull Day requestedDay);
-
+        void loadShowSettingsActivity();
 
     }
 

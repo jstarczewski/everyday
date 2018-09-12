@@ -77,6 +77,11 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
         daysView.showEditCurrentDay(Integer.valueOf(day.getDayId()));
     }
 
+    @Override
+    public void loadShowSettingsActivity() {
+        daysView.showSettingsActivity();
+    }
+
 
 }
 

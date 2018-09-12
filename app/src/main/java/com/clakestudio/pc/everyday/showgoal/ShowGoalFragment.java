@@ -105,7 +105,7 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
             }
         };
         presenter.start();
-        
+
     }
 
     @Override

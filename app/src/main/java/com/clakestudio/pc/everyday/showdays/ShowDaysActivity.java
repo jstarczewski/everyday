@@ -69,6 +69,7 @@ public class ShowDaysActivity extends BaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            showDaysPresenter.loadShowSettingsActivity();
             return true;
         }
 

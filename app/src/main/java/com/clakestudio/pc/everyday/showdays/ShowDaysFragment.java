@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.adddays.AddDayActivity;
 import com.clakestudio.pc.everyday.data.Day;
+import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
 import org.w3c.dom.Text;
 
@@ -156,6 +157,11 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
     @Override
     public void showEditCurrentDay(int dayId) {
         startActivity(new Intent(getContext(), AddDayActivity.class));
+    }
+
+    @Override
+    public void showSettingsActivity() {
+        startActivity(new Intent(getContext(), SettingsActivity.class));
     }
 
     /**
