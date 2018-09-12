@@ -7,11 +7,8 @@ package com.clakestudio.pc.everyday;
 public interface BasePresenter {
 
     /**
-     *
      * seems like start is a place where data is gonna be queried if needed
-     *
-     *
-     * */
+     */
 
 
     void start();

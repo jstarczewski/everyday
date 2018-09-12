@@ -311,7 +311,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void afterDismiss() {
-       presenter.start();
+        presenter.start();
     }
 
 

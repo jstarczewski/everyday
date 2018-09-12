@@ -8,6 +8,7 @@ import com.clakestudio.pc.everyday.data.DayRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 /**
  * Created by Jan on 9/1/2018.
@@ -40,8 +41,9 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     @Override
     public void saveDay(String[] dayInfoArray) {
-        Log.e("Day", dayInfoArray[0] + "   " + dayInfoArray[1]);
-        dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
+        Random random = new Random();
+        Log.e("Day", dayInfoArray[0] + String.valueOf(random.nextInt(300) + "   " + dayInfoArray[1]));
+        dayRepository.addNewDay(new Day(dayInfoArray[0] + String.valueOf(random.nextInt(300)), dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
         view.showDays();
     }
 }

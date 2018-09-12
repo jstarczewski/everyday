@@ -1,5 +1,7 @@
 package com.clakestudio.pc.everyday.data;
 
+import android.os.AsyncTask;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,7 +18,7 @@ public class DayRepository implements Runnable {
     private Boolean isUpdated = false;
     private static DayRepository INSTANCE = null;
 
-  //  @Inject
+    //  @Inject
     private DayRepository(DayDao dayDao) {
         this.dayDao = dayDao;
     }
@@ -63,10 +65,7 @@ public class DayRepository implements Runnable {
      * No default for canceling the thread -> now a long task, does not take much time gonna test what is going to happen after lots of data
      * No default thread pooling -> I should create one
      * No default for handling configuration changes in Android -> that is a problem but in this activity we cannot change the orientation
-     *
-     *
-     * */
-
+     */
 
 
     public void setAccessible(Accessible accessible) {
@@ -74,17 +73,54 @@ public class DayRepository implements Runnable {
     }
 
     public void getAccessToDays() {
+
+        GetAccessDays getAccessDays = new GetAccessDays(dayDao, accessible);
+        getAccessDays.execute();
+/*
         new Thread() {
             @Override
             public void run() {
                 accessible.getAccessDays(getDays());
             }
-        }.start();
+        }.start();*/
+
+
+
     }
 
 
     @Override
     public void run() {
 
+    }
+}
+
+/**
+ *
+ * Do not know wheter this approach with acynctask is good -> gonna do more research in case of memory leaks etc
+ *
+ *
+ * **/
+
+
+
+class GetAccessDays extends AsyncTask<List<Day>, Void, List<Day>> {
+
+    private Accessible accessible;
+    private DayDao dayDao;
+
+    GetAccessDays(DayDao dayDao, Accessible accessible) {
+        this.dayDao = dayDao;
+        this.accessible = accessible;
+    }
+
+    @Override
+    protected List<Day> doInBackground(List<Day>... days) {
+       return dayDao.getDayList();
+    }
+
+    @Override
+    protected void onPostExecute(List<Day> days) {
+        accessible.getAccessDays(days);
     }
 }
