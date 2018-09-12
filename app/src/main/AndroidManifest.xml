@@ -43,7 +43,9 @@
         <receiver android:name=".reminder.ReminderReceiver" />
 
         <activity android:name=".countdown.CountdownActivity" />
-        <activity android:name=".showgoal.ShowGoalActivity"></activity>
+        <activity
+            android:name=".showgoal.ShowGoalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

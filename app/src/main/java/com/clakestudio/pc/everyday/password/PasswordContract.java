@@ -11,7 +11,7 @@ public interface PasswordContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showShowDaysActivity();
+        void showShowGoalActivity();
 
         void showForgotPasswordActivity();
 

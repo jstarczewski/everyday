@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.clakestudio.pc.everyday.countdown.CountdownActivity;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.info.InfoActivity;
 import com.clakestudio.pc.everyday.password.PasswordActivity;
 import com.clakestudio.pc.everyday.setgoal.SetGoalActivity;
-import com.clakestudio.pc.everyday.settings.SettingsActivity;
-import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
+import com.clakestudio.pc.everyday.showgoal.ShowGoalActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -29,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         else if(settingsRepository.isPasswordSet()) {
             startActivity(new Intent(this, PasswordActivity.class));
         } else {
-            startActivity(new Intent(this, ShowDaysActivity.class));
+            startActivity(new Intent(this, ShowGoalActivity.class));
         }
         finish();
     }

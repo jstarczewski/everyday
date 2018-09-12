@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.forgotpassword.ForgotPasswordActivity;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
+import com.clakestudio.pc.everyday.showgoal.ShowGoalActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,8 +91,8 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     }
 
     @Override
-    public void showShowDaysActivity() {
-        startActivity(new Intent(getActivity(), ShowDaysActivity.class));
+    public void showShowGoalActivity() {
+        startActivity(new Intent(getActivity(), ShowGoalActivity.class));
         getActivity().finish();
     }
 

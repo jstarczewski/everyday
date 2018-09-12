@@ -25,6 +25,6 @@ public class PasswordPresenter implements PasswordContract.Presenter {
     @Override
     public void checkPasswordCorrectness(String password) {
         if (password.equals(settingsRepository.getPassword()))
-            view.showShowDaysActivity();
+            view.showShowGoalActivity();
     }
 }
