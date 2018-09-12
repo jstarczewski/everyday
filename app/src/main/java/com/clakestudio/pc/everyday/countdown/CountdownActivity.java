@@ -17,6 +17,7 @@ public class CountdownActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countdown);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         CountdownFragment countdownFragment = (CountdownFragment)getSupportFragmentManager().findFragmentById(R.id.contentFrame);
         if (countdownFragment==null) {
             countdownFragment = CountdownFragment.newInstance();
@@ -30,6 +31,13 @@ public class CountdownActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        this.finish();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
 }

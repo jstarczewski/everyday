@@ -158,7 +158,6 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         Intent intent = new Intent(getContext(), CountdownActivity.class);
         intent.putExtra("dayId", dayId);
         startActivity(intent);
-
     }
 
     @Override

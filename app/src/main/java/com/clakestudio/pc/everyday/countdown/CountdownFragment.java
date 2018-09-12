@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
@@ -68,12 +69,12 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
             dayId = getActivity().getIntent().getExtras().getInt("dayId", 0);
         }
 
-        presenter.start();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        presenter.start();
     }
 
     @Override
@@ -106,13 +107,20 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
                  * */
                 fireMediaPlayer();
             }
-        };
+        }.start();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.stop();
     }
 
     @Override
     public void startAddDayActivity() {
         Intent intent = new Intent(getContext(), AddDayActivity.class);
         intent.putExtra("dayId", dayId);
+        startActivity(intent);
         getActivity().finish();
     }
 
