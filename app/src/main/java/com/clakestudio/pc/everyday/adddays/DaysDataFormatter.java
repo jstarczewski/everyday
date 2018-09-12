@@ -4,9 +4,9 @@ package com.clakestudio.pc.everyday.adddays;
  * Created by Jan on 9/3/2018.
  */
 
-public class DaysDataFormatter {
+class DaysDataFormatter {
 
-    public static String[] getDayInfo(String dayInfo, String title, String note) {
+    static String[] getDayInfo(String dayInfo, String title, String note) {
 
         String[] dayInfoArray = new String[4];
         dayInfoArray[0] = String.valueOf(dayInfo.charAt(4));

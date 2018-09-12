@@ -28,7 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:inputType="textShortMessage" />
+        android:maxLines="1"
+        android:maxLength="4"
+        android:inputType="numberPassword"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +41,7 @@
 
         <Button
             android:id="@+id/btCancel"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -49,6 +52,7 @@
 
         <Button
             android:id="@+id/btConfirmChange"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

@@ -119,7 +119,7 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
 
     @Override
     public void afterTextChanged(Editable s) {
-        passwordPresenter.checkPasswordCorrectness(etPassword.getText().toString());
+            passwordPresenter.checkPasswordCorrectness(etPassword.getText().toString());
     }
 
     /**

@@ -2,41 +2,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorDaysBackground"
     tools:context="com.clakestudio.pc.everyday.adddays.AddDayFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/fab_margin"
+        android:elevation="4dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        app:cardBackgroundColor="@color/colorText">
 
-        <EditText
-            android:id="@+id/etTitle"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/what_your_why_is"
-            android:maxLines="1"
-            android:shadowColor="@color/colorText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textColorLink="@color/colorText" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/etNote"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:gravity="top"
-            android:hint="go go"
-            android:inputType="textMultiLine" />
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/what_your_why_is"
+                android:maxLines="2"
+                android:typeface="monospace"
+                android:shadowColor="@color/colorText"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/etNote"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:gravity="top"
+                android:hint="go go"
+                android:inputType="textMultiLine" />
+
+        </LinearLayout>
 
 
+    </android.support.v7.widget.CardView>
 </ScrollView>
 
 
