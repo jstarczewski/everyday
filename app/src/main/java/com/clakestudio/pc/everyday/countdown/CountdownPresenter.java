@@ -20,7 +20,7 @@ public class CountdownPresenter implements CountdownContract.Presenter {
 
     @Override
     public void start() {
-
+        view.startCountdownTimer(getFocusDuration());
     }
 
     @Override
@@ -36,5 +36,10 @@ public class CountdownPresenter implements CountdownContract.Presenter {
     @Override
     public void updateRemainingTime(int timeLeft) {
         view.updateTextViewCountDown(timeLeft);
+    }
+
+    @Override
+    public void stop() {
+        view.stopCountdownTimer();
     }
 }

@@ -32,6 +32,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     private TextView tvCountdown;
     private int countdownDuration;
     private MediaPlayer mediaPlayer;
+    private int dayId = 0;
 
     public CountdownFragment() {
         // Required empty public constructor
@@ -62,11 +63,17 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
         super.onViewCreated(view, savedInstanceState);
         countdownDuration = presenter.getFocusDuration();
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.sound);
-        startCountdownTimer(countdownDuration);
+
+        if (getActivity() != null && getActivity().getIntent() != null) {
+            dayId = getActivity().getIntent().getExtras().getInt("dayId", 0);
+        }
+
+        presenter.start();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -99,12 +106,13 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
                  * */
                 fireMediaPlayer();
             }
-        }.start();
+        };
     }
 
     @Override
     public void startAddDayActivity() {
-        startActivity(new Intent(getActivity(), AddDayActivity.class));
+        Intent intent = new Intent(getContext(), AddDayActivity.class);
+        intent.putExtra("dayId", dayId);
         getActivity().finish();
     }
 
@@ -124,6 +132,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     public void stopCountdownTimer() {
         countDownTimer.cancel();
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -145,4 +154,6 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
         super.onPause();
         stopCountdownTimer();
     }
+
+
 }

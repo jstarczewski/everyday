@@ -21,6 +21,7 @@ public interface CountdownContract {
 
         void stopCountdownTimer();
 
+
     }
 
     interface Presenter extends BasePresenter {
@@ -30,6 +31,8 @@ public interface CountdownContract {
         void loadAddDayActivity();
 
         void updateRemainingTime(int timeLeft);
+
+        void stop();
 
     }
 

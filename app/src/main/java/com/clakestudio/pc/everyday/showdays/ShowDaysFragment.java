@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.adddays.AddDayActivity;
+import com.clakestudio.pc.everyday.countdown.CountdownActivity;
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
@@ -154,7 +155,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
     @Override
     public void showAddNewDay(int dayId) {
-        Intent intent = new Intent(getContext(), AddDayActivity.class);
+        Intent intent = new Intent(getContext(), CountdownActivity.class);
         intent.putExtra("dayId", dayId);
         startActivity(intent);
 
