@@ -7,6 +7,7 @@ import com.clakestudio.pc.everyday.BaseView;
 import com.clakestudio.pc.everyday.data.Day;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jan on 8/30/2018.
@@ -18,7 +19,7 @@ public interface ShowDaysContract {
     interface View extends BaseView<Presenter> {
 
 
-        void showDays(ArrayList<Day> days);
+        void showDays();
 
         void showAddNewDay();
 
@@ -41,6 +42,7 @@ public interface ShowDaysContract {
  //       void openDayDetails(@NonNull Day requestedDay);
         void loadShowSettingsActivity();
 
+        List<Day> getDays();
     }
 
 }

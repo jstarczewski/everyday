@@ -10,7 +10,7 @@ import javax.inject.Inject;
  * Created by Jan on 8/30/2018.
  */
 
-public class DayRepository implements Runnable {
+public class DayRepository {
 
     private final DayDao dayDao;
     private List<Day> daysList;
@@ -31,7 +31,7 @@ public class DayRepository implements Runnable {
         return INSTANCE;
     }
 
-    private List<Day> getDays() {
+    public List<Day> getDays() {
         return dayDao.getDayList();
     }
 
@@ -67,41 +67,11 @@ public class DayRepository implements Runnable {
      * No default for handling configuration changes in Android -> that is a problem but in this activity we cannot change the orientation
      */
 
-
-    public void setAccessible(Accessible accessible) {
-        this.accessible = accessible;
-    }
-
-    public void getAccessToDays() {
-
-        GetAccessDays getAccessDays = new GetAccessDays(dayDao, accessible);
-        getAccessDays.execute();
-/*
-        new Thread() {
-            @Override
-            public void run() {
-                accessible.getAccessDays(getDays());
-            }
-        }.start();*/
-
-
-
-    }
-
-
-    @Override
-    public void run() {
-
-    }
 }
 
 /**
- *
  * Do not know wheter this approach with acynctask is good -> gonna do more research in case of memory leaks etc
- *
- *
- * **/
-
+ **/
 
 
 class GetAccessDays extends AsyncTask<List<Day>, Void, List<Day>> {
@@ -116,7 +86,7 @@ class GetAccessDays extends AsyncTask<List<Day>, Void, List<Day>> {
 
     @Override
     protected List<Day> doInBackground(List<Day>... days) {
-       return dayDao.getDayList();
+        return dayDao.getDayList();
     }
 
     @Override

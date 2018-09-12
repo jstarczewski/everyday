@@ -2,6 +2,7 @@ package com.clakestudio.pc.everyday.showdays;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.clakestudio.pc.everyday.settings.SettingsActivity;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -145,8 +147,9 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
 
     @Override
-    public void showDays(ArrayList<Day> days) {
-        showDaysAdapter.replaceData(days);
+    public void showDays() {
+        AsyncShowDays asyncShowDays = new AsyncShowDays(showDaysAdapter);
+        asyncShowDays.execute(daysPresenter);
     }
 
     @Override
@@ -262,3 +265,24 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
 }
 
+
+class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day>> {
+
+    private ShowDaysFragment.ShowDaysAdapter showDaysAdapter;
+
+    AsyncShowDays(ShowDaysFragment.ShowDaysAdapter showDaysAdapter) {
+        this.showDaysAdapter = showDaysAdapter;
+    }
+
+
+    @Override
+    protected List<Day> doInBackground(ShowDaysContract.Presenter... presenter) {
+        return presenter[0].getDays();
+    }
+
+    @Override
+    protected void onPostExecute(List<Day> days) {
+        super.onPostExecute(days);
+        showDaysAdapter.replaceData((ArrayList<Day>) days);
+    }
+}

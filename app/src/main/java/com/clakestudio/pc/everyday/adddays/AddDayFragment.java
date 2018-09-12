@@ -128,3 +128,4 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         void onFragmentInteraction(Uri uri);
     }
 }
+

@@ -1,7 +1,6 @@
 package com.clakestudio.pc.everyday.showdays;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.clakestudio.pc.everyday.data.Accessible;
 import com.clakestudio.pc.everyday.data.Day;
@@ -41,27 +40,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void loadDays() {
-
-        dayRepository.setAccessible(new Accessible() {
-            @Override
-            public void getAccessDays(final List<Day> dayList) {
-                      daysView.showDays((ArrayList<Day>) dayList);
-            }
-            @Override
-            public void getAccessDaysById(List<Day> dayList) {
-
-            }
-        });
-        dayRepository.getAccessToDays();
-        /*
-        (new Thread() {
-
-            @Override
-            public void run() {
-                daysView.showDays((ArrayList<Day>) dayRepository.getDays());
-            }
-        }).start();*/
-
+        daysView.showDays();
     }
 
 
@@ -82,7 +61,12 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
         daysView.showSettingsActivity();
     }
 
+    @Override
+    public List<Day> getDays() {
+        return dayRepository.getDays();
+    }
 
 }
+
 
 
