@@ -74,13 +74,16 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         super.onViewCreated(view, savedInstanceState);
         // addDayPresenter.loadCurrentDayInfo(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE).getInt("currentDay", 0):;
 
-        int dayId = getActivity().getIntent().getExtras().getInt("dayId");
-        String title = getActivity().getIntent().getExtras().getString("title");
-        String note = getActivity().getIntent().getExtras().getString("note");
-        if (title!=null && note!=null)
-            addDayPresenter.loadCurrentDayInfo(dayId, title, note);
-
-        addDayPresenter.loadCurrentDayInfo(dayId);
+        if (getActivity() != null && getActivity().getIntent() != null) {
+            int dayId = getActivity().getIntent().getExtras().getInt("dayId", 0);
+            String title = getActivity().getIntent().getExtras().getString("title", "");
+            String note = getActivity().getIntent().getExtras().getString("note", "");
+            if (!title.equals("") && !note.equals(""))
+                addDayPresenter.loadCurrentDayInfo(dayId, title, note);
+            else {
+                addDayPresenter.loadCurrentDayInfo(dayId);
+            }
+        }
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +110,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
 
     @Override
     public void showCurrentDayInfo(String dayInfo, String tittle, String note) {
-         AddDayActivity addDayActivity = (AddDayActivity) getActivity();
+        AddDayActivity addDayActivity = (AddDayActivity) getActivity();
         if (addDayActivity != null && addDayActivity.getSupportActionBar() != null && addDayActivity.getSupportActionBar().getTitle() != null) {
             addDayActivity.getSupportActionBar().setTitle(dayInfo);
             toolbarTitle = dayInfo;
@@ -118,7 +121,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
 
     @Override
     public void showNewDayInfo(String dayInfo) {
-       AddDayActivity addDayActivity = (AddDayActivity) getActivity();
+        AddDayActivity addDayActivity = (AddDayActivity) getActivity();
         if (addDayActivity != null && addDayActivity.getSupportActionBar() != null && addDayActivity.getSupportActionBar().getTitle() != null) {
             addDayActivity.getSupportActionBar().setTitle(dayInfo);
             toolbarTitle = dayInfo;

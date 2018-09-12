@@ -172,6 +172,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
     @Override
     public void showSettingsActivity() {
         startActivity(new Intent(getContext(), SettingsActivity.class));
+        getActivity().finish();
     }
 
     /**
@@ -242,6 +243,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
             showDaysViewHolder.cvDay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // click only on the last item
+                   // if (showDaysViewHolder.getAdapterPosition() == days.size())
                     dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()));
                 }
             });

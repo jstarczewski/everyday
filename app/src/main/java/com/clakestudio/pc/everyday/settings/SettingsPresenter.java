@@ -124,4 +124,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
         view.showDismissDialog();
     }
 
+    @Override
+    public void loadShowDaysActivity() {
+        view.showShowDaysActivity();
+    }
+
 }

@@ -33,4 +33,11 @@ public class SettingsActivity extends BaseActivity implements TimePickerDialog.O
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        presenter.loadShowDaysActivity();
+    }
 }

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.reminder.AfterDismissListener;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
+import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AfterDismissListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -236,6 +238,12 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void showSetReminderSwitchOnOrOff(boolean value) {
         sReminder.setChecked(value);
+    }
+
+    @Override
+    public void showShowDaysActivity() {
+        startActivity(new Intent(getContext(), ShowDaysActivity.class));
+        getActivity().finish();
     }
 
     @Override

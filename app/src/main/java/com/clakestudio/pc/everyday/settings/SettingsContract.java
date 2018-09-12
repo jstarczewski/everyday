@@ -27,6 +27,8 @@ public interface SettingsContract {
 
         void showSetReminderSwitchOnOrOff(boolean value);
 
+        void showShowDaysActivity();
+
     }
 
     interface Presenter extends BasePresenter {
@@ -59,6 +61,7 @@ public interface SettingsContract {
 
         void save(String saveWhat, String value);
 
+        void loadShowDaysActivity();
 
     }
 
