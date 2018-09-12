@@ -156,7 +156,9 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
     @Override
     public void showEditCurrentDay(int dayId) {
-        startActivity(new Intent(getContext(), AddDayActivity.class));
+        Intent intent = new Intent(getContext(), AddDayActivity.class);
+        intent.putExtra("dayId", dayId);
+        startActivity(intent);
     }
 
     @Override

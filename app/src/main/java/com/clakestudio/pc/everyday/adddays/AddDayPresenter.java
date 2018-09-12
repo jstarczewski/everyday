@@ -35,8 +35,13 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     @Override
     public void loadCurrentDayInfo(int day) {
+        Day day1 = dayRepository.getDayById(String.valueOf(day));
         String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
-        view.showCurrentDayInfo("Day " + day + " / " + date);
+        if (day1 != null)
+            view.showCurrentDayInfo("Day " + day + " / " + date, day1.getTitle(), day1.getNote());
+        else {
+            view.showCurrentDayInfo("Day" + day + " / " + date, "", "");
+        }
     }
 
     @Override

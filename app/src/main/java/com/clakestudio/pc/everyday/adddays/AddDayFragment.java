@@ -96,12 +96,14 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     }
 
     @Override
-    public void showCurrentDayInfo(String dayInfo) {
+    public void showCurrentDayInfo(String dayInfo, String title, String note) {
         AddDayActivity addDayActivity = (AddDayActivity) getActivity();
         if (addDayActivity != null && addDayActivity.getSupportActionBar() != null && addDayActivity.getSupportActionBar().getTitle() != null) {
             addDayActivity.getSupportActionBar().setTitle(dayInfo);
             toolbarTitle = dayInfo;
         }
+        etTitle.setText(title);
+        etNote.setText(note);
     }
 
     @Override

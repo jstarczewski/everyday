@@ -38,7 +38,8 @@
         <activity
             android:name=".password.PasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".forgotpassword.ForgotPasswordActivity" />
+        <activity android:name=".forgotpassword.ForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver android:name=".reminder.ReminderReceiver" />
 

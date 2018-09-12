@@ -1,6 +1,7 @@
 package com.clakestudio.pc.everyday.forgotpassword;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -73,7 +75,8 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
 
     @Override
     public void startSettingsActivity() {
-
+        startActivity(new Intent(getContext(), SettingsActivity.class));
+        getActivity().finish();
     }
 
     @Override

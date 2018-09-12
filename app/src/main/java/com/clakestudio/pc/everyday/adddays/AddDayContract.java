@@ -11,7 +11,7 @@ public class AddDayContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showCurrentDayInfo(String dayInfo);
+        void showCurrentDayInfo(String dayInfo, String title, String note);
 
         void showDays();
 

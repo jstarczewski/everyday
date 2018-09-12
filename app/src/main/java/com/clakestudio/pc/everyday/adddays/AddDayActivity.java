@@ -25,6 +25,9 @@ public class AddDayActivity extends BaseActivity {
         }
 
         addDayPresenter = new AddDayPresenter(DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao()), addDayFragment);
+        int dayId = getIntent().getExtras().getInt("dayId", -1);
+        if (dayId!=-1)
+            addDayPresenter.loadCurrentDayInfo(dayId);
 
 
     }
