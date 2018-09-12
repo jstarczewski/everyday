@@ -26,7 +26,5 @@ public class PasswordPresenter implements PasswordContract.Presenter {
     public void checkPasswordCorrectness(String password) {
         if (password.equals(settingsRepository.getPassword()))
             view.showShowDaysActivity();
-        else
-            view.showWrongPasswordToast();
     }
 }

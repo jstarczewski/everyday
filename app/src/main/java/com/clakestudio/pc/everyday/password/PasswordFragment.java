@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +26,11 @@ import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
  * Use the {@link PasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PasswordFragment extends Fragment implements PasswordContract.View, View.OnClickListener {
+public class PasswordFragment extends Fragment implements PasswordContract.View, View.OnClickListener, TextWatcher {
 
     private PasswordPresenter passwordPresenter;
     private EditText etPassword;
     private Button btForgotPassword;
-    private Button btProcceed;
 
     public PasswordFragment() {
         // Required empty public constructor
@@ -55,17 +56,15 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_password, container, false);
-        btForgotPassword = (Button)view.findViewById(R.id.btForgotPassword);
-        etPassword = (EditText)view.findViewById(R.id.etPassword);
-        btProcceed = (Button)view.findViewById(R.id.btProcceed);
+        btForgotPassword = (Button) view.findViewById(R.id.btForgotPassword);
+        etPassword = (EditText) view.findViewById(R.id.etPassword);
+        etPassword.addTextChangedListener(this);
 
-        btProcceed.setOnClickListener(this);
         btForgotPassword.setOnClickListener(this);
 
         return view;
 
     }
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,12 +86,7 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
 
     @Override
     public void onClick(View v) {
-        if (v.getTag().equals("btProcceed")) {
-            passwordPresenter.checkPasswordCorrectness(etPassword.getText().toString());
-        }
-        else {
-            showForgotPasswordActivity();
-        }
+        showForgotPasswordActivity();
     }
 
     @Override
@@ -110,6 +104,21 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     @Override
     public void showWrongPasswordToast() {
         Toast.makeText(getContext(), "Wrong password", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        passwordPresenter.checkPasswordCorrectness(etPassword.getText().toString());
     }
 
     /**

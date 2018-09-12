@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(this, SetGoalActivity.class));
         }
         else if(settingsRepository.isPasswordSet()) {
-            startActivity(new Intent(this, ShowDaysActivity.class));
+            startActivity(new Intent(this, PasswordActivity.class));
         } else {
             startActivity(new Intent(this, ShowDaysActivity.class));
         }
