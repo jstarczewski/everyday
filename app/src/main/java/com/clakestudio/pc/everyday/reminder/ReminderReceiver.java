@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
+import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.utils.SplashActivity;
 
 /**
@@ -22,6 +24,9 @@ public class ReminderReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(context));
+
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent repeatingIntent = new Intent(context, SplashActivity.class);
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -37,6 +42,11 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .build();
         if (notificationManager != null) {
             notificationManager.notify(100, notification);
+        }
+        if (settingsRepository.isReminderSet()) {
+            Intent notificationIntent = new Intent(context, ReminderReceiver.class);
+            PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmUtils.setAlarm(context, settingsRepository.getReminderTime(), sender);
         }
 
     }

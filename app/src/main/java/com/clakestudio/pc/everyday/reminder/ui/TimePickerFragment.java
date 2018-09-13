@@ -18,6 +18,7 @@ import android.widget.TimePicker;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.reminder.AfterDismissListener;
+import com.clakestudio.pc.everyday.reminder.AlarmUtils;
 import com.clakestudio.pc.everyday.reminder.ReminderReceiver;
 import com.clakestudio.pc.everyday.settings.SettingsPresenter;
 import com.clakestudio.pc.everyday.utils.SplashActivity;
@@ -112,26 +113,13 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         }
         settingsRepository.setReminder(true);*/
 
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-            //    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
-        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
-        else {
-            if (alarmManager != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-                }
-            }
-        }
 
         // if (alarmManager != null) {
         //           alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
 //            settingsRepository.setReminder(true);
 
+        settingsRepository.setReminderTime(calendar.getTimeInMillis());
+        AlarmUtils.setAlarm(context, calendar.getTimeInMillis(), sender);
 
     }
 

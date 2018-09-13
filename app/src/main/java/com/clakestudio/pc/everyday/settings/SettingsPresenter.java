@@ -53,7 +53,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void saveIsReminderSet(boolean isSet) {
         if (!isSet)
-            settingsRepository.setReminder(false);
+            settingsRepository.setReminderTime(-1);
         else {
             view.showSetReminderTimeDialog();
         }
