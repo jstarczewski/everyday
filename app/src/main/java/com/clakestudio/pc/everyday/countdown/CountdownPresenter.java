@@ -42,4 +42,10 @@ public class CountdownPresenter implements CountdownContract.Presenter {
     public void stop() {
         view.stopCountdownTimer();
     }
+
+    @Override
+    public void skip() {
+        view.stopCountdownTimer();
+        view.startAddDayActivity();
+    }
 }

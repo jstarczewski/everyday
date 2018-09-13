@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.clakestudio.pc.everyday.R;
@@ -26,11 +27,12 @@ import com.clakestudio.pc.everyday.adddays.AddDayActivity;
  * Use the {@link CountdownFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CountdownFragment extends Fragment implements CountdownContract.View {
+public class CountdownFragment extends Fragment implements CountdownContract.View, View.OnClickListener {
 
     private CountdownContract.Presenter presenter;
     private CountDownTimer countDownTimer;
     private TextView tvCountdown;
+    private Button btSkip;
     private int countdownDuration;
     private MediaPlayer mediaPlayer;
     private int dayId = 0;
@@ -55,6 +57,8 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_countdown, container, false);
         tvCountdown = (TextView) view.findViewById(R.id.tvCountdown);
+        btSkip = (Button)view.findViewById(R.id.btSkip);
+        btSkip.setOnClickListener(this);
 
         return view;
     }
@@ -139,6 +143,11 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     @Override
     public void stopCountdownTimer() {
         countDownTimer.cancel();
+    }
+
+    @Override
+    public void onClick(View v) {
+        presenter.skip();
     }
 
 

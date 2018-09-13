@@ -34,6 +34,8 @@ public interface CountdownContract {
 
         void stop();
 
+        void skip();
+
     }
 
 
