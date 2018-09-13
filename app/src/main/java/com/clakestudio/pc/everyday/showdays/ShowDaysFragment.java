@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +22,6 @@ import com.clakestudio.pc.everyday.countdown.CountdownActivity;
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +34,14 @@ import java.util.List;
  * Use the {@link ShowDaysFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShowDaysFragment extends Fragment implements ShowDaysContract.View {
+public class ShowDaysFragment extends Fragment implements ShowDaysContract.View, View.OnClickListener {
 
     //
 
     private ShowDaysContract.Presenter daysPresenter;
 
     private ShowDaysAdapter showDaysAdapter;
+    private FloatingActionButton fab;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,7 +87,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         View v = inflater.inflate(R.layout.fragment_show_days, container, false);
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-
+        fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         return v;
     }
@@ -175,6 +177,16 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
         getActivity().finish();
     }
 
+    @Override
+    public void showDayAlreadyAddedToast() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        daysPresenter.checkIfDayAlreadyAdded((showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount()-1).getDate());
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -244,8 +256,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
                 @Override
                 public void onClick(View v) {
                     // click only on the last item
-                    if (showDaysViewHolder.getAdapterPosition() == days.size()-1)
-                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()));
+                    if (showDaysViewHolder.getAdapterPosition() == days.size() - 1)
+                        dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()));
                 }
             });
 
@@ -275,9 +287,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
 /**
  * -> to another file to prevent memory leakse (by making it staic later)
- *
- *
- * */
+ */
 
 class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day>> {
 

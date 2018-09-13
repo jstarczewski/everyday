@@ -1,12 +1,14 @@
 package com.clakestudio.pc.everyday.showdays;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import com.clakestudio.pc.everyday.data.Accessible;
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -17,16 +19,15 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
 
     private final DayRepository dayRepository;
-
-    private List<Day> days;
-    private final ShowDaysContract.View daysView;
+    private static final String pattern = "dd MM yyyy";
+    private final ShowDaysContract.View view;
     private SettingsRepository settingsRepository;
 
-    public ShowDaysPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull ShowDaysContract.View daysView) {
+    public ShowDaysPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull ShowDaysContract.View view) {
         this.dayRepository = dayRepository;
-        this.daysView = daysView;
+        this.view = view;
         this.settingsRepository = settingsRepository;
-        daysView.setPresenter(this);
+        view.setPresenter(this);
     }
 
 
@@ -36,30 +37,42 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
     }
 
     @Override
+    public void checkIfDayAlreadyAdded(String date) {
+        String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
+        Log.e("dates", currentDate + " --- " + date);
+        if (currentDate.equals(date)) {
+            view.showDayAlreadyAddedToast();
+        }
+        else {
+            addNewDay();
+        }
+    }
+
+    @Override
     public void result(int requestCode, int resultCode) {
 
     }
 
     @Override
     public void loadDays() {
-        daysView.showDays();
+        view.showDays();
     }
 
 
     @Override
     public void addNewDay() {
         //dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
-        daysView.showAddNewDay(settingsRepository.getCurrentDay());
+        view.showAddNewDay(settingsRepository.getCurrentDay());
     }
 
     @Override
     public void editCurrentDay(Day day) {
-        daysView.showEditCurrentDay(Integer.valueOf(day.getDayId()), day.getTitle(), day.getNote());
+        view.showEditCurrentDay(Integer.valueOf(day.getDayId()), day.getTitle(), day.getNote());
     }
 
     @Override
     public void loadShowSettingsActivity() {
-        daysView.showSettingsActivity();
+        view.showSettingsActivity();
     }
 
     @Override

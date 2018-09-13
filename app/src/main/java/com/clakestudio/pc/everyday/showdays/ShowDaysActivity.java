@@ -38,21 +38,7 @@ public class ShowDaysActivity extends BaseActivity {
                 SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this))
                 ,showDaysFragment);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //          .setAction("Action", null).show();
 
-                /**
-                 * No the right way to naviget to other activity cuz Fragment is so called VIEW
-                 *
-                 * */
-
-                showDaysPresenter.addNewDay();
-            }
-        });
     }
 
 

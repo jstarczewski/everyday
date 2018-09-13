@@ -32,7 +32,7 @@ public interface ShowDaysContract {
 
     interface Presenter extends BasePresenter {
 
-        void checkIfDayAlreadyAdded();
+        void checkIfDayAlreadyAdded(String date);
 
         void result(int requestCode, int resultCode);
 
