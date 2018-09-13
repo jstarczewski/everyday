@@ -22,13 +22,6 @@ public class SplashActivity extends AppCompatActivity {
 
         SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this));
 
-        if (settingsRepository.isReminderSet()) {
-            Intent notificationIntent = new Intent(this, ReminderReceiver.class);
-            PendingIntent sender = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmUtils.setAlarm(this, settingsRepository.getReminderTime(), sender);
-        }
-
-
         if (!settingsRepository.isInfoRead()) {
             startActivity(new Intent(this, InfoActivity.class));
         } else if (!settingsRepository.isGoalSet()) {

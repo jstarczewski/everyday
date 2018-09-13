@@ -94,7 +94,7 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public boolean isReminderSet() {
-        return sharedPreferences.getLong(Settings.REMINDER_TIME.toString(), -1) == -1;
+        return !(sharedPreferences.getLong(Settings.REMINDER_TIME.toString(), -1) == -1);
     }
 
     @Override

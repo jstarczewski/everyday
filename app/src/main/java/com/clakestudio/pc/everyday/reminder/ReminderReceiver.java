@@ -27,6 +27,13 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(context));
 
+        /*
+        if (!settingsRepository.isReminderSet()) {
+            Intent notificationIntent = new Intent(context, ReminderReceiver.class);
+            PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmUtils.cancelAlarm(context, sender);
+        }*/
+
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent repeatingIntent = new Intent(context, SplashActivity.class);
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -44,6 +51,11 @@ public class ReminderReceiver extends BroadcastReceiver {
             notificationManager.notify(100, notification);
         }
 
+        /*if (settingsRepository.isReminderSet()) {
+            Intent notificationIntent = new Intent(context, ReminderReceiver.class);
+            PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmUtils.setAlarm(context, settingsRepository.getReminderTime() + 20000, sender);
+        }*/
 
     }
 }

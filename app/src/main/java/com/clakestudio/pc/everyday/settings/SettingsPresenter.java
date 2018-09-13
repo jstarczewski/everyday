@@ -1,8 +1,6 @@
 package com.clakestudio.pc.everyday.settings;
 
 
-import android.util.Log;
-
 import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
@@ -52,9 +50,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void saveIsReminderSet(boolean isSet) {
-        if (!isSet)
+        if (!isSet) {
             settingsRepository.setReminderTime(-1);
-        else {
+        } else {
             view.showSetReminderTimeDialog();
         }
     }
