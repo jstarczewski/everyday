@@ -1,9 +1,7 @@
 package com.clakestudio.pc.everyday.settings;
 
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -13,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -32,12 +29,8 @@ import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AfterDismissListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    private final String EMPTY = "";
 
     AlertDialog alertDialog;
 
@@ -174,13 +167,16 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void showChangePasswordDialog() {
-
+        etNewPasswordOrGoal.setText(EMPTY);
+        etNewPasswordOrGoal.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         setDialogInfo(getString(R.string.change_password), getString(R.string.enter_new_password_here));
         alertDialog.show();
     }
 
     @Override
     public void showChangeGoalDialog() {
+        etNewPasswordOrGoal.setText(EMPTY);
+        etNewPasswordOrGoal.setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
         setDialogInfo(getString(R.string.change_your_goal), getString(R.string.enter_your_goal_here));
         alertDialog.show();
     }
