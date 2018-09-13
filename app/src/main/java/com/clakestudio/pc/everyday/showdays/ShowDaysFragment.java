@@ -1,7 +1,6 @@
 package com.clakestudio.pc.everyday.showdays;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,33 +25,12 @@ import com.clakestudio.pc.everyday.settings.SettingsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ShowDaysFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ShowDaysFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShowDaysFragment extends Fragment implements ShowDaysContract.View, View.OnClickListener {
 
-    //
 
     private ShowDaysContract.Presenter daysPresenter;
 
     private ShowDaysAdapter showDaysAdapter;
-    private FloatingActionButton fab;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public ShowDaysFragment() {
         // Required empty public constructor
@@ -72,24 +50,19 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     RecyclerView recyclerView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_show_days, container, false);
-
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        fab = (FloatingActionButton)getActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(this);
-
+        recyclerView = v.findViewById(R.id.recyclerView);
+        if (getActivity() != null) {
+            FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+            fab.setOnClickListener(this);
+        }
         return v;
     }
 
@@ -110,13 +83,6 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         recyclerView.setAdapter(showDaysAdapter);
 
         daysPresenter.start();
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     /*
@@ -140,7 +106,6 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -174,7 +139,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     @Override
     public void showSettingsActivity() {
         startActivity(new Intent(getContext(), SettingsActivity.class));
-        getActivity().finish();
+        if (getActivity() != null)
+            getActivity().finish();
     }
 
     @Override
@@ -184,7 +150,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     @Override
     public void onClick(View v) {
-        daysPresenter.checkIfDayAlreadyAdded((showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount()-1).getDate());
+        daysPresenter.checkIfDayAlreadyAdded((showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
     }
 
     /**
@@ -197,10 +163,6 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
     class ShowDaysAdapter extends RecyclerView.Adapter<ShowDaysAdapter.ShowDaysViewHolder> {
 
@@ -218,29 +180,29 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
             ShowDaysViewHolder(View itemView) {
                 super(itemView);
 
-                tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-                tvNote = (TextView) itemView.findViewById(R.id.tvNote);
-                tvDayInfo = (TextView) itemView.findViewById(R.id.tvDayInfo);
-                cvDay = (CardView) itemView.findViewById(R.id.day);
+                tvTitle = itemView.findViewById(R.id.tvTitle);
+                tvNote = itemView.findViewById(R.id.tvNote);
+                tvDayInfo = itemView.findViewById(R.id.tvDayInfo);
+                cvDay = itemView.findViewById(R.id.day);
 
             }
         }
 
-        public ShowDaysAdapter(ArrayList<Day> days, DayItemListener dayItemListener) {
+        ShowDaysAdapter(ArrayList<Day> days, DayItemListener dayItemListener) {
             this.days = days;
             this.dayItemListener = dayItemListener;
         }
 
 
-        public ArrayList<Day> getDays() {
+        ArrayList<Day> getDays() {
             return days;
         }
 
-        public void setDays(ArrayList<Day> days) {
+        void setDays(ArrayList<Day> days) {
             this.days = days;
         }
 
-        public void replaceData(ArrayList<Day> days) {
+        void replaceData(ArrayList<Day> days) {
             setDays(days);
             notifyDataSetChanged();
         }
@@ -268,7 +230,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         public void onBindViewHolder(@NonNull ShowDaysViewHolder holder, int position) {
             holder.tvTitle.setText(days.get(position).getTitle());
             holder.tvNote.setText(days.get(position).getNote());
-            holder.tvDayInfo.setText("Day " + days.get(position).getDayId() + " / " + days.get(position).getDate());
+            String dayInfo = "Day " + days.get(position).getDayId() + " / " + days.get(position).getDate();
+            holder.tvDayInfo.setText(dayInfo);
         }
 
         @Override

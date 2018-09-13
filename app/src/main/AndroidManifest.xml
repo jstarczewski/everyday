@@ -14,13 +14,16 @@
         <activity
             android:name=".showdays.ShowDaysActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".adddays.AddDayActivity"
             android:label="@string/title_activity_add_day"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".utils.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,23 +33,31 @@
         </activity>
         <activity
             android:name=".info.InfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".setgoal.SetGoalActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".settings.SettingsActivity" />
         <activity
             android:name=".password.PasswordActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".forgotpassword.ForgotPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".forgotpassword.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".reminder.ReminderReceiver" />
 
-        <activity android:name=".countdown.CountdownActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".countdown.CountdownActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".showgoal.ShowGoalActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
