@@ -51,7 +51,7 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     @Override
     public void saveDay(String[] dayInfoArray) {
         dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
-     //   settingsRepository.increateCurrentDayCount();
+        settingsRepository.increateCurrentDayCount();
         view.showDays();
     }
 }

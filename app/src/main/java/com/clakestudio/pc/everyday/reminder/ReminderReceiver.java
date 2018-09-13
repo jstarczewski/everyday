@@ -46,7 +46,7 @@ public class ReminderReceiver extends BroadcastReceiver {
                     .setContentIntent(pendingIntent)
                     .setWhen(System.currentTimeMillis())
                     .build();
-            if (notificationManager != null) {
+            if (notificationManager != null && settingsRepository.isReminderSet()) {
                 notificationManager.notify(100, notification);
             }
 

@@ -25,7 +25,6 @@ public class SharedPreferencesSettings implements Settable {
     private static final String REMINDER = "REMINDER";
     */
 
-    private Context context;
     private static SharedPreferencesSettings sharedPreferencesSettings;
     private SharedPreferences sharedPreferences;
 
@@ -37,7 +36,6 @@ public class SharedPreferencesSettings implements Settable {
     }
 
     private SharedPreferencesSettings(Context context) {
-        this.context = context;
         this.sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
     }
 

@@ -244,7 +244,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
                 @Override
                 public void onClick(View v) {
                     // click only on the last item
-                   // if (showDaysViewHolder.getAdapterPosition() == days.size())
+                    if (showDaysViewHolder.getAdapterPosition() == days.size()-1)
                     dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()));
                 }
             });
@@ -273,6 +273,11 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View 
 
 }
 
+/**
+ * -> to another file to prevent memory leakse (by making it staic later)
+ *
+ *
+ * */
 
 class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day>> {
 

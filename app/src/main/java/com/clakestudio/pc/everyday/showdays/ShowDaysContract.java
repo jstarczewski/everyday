@@ -26,9 +26,13 @@ public interface ShowDaysContract {
         void showEditCurrentDay(int dayId, String tittle, String note);
 
         void showSettingsActivity();
+
+        void showDayAlreadyAddedToast();
     }
 
     interface Presenter extends BasePresenter {
+
+        void checkIfDayAlreadyAdded();
 
         void result(int requestCode, int resultCode);
 
