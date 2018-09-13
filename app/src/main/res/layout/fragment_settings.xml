@@ -99,15 +99,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:background="@color/colorPrimary"
-                android:textColor="@color/colorText"
                 android:text="Change"
+                android:textColor="@color/colorText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
         </android.support.constraint.ConstraintLayout>
-
 
 
         <android.support.constraint.ConstraintLayout
@@ -134,8 +133,8 @@
                 android:id="@+id/cbDurationTen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
                 android:tag="10"
+                android:text="10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -144,8 +143,8 @@
                 android:id="@+id/cbDurationFive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
                 android:tag="5"
+                android:text="5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cbDurationTen"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -154,8 +153,8 @@
                 android:id="@+id/cbDurationThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"
                 android:tag="3"
+                android:text="3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cbDurationFive"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -164,8 +163,8 @@
                 android:id="@+id/cbDurationOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
                 android:tag="1"
+                android:text="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cbDurationThree"
                 app:layout_constraintTop_toTopOf="parent" />
