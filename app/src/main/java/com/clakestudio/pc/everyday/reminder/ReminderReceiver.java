@@ -27,35 +27,34 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(context));
 
-        /*
+
         if (!settingsRepository.isReminderSet()) {
             Intent notificationIntent = new Intent(context, ReminderReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmUtils.cancelAlarm(context, sender);
-        }*/
+        } else {
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            Intent repeatingIntent = new Intent(context, SplashActivity.class);
+            repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent repeatingIntent = new Intent(context, SplashActivity.class);
-        repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.logosplash)
-                .setContentTitle("Focus time !")
-                .setContentText("It is time to focus on your goal")
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .setWhen(System.currentTimeMillis())
-                .build();
-        if (notificationManager != null) {
-            notificationManager.notify(100, notification);
-        }
+            Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.logosplash)
+                    .setContentTitle("Focus time !")
+                    .setContentText("It is time to focus on your goal")
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent)
+                    .setWhen(System.currentTimeMillis())
+                    .build();
+            if (notificationManager != null) {
+                notificationManager.notify(100, notification);
+            }
 
         /*if (settingsRepository.isReminderSet()) {
             Intent notificationIntent = new Intent(context, ReminderReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmUtils.setAlarm(context, settingsRepository.getReminderTime() + 20000, sender);
         }*/
-
+        }
     }
 }
