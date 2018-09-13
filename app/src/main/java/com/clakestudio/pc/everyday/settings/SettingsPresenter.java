@@ -112,12 +112,12 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void save(String saveWhat, String value) {
+    public void save(String saveWhat, String value, String value2) {
         if (saveWhat.equals("Change password"))
             saveNewPassword(value);
         else {
             if (!(value.equals(Settings.NOT_SET.toString())))
-                saveNewGoal(value);
+                saveNewGoal(value2);
         }
         view.showDismissDialog();
     }

@@ -59,7 +59,7 @@ public interface SettingsContract {
 
         void determineCheckBoxVisibility();
 
-        void save(String saveWhat, String value);
+        void save(String saveWhat, String value, String value2);
 
         void loadShowDaysActivity();
 

@@ -31,4 +31,5 @@
     <string name="enter_new_password_here">Enter new password here</string>
     <string name="change_your_goal">Change your goal</string>
     <string name="think_a_while_about_it">Think a while about it...</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -35,14 +35,11 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     AlertDialog alertDialog;
 
     private SettingsContract.Presenter presenter;
-    private EditText etNewPasswordOrGoal;
     private Toolbar dialogToolbar;
     private Switch sPassword;
     private Switch sReminder;
-    private ConstraintLayout clGoal;
-    private Button btConfirmChange;
-    private Button btChangeGoal;
-    private Button btCancel;
+    private EditText etDialogChangeGoal;
+    private EditText etDialogChangePassword;
 
     private CheckBox cbOneMin;
     private CheckBox cbThreeMin;
@@ -85,8 +82,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
 
 
-        clGoal = (ConstraintLayout) view.findViewById(R.id.clChangeGoal);
-        btChangeGoal = (Button) view.findViewById(R.id.btChangeGoal);
+        Button btChangeGoal = (Button) view.findViewById(R.id.btChangeGoal);
         btChangeGoal.setOnClickListener(this);
 
 
@@ -106,11 +102,14 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         alertDialog.setCancelable(false);
         alertDialog.setCanceledOnTouchOutside(false);
 
-        btCancel = (Button) alertDialogView.findViewById(R.id.btCancel);
+        Button btCancel = (Button) alertDialogView.findViewById(R.id.btCancel);
         dialogToolbar = (Toolbar) alertDialogView.findViewById(R.id.toolbar);
         btCancel.setOnClickListener(this);
-        etNewPasswordOrGoal = (EditText) alertDialogView.findViewById(R.id.etChange);
-        btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
+
+        etDialogChangeGoal = alertDialogView.findViewById(R.id.etChangeGoal);
+        etDialogChangePassword = alertDialogView.findViewById(R.id.etChangePassword);
+
+        Button btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
         btConfirmChange.setOnClickListener(this);
         alertDialog.setView(alertDialogView);
 
@@ -167,16 +166,16 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void showChangePasswordDialog() {
-        etNewPasswordOrGoal.setText(EMPTY);
-        etNewPasswordOrGoal.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        etDialogChangePassword.setVisibility(View.VISIBLE);
+        etDialogChangeGoal.setVisibility(View.GONE  );
         setDialogInfo(getString(R.string.change_password), getString(R.string.enter_new_password_here));
         alertDialog.show();
     }
 
     @Override
     public void showChangeGoalDialog() {
-        etNewPasswordOrGoal.setText(EMPTY);
-        etNewPasswordOrGoal.setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
+        etDialogChangeGoal.setVisibility(View.VISIBLE);
+        etDialogChangePassword.setVisibility(View.GONE);
         setDialogInfo(getString(R.string.change_your_goal), getString(R.string.enter_your_goal_here));
         alertDialog.show();
     }
@@ -212,7 +211,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void setDialogInfo(String toolbarTitle, String editTextHint) {
-        etNewPasswordOrGoal.setHint(editTextHint);
+        etDialogChangePassword.setHint(editTextHint);
+        etDialogChangeGoal.setHint(editTextHint);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialogToolbar.setTitle(toolbarTitle);
         }
@@ -251,11 +251,11 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             }
             case R.id.btConfirmChange: {
                 Toast.makeText(getContext(), dialogToolbar.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                presenter.save(dialogToolbar.getTitle().toString(), etNewPasswordOrGoal.getText().toString());
+                presenter.save(dialogToolbar.getTitle().toString(), etDialogChangePassword.getText().toString(), etDialogChangeGoal.getText().toString());
                 break;
             }
             case R.id.btCancel: {
-                presenter.save(dialogToolbar.getTitle().toString(), Settings.NOT_SET.toString());
+                presenter.save(dialogToolbar.getTitle().toString(), Settings.NOT_SET.toString(), etDialogChangeGoal.getText().toString());
             }
         }
 
