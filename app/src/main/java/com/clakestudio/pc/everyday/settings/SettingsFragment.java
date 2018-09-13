@@ -58,7 +58,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     TimePickerFragment timePickerFragment;
 
-    private OnFragmentInteractionListener mListener;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -161,7 +160,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override

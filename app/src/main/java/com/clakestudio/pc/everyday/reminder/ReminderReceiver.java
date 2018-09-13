@@ -43,11 +43,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         if (notificationManager != null) {
             notificationManager.notify(100, notification);
         }
-        if (settingsRepository.isReminderSet()) {
-            Intent notificationIntent = new Intent(context, ReminderReceiver.class);
-            PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmUtils.setAlarm(context, settingsRepository.getReminderTime(), sender);
-        }
+
 
     }
 }
