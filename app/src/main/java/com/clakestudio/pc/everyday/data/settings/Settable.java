@@ -26,11 +26,13 @@ public interface Settable {
 
     String getGoal();
 
-    void setReminder(boolean isSet);
-
     boolean isReminderSet();
 
     int getCurrentDay();
 
     void increaseCurrentDay();
+
+    void setReminderTime(long time);
+
+    long getReminderTime();
 }

@@ -91,14 +91,10 @@ public class SharedPreferencesSettings implements Settable {
         return sharedPreferences.getString(Settings.GOAL.toString(), Settings.NOT_SET.toString());
     }
 
-    @Override
-    public void setReminder(boolean isSet) {
-        sharedPreferences.edit().putBoolean(Settings.REMINDER.toString(), isSet).apply();
-    }
 
     @Override
     public boolean isReminderSet() {
-        return sharedPreferences.getBoolean(Settings.REMINDER.toString(), false);
+        return sharedPreferences.getLong(Settings.REMINDER_TIME.toString(), -1) == -1;
     }
 
     @Override
@@ -108,7 +104,17 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public void increaseCurrentDay() {
-       sharedPreferences.edit().putInt(Settings.CURRENT_DAY.toString(), sharedPreferences.getInt(Settings.CURRENT_DAY.toString(), 0)+1).apply();
+        sharedPreferences.edit().putInt(Settings.CURRENT_DAY.toString(), sharedPreferences.getInt(Settings.CURRENT_DAY.toString(), 0) + 1).apply();
+    }
+
+    @Override
+    public void setReminderTime(long time) {
+        sharedPreferences.edit().putLong(Settings.REMINDER_TIME.toString(), time).apply();
+    }
+
+    @Override
+    public long getReminderTime() {
+        return sharedPreferences.getLong(Settings.REMINDER_TIME.toString(), -1);
     }
 
 }

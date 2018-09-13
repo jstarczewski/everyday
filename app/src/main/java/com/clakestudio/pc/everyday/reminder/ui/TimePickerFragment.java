@@ -77,8 +77,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         setCalendar(hourOfDay, minute);
         Context context = getContext();
         Intent intent = new Intent(context, ReminderReceiver.class);
-        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
-
+        PendingIntent sender = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+/*
         AlarmManager am = null;
         if (context != null) {
             am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -102,7 +102,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             Settings.System.putString(context.getContentResolver(),
                     Settings.System.NEXT_ALARM_FORMATTED,
                     fmt.format(c.getTime()));*/
-        } else {
+        /*} else {
             Intent showIntent = new Intent(context, SplashActivity.class);
             PendingIntent showOperation = PendingIntent.getActivity(context, 0, showIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), showOperation);
@@ -110,7 +110,28 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
                 am.setAlarmClock(alarmClockInfo, sender);
             }
         }
-        settingsRepository.setReminder(true);
+        settingsRepository.setReminder(true);*/
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+            //    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
+        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
+        else {
+            if (alarmManager != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+                }
+            }
+        }
+
+        // if (alarmManager != null) {
+        //           alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
+//            settingsRepository.setReminder(true);
+
 
     }
 

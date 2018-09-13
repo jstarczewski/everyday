@@ -12,7 +12,7 @@ import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.utils.SplashActivity;
 
 /**
- * Created by Jan on 9/7/2018.
+ * Created by Jan on 9/7/210018.
  * added some if clauses to
  */
 
@@ -25,7 +25,7 @@ public class ReminderReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent repeatingIntent = new Intent(context, SplashActivity.class);
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logosplash)
@@ -36,7 +36,7 @@ public class ReminderReceiver extends BroadcastReceiver {
                 .setWhen(System.currentTimeMillis())
                 .build();
         if (notificationManager != null) {
-            notificationManager.notify(0, notification);
+            notificationManager.notify(100, notification);
         }
 
     }

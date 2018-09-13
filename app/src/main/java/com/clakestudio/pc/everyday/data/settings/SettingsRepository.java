@@ -60,23 +60,31 @@ public class SettingsRepository {
         return settable.isGoalSet();
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return settable.getPassword();
     }
 
     public String getGoal() {
         return settable.getGoal();
     }
+
     public boolean isReminderSet() {
         return settable.isReminderSet();
     }
-    public void setReminder(boolean isSet) {
-       settable.setReminder(isSet);
-    }
+
     public int getCurrentDay() {
         return settable.getCurrentDay();
     }
+
     public void increateCurrentDayCount() {
         settable.increaseCurrentDay();
+    }
+
+    public void setReminderTime(long time) {
+        settable.setReminderTime(time);
+    }
+
+    public long getReminderTime() {
+        return settable.getReminderTime();
     }
 }
