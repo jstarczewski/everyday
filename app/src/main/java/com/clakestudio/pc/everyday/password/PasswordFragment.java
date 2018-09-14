@@ -26,15 +26,7 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     public PasswordFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment PasswordFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PasswordFragment newInstance() {
+  public static PasswordFragment newInstance() {
         return new PasswordFragment();
     }
 
