@@ -150,7 +150,10 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     @Override
     public void onClick(View v) {
-        daysPresenter.checkIfDayAlreadyAdded((showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
+        if (showDaysAdapter.getDays().isEmpty())
+            daysPresenter.addNewDay();
+        else
+            daysPresenter.checkIfDayAlreadyAdded((showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
     }
 
     /**

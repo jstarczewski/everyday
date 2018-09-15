@@ -4,8 +4,6 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 /**
  * Created by Jan on 8/30/2018.
  */
@@ -18,7 +16,6 @@ public class DayRepository {
     private Boolean isUpdated = false;
     private static DayRepository INSTANCE = null;
 
-    //  @Inject
     private DayRepository(DayDao dayDao) {
         this.dayDao = dayDao;
     }
