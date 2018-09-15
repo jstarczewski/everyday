@@ -7,8 +7,9 @@ This is the v2 (2018) version of my DayOne (app created back in 2017). Both Apps
 * implement RecyclerView different way to ease displaying data 
 * use AsyncTasks with weak references to do small tasks on the background thread
 * use interfaces more complex way to ease development process
-* use BroadcastRecievers and AlarmManagers to create and deliver simple local notifications at certain time of d day
-#Future of EveryDay!
+* use BroadcastRecievers and AlarmManagers to create and deliver simple local notifications at certain time of a day  
+
+##Future of EveryDay!
 Right now bugs are being solved. What I plan to do with Everyday!
 * Refactor the code and use some dependency injection frameworks (ButterKnife and Dagger2) to prove my basic understanding of them.
 * Create a fake data source so the <i>Repository patter</i> implemented within the app will finally do his thang
