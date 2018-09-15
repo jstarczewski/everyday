@@ -117,7 +117,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     @Override
     public void showDays() {
-        AsyncShowDays asyncShowDays = new AsyncShowDays(showDaysAdapter);
+        AsyncShowDays asyncShowDays = new AsyncShowDays(this.showDaysAdapter);
         asyncShowDays.execute(daysPresenter);
     }
 
@@ -258,11 +258,12 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
 class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day>> {
 
-    private WeakReference<ShowDaysFragment.ShowDaysAdapter> showDaysAdapter;
+    private WeakReference<ShowDaysFragment.ShowDaysAdapter> showDaysAdapterWeakReference;
 
-    AsyncShowDays(WeakReference<ShowDaysFragment.ShowDaysAdapter> showDaysAdapter) {
-        this.showDaysAdapter = showDaysAdapter;
+    AsyncShowDays(ShowDaysFragment.ShowDaysAdapter showDaysAdapter) {
+        showDaysAdapterWeakReference = new WeakReference<ShowDaysFragment.ShowDaysAdapter>(showDaysAdapter);
     }
+
 
 
     @Override
@@ -273,6 +274,6 @@ class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day
     @Override
     protected void onPostExecute(List<Day> days) {
         super.onPostExecute(days);
-        showDaysAdapter.get().replaceData((ArrayList<Day>) days);
+        showDaysAdapterWeakReference.get().replaceData((ArrayList<Day>) days);
     }
 }
