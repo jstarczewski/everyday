@@ -26,7 +26,8 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     public PasswordFragment() {
         // Required empty public constructor
     }
-  public static PasswordFragment newInstance() {
+
+    public static PasswordFragment newInstance() {
         return new PasswordFragment();
     }
 
