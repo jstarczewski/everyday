@@ -22,6 +22,7 @@ import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -257,9 +258,9 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
 class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day>> {
 
-    private ShowDaysFragment.ShowDaysAdapter showDaysAdapter;
+    private WeakReference<ShowDaysFragment.ShowDaysAdapter> showDaysAdapter;
 
-    AsyncShowDays(ShowDaysFragment.ShowDaysAdapter showDaysAdapter) {
+    AsyncShowDays(WeakReference<ShowDaysFragment.ShowDaysAdapter> showDaysAdapter) {
         this.showDaysAdapter = showDaysAdapter;
     }
 
@@ -272,6 +273,6 @@ class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day
     @Override
     protected void onPostExecute(List<Day> days) {
         super.onPostExecute(days);
-        showDaysAdapter.replaceData((ArrayList<Day>) days);
+        showDaysAdapter.get().replaceData((ArrayList<Day>) days);
     }
 }
