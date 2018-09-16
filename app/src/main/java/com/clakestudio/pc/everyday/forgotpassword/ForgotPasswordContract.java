@@ -11,11 +11,10 @@ public interface ForgotPasswordContract {
 
     interface View extends BaseView<Presenter> {
 
-        void startSettingsActivity();
+        void showStartSettingsActivity();
 
         void showToastAboutGoalIncorrectness();
 
-        void checkGoal();
     }
 
     interface Presenter extends BasePresenter {

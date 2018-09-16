@@ -27,6 +27,7 @@ public class InfoPresenter implements InfoContract.Presenter {
     @Override
     public void setAppInfoUnderstood() {
         settingsRepository.setInfoRead();
-        infoView.showSetGoalActivity();
+        infoView.showStartSetGoalActivity();
     }
+
 }

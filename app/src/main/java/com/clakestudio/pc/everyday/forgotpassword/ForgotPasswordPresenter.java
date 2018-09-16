@@ -25,7 +25,7 @@ public class ForgotPasswordPresenter implements ForgotPasswordContract.Presenter
     @Override
     public void checkGoalCorrectness(String goal) {
         if (settingsRepository.isGoalSet() && goal.equals(settingsRepository.getGoal())) {
-            view.startSettingsActivity();
+            view.showStartSettingsActivity();
         } else {
             view.showToastAboutGoalIncorrectness();
         }

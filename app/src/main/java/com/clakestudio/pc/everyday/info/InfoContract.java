@@ -11,7 +11,7 @@ public class InfoContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showSetGoalActivity();
+        void showStartSetGoalActivity();
 
 
     }

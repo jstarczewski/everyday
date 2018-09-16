@@ -15,14 +15,6 @@ import android.widget.Toast;
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.settings.SettingsActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ForgotPasswordFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ForgotPasswordFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ForgotPasswordFragment extends Fragment implements ForgotPasswordContract.View, View.OnClickListener {
 
     private ForgotPasswordContract.Presenter presenter;
@@ -50,12 +42,7 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
         Button btCheckGoal = (Button) view.findViewById(R.id.btCheckGoal);
         btCheckGoal.setOnClickListener(this);
 
-        // Inflate the layout for this fragment
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
     }
 
     @Override
@@ -74,7 +61,7 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
     }
 
     @Override
-    public void startSettingsActivity() {
+    public void showStartSettingsActivity() {
         startActivity(new Intent(getContext(), SettingsActivity.class));
         getActivity().finish();
     }
@@ -85,27 +72,8 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
     }
 
     @Override
-    public void checkGoal() {
+    public void onClick(View v) {
         presenter.checkGoalCorrectness(etGoal.getText().toString());
     }
 
-    @Override
-    public void onClick(View v) {
-        checkGoal();
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
