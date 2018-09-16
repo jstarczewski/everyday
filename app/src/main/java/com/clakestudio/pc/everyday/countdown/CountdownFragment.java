@@ -18,21 +18,11 @@ import android.widget.TextView;
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.adddays.AddDayActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CountdownFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CountdownFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CountdownFragment extends Fragment implements CountdownContract.View, View.OnClickListener {
 
     private CountdownContract.Presenter presenter;
     private CountDownTimer countDownTimer;
     private TextView tvCountdown;
-    private Button btSkip;
-    private int countdownDuration;
     private MediaPlayer mediaPlayer;
     private int dayId = 0;
 
@@ -51,12 +41,12 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_countdown, container, false);
         tvCountdown = view.findViewById(R.id.tvCountdown);
-        btSkip = view.findViewById(R.id.btSkip);
+        Button btSkip = view.findViewById(R.id.btSkip);
         btSkip.setOnClickListener(this);
 
         return view;
@@ -65,7 +55,6 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        countdownDuration = presenter.getFocusDuration();
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.sound);
 
         if (getActivity() != null && getActivity().getIntent() != null) {
@@ -149,18 +138,6 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     public void onClick(View v) {
         presenter.skipCountdown();
     }
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
 
     @Override
     public void onPause() {

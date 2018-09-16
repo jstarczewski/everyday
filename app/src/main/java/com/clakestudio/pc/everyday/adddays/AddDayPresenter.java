@@ -35,21 +35,19 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     }
 
     @Override
-    public void loadCurrentDayInfo(int dayId) {
+    public void loadDayInfo(int dayId, String title, String note) {
         String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
-        view.showNewDayInfo("Day " + dayId + " / " + date);
-    }
-
-    @Override
-    public void loadCurrentDayInfo(int dayId, String title, String note) {
-        String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
-        view.showCurrentDayInfo("Day " + dayId + " / " + date, title, note);
+        if (!title.equals("") && !note.equals("")) {
+            view.showNewDayInfo("Day " + dayId + " / " + date);
+        } else {
+            view.showCurrentDayInfo("Day " + dayId + " / " + date, title, note);
+        }
     }
 
     @Override
     public void saveDay(String[] dayInfoArray) {
         dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
         settingsRepository.incrementCurrentDayCount();
-        view.showDays();
+        view.showStartShowDaysActivity();
     }
 }

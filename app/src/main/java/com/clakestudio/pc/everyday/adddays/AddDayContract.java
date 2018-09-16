@@ -16,15 +16,13 @@ public class AddDayContract {
 
         void showNewDayInfo(String dayInfo);
 
-        void showDays();
+        void showStartShowDaysActivity();
 
     }
 
     interface Presenter extends BasePresenter {
 
-        void loadCurrentDayInfo(int dayId);
-
-        void loadCurrentDayInfo(int dayId, String title, String note);
+        void loadDayInfo(int dayId, String title, String note);
 
         void saveDay(String[] dayInfoArray);
 
