@@ -11,11 +11,13 @@ public interface SetGoalContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showSettingsActivity();
+        void showStartSettingsActivity();
 
         void determineGoalTextViewVisibility();
 
         void showGoalForThreeSeconds();
+
+        void showEmptyGoalToast();
 
     }
 
@@ -23,7 +25,7 @@ public interface SetGoalContract {
 
         void setGoal(String string);
 
-
+        void startSettingsActivity();
     }
 
 
