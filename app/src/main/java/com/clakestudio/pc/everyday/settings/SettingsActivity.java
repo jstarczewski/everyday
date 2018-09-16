@@ -1,10 +1,8 @@
 package com.clakestudio.pc.everyday.settings;
 
 import android.app.TimePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
@@ -38,6 +36,6 @@ public class SettingsActivity extends BaseActivity implements TimePickerDialog.O
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        presenter.loadShowDaysActivity();
+        presenter.startShowDaysActivity();
     }
 }

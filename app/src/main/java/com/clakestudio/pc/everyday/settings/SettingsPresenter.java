@@ -28,23 +28,12 @@ public class SettingsPresenter implements SettingsContract.Presenter {
         determineCheckBoxVisibility();
     }
 
-
-    @Override
-    public int getCurrentHour() {
-        return 0;
-    }
-
-    @Override
-    public int getCurrentMinute() {
-        return 0;
-    }
-
     @Override
     public void saveIsPasswordSet(boolean isSet) {
         if (!isSet)
             settingsRepository.setPassword(Settings.NOT_SET.toString());
         else {
-            view.showChangePasswordDialog();
+            view.showStartChangePasswordDialog();
         }
     }
 
@@ -68,8 +57,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void saveNewFocusDurationTime(int time) {
-        settingsRepository.setFocusDurationTime(time);
+    public void saveFocusDurationTime(boolean isChecked, int time) {
+        if (isChecked)
+            settingsRepository.setFocusDurationTime(time);
         view.showChangeFocusDurationTime(time);
     }
 
@@ -123,8 +113,23 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void loadShowDaysActivity() {
+    public void startShowDaysActivity() {
         view.showShowDaysActivity();
+    }
+
+    @Override
+    public void startChangeGoalDialog() {
+        view.showStartChangeGoalDialog();
+    }
+
+    @Override
+    public void startChangePasswordDialog() {
+        view.showStartChangePasswordDialog();
+    }
+
+    @Override
+    public void refresh() {
+        this.start();
     }
 
 }

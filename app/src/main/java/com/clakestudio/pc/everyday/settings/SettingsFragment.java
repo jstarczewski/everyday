@@ -3,15 +3,12 @@ package com.clakestudio.pc.everyday.settings;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.Settings;
@@ -30,7 +26,7 @@ import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 public class SettingsFragment extends Fragment implements SettingsContract.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener, AfterDismissListener {
 
-    private final String EMPTY = "";
+//    private final String EMPTY = "";
 
     AlertDialog alertDialog;
 
@@ -53,13 +49,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SettingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
@@ -72,44 +61,42 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        sPassword = (Switch) view.findViewById(R.id.sPassword);
-        sReminder = (Switch) view.findViewById(R.id.sFocusReminder);
+        sPassword = view.findViewById(R.id.sPassword);
+        sReminder = view.findViewById(R.id.sFocusReminder);
 
 
-        Button btChangeGoal = (Button) view.findViewById(R.id.btChangeGoal);
+        Button btChangeGoal = view.findViewById(R.id.btChangeGoal);
         btChangeGoal.setOnClickListener(this);
 
 
-        cbOneMin = (CheckBox) view.findViewById(R.id.cbDurationOne);
-        cbThreeMin = (CheckBox) view.findViewById(R.id.cbDurationThree);
-        cbFiveMin = (CheckBox) view.findViewById(R.id.cbDurationFive);
-        cbTenMin = (CheckBox) view.findViewById(R.id.cbDurationTen);
+        cbOneMin = view.findViewById(R.id.cbDurationOne);
+        cbThreeMin = view.findViewById(R.id.cbDurationThree);
+        cbFiveMin = view.findViewById(R.id.cbDurationFive);
+        cbTenMin = view.findViewById(R.id.cbDurationTen);
 
 
+        // TimePickerDialog
         timePickerFragment = new TimePickerFragment();
         timePickerFragment.setCancelable(false);
         timePickerFragment.setAfterDismissListener(this);
 
         // Alert dialog
         alertDialog = new AlertDialog.Builder(view.getContext()).create();
-        View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, null);
+        View alertDialogView = LayoutInflater.from(alertDialog.getContext()).inflate(R.layout.dialog_change, container, false);
         alertDialog.setCancelable(false);
         alertDialog.setCanceledOnTouchOutside(false);
-
-        Button btCancel = (Button) alertDialogView.findViewById(R.id.btCancel);
-        dialogToolbar = (Toolbar) alertDialogView.findViewById(R.id.toolbar);
+        Button btCancel = alertDialogView.findViewById(R.id.btCancel);
+        dialogToolbar = alertDialogView.findViewById(R.id.toolbar);
         btCancel.setOnClickListener(this);
-
         etDialogChangeGoal = alertDialogView.findViewById(R.id.etChangeGoal);
         etDialogChangePassword = alertDialogView.findViewById(R.id.etChangePassword);
-
-        Button btConfirmChange = (Button) alertDialogView.findViewById(R.id.btConfirmChange);
+        Button btConfirmChange = alertDialogView.findViewById(R.id.btConfirmChange);
         btConfirmChange.setOnClickListener(this);
         alertDialog.setView(alertDialogView);
 
@@ -161,19 +148,20 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void showSetReminderTimeDialog() {
-        timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+        if (getActivity() != null && getActivity().getSupportFragmentManager() != null)
+            timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
     @Override
-    public void showChangePasswordDialog() {
+    public void showStartChangePasswordDialog() {
         etDialogChangePassword.setVisibility(View.VISIBLE);
-        etDialogChangeGoal.setVisibility(View.GONE  );
+        etDialogChangeGoal.setVisibility(View.GONE);
         setDialogInfo(getString(R.string.change_password), getString(R.string.enter_new_password_here));
         alertDialog.show();
     }
 
     @Override
-    public void showChangeGoalDialog() {
+    public void showStartChangeGoalDialog() {
         etDialogChangeGoal.setVisibility(View.VISIBLE);
         etDialogChangePassword.setVisibility(View.GONE);
         setDialogInfo(getString(R.string.change_your_goal), getString(R.string.enter_your_goal_here));
@@ -221,7 +209,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void showDismissDialog() {
         alertDialog.dismiss();
-        presenter.start();
+        presenter.refresh();
     }
 
     @Override
@@ -237,7 +225,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void showShowDaysActivity() {
         startActivity(new Intent(getContext(), ShowDaysActivity.class));
-        getActivity().finish();
+        if (getActivity() != null)
+            getActivity().finish();
     }
 
     @Override
@@ -246,11 +235,10 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
         switch (v.getId()) {
 
             case R.id.btChangeGoal: {
-                showChangeGoalDialog();
+                presenter.startChangeGoalDialog();
                 break;
             }
             case R.id.btConfirmChange: {
-                Toast.makeText(getContext(), dialogToolbar.getTitle().toString(), Toast.LENGTH_SHORT).show();
                 presenter.save(dialogToolbar.getTitle().toString(), etDialogChangePassword.getText().toString(), etDialogChangeGoal.getText().toString());
                 break;
             }
@@ -282,28 +270,24 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
                 presenter.saveIsPasswordSet(isChecked);
                 break;
             }
-
             default: {
-                if (isChecked)
-                    presenter.saveNewFocusDurationTime(Integer.valueOf(buttonView.getTag().toString()));
-                if (!isChecked && presenter.getFocusDurationTime() == Integer.valueOf(buttonView.getTag().toString()))
-                    buttonView.setChecked(true);
+                presenter.saveFocusDurationTime(isChecked, Integer.valueOf(buttonView.getTag().toString()));
             }
-/*
+            /*
            case R.id.cbDurationOne: {
-                presenter.saveNewFocusDurationTime(1);
+                presenter.saveFocusDurationTime(1);
                 break;
             }
             case R.id.cbDurationThree: {
-                presenter.saveNewFocusDurationTime(3);
+                presenter.saveFocusDurationTime(3);
                 break;
             }
             case R.id.cbDurationFive: {
-                presenter.saveNewFocusDurationTime(5);
+                presenter.saveFocusDurationTime(5);
                 break;
             }
             case R.id.cbDurationTen: {
-                presenter.saveNewFocusDurationTime(10);
+                presenter.saveFocusDurationTime(10);
                 break;
             }*/
 
@@ -313,23 +297,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
     @Override
     public void afterDismiss() {
-        presenter.start();
+        presenter.refresh();
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
 

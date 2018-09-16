@@ -13,12 +13,13 @@ public interface SettingsContract {
 
         void showSetReminderTimeDialog();
 
-        void showChangePasswordDialog();
+        void showStartChangePasswordDialog();
 
-        void showChangeGoalDialog();
+        void showStartChangeGoalDialog();
 
         void showChangeFocusDurationTime(int id);
 
+        // method helps to eliminate some of duplications, does not communicate with presenter
         void setDialogInfo(String toolbarTitle, String editTextHint);
 
         void showDismissDialog();
@@ -33,10 +34,6 @@ public interface SettingsContract {
 
     interface Presenter extends BasePresenter {
 
-        int getCurrentHour();
-
-        int getCurrentMinute();
-
         void saveIsPasswordSet(boolean isSet);
 
         void saveIsReminderSet(boolean isSet);
@@ -45,7 +42,7 @@ public interface SettingsContract {
 
         void saveNewGoal(String goal);
 
-        void saveNewFocusDurationTime(int time);
+        void saveFocusDurationTime(boolean isChecked, int time);
 
         void saveFocusReminderTime();
 
@@ -61,8 +58,13 @@ public interface SettingsContract {
 
         void save(String saveWhat, String value, String value2);
 
-        void loadShowDaysActivity();
+        void startShowDaysActivity();
 
+        void startChangeGoalDialog();
+
+        void startChangePasswordDialog();
+
+        void refresh();
     }
 
 }
