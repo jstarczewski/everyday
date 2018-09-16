@@ -29,23 +29,33 @@ public class CountdownPresenter implements CountdownContract.Presenter {
     }
 
     @Override
-    public void loadAddDayActivity() {
-        view.startAddDayActivity();
+    public void startAddDayActivity() {
+        view.showStartAddDayActivity();
     }
 
     @Override
     public void updateRemainingTime(int timeLeft) {
-        view.updateTextViewCountDown(timeLeft);
+        view.showUpdateTextViewCountDown(timeLeft);
     }
 
     @Override
     public void stop() {
-        view.stopCountdownTimer();
+        view.showStopCountdownTimer();
     }
 
     @Override
-    public void skip() {
-        view.stopCountdownTimer();
-        view.startAddDayActivity();
+    public void skipCountdown() {
+        view.showStopCountdownTimer();
+        view.showStartAddDayActivity();
+    }
+
+    @Override
+    public void fireMediaPlayer() {
+        view.showFireMediaPlayer();
+    }
+
+    @Override
+    public void stopCountdown() {
+        view.showStopCountdownTimer();
     }
 }

@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -56,8 +55,8 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_countdown, container, false);
-        tvCountdown = (TextView) view.findViewById(R.id.tvCountdown);
-        btSkip = (Button)view.findViewById(R.id.btSkip);
+        tvCountdown = view.findViewById(R.id.tvCountdown);
+        btSkip = view.findViewById(R.id.btSkip);
         btSkip.setOnClickListener(this);
 
         return view;
@@ -109,7 +108,7 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
                 /**
                  * Don't know whether it is good to call view methods directly
                  * */
-                fireMediaPlayer();
+                presenter.fireMediaPlayer();
             }
         }.start();
     }
@@ -121,33 +120,34 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     }
 
     @Override
-    public void startAddDayActivity() {
+    public void showStartAddDayActivity() {
         Intent intent = new Intent(getContext(), AddDayActivity.class);
         intent.putExtra("dayId", dayId);
         startActivity(intent);
-        getActivity().finish();
+        if (getActivity() != null)
+            getActivity().finish();
     }
 
     @Override
-    public void updateTextViewCountDown(int timeLeft) {
+    public void showUpdateTextViewCountDown(int timeLeft) {
         tvCountdown.setText(String.valueOf(timeLeft));
     }
 
     @Override
-    public void fireMediaPlayer() {
+    public void showFireMediaPlayer() {
         if (mediaPlayer != null)
             mediaPlayer.start();
-        presenter.loadAddDayActivity();
+        presenter.startAddDayActivity();
     }
 
     @Override
-    public void stopCountdownTimer() {
+    public void showStopCountdownTimer() {
         countDownTimer.cancel();
     }
 
     @Override
     public void onClick(View v) {
-        presenter.skip();
+        presenter.skipCountdown();
     }
 
 
@@ -161,15 +161,11 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
     @Override
     public void onPause() {
         super.onPause();
-        stopCountdownTimer();
+        presenter.stopCountdown();
     }
 
 

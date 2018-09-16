@@ -13,13 +13,13 @@ public interface CountdownContract {
 
         void startCountdownTimer(int min);
 
-        void startAddDayActivity();
+        void showStartAddDayActivity();
 
-        void updateTextViewCountDown(int timeLeft);
+        void showUpdateTextViewCountDown(int timeLeft);
 
-        void fireMediaPlayer();
+        void showFireMediaPlayer();
 
-        void stopCountdownTimer();
+        void showStopCountdownTimer();
 
 
     }
@@ -28,13 +28,17 @@ public interface CountdownContract {
 
         int getFocusDuration();
 
-        void loadAddDayActivity();
+        void startAddDayActivity();
 
         void updateRemainingTime(int timeLeft);
 
         void stop();
 
-        void skip();
+        void skipCountdown();
+
+        void fireMediaPlayer();
+
+        void stopCountdown();
 
     }
 
