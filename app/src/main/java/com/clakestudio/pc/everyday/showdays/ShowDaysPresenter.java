@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Jan on 8/30/2018.
  */
 
-public class ShowDaysPresenter implements ShowDaysContract.Presenter {
+public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAccessor {
 
 
     private final DayRepository dayRepository;
@@ -37,6 +37,11 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void checkIfDayAlreadyAdded(String date) {
         String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
         Log.e("dates", currentDate + " --- " + date);
@@ -55,14 +60,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
          * does not include android packages into presenter
          *
          * */
-
-        dayRepository.getDays(new AsyncAccessor() {
-            @Override
-            public void getDays(List<Day> dayList) {
-                view.showDays(dayList);
-            }
-        });
-
+        dayRepository.getDays(this);
     }
 
 
@@ -101,6 +99,10 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
         }
     }
 
+    @Override
+    public void getDays(List<Day> dayList) {
+        view.showDays(dayList);
+    }
 }
 
 

@@ -98,7 +98,7 @@ class AsyncAddNewDay extends AsyncTask<Day, Void, Void> {
 
     private WeakReference<DayDao> dayDaoWeakReference;
 
-    public AsyncAddNewDay(DayDao dayDao) {
+    AsyncAddNewDay(DayDao dayDao) {
         dayDaoWeakReference = new WeakReference<>(dayDao);
     }
 

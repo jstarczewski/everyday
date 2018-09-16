@@ -61,6 +61,11 @@ public class ForgotPasswordFragment extends Fragment implements ForgotPasswordCo
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void showStartSettingsActivity() {
         startActivity(new Intent(getContext(), SettingsActivity.class));
         getActivity().finish();

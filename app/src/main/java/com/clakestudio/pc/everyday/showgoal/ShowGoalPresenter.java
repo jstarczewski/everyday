@@ -1,6 +1,11 @@
 package com.clakestudio.pc.everyday.showgoal;
 
+import com.clakestudio.pc.everyday.data.AsyncAccessor;
+import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
+
+import java.util.List;
+
 /**
  * Created by Jan on 9/12/2018.
  */
@@ -24,6 +29,11 @@ public class ShowGoalPresenter implements ShowGoalContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void loadGoal() {
         view.showGoal(settingsRepository.getGoal());
     }
@@ -37,4 +47,5 @@ public class ShowGoalPresenter implements ShowGoalContract.Presenter {
     public void startDaysActivity() {
         view.showStartDaysActivity();
     }
+
 }

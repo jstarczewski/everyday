@@ -60,6 +60,11 @@ public class InfoFragment extends Fragment implements InfoContract.View, View.On
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void showStartSetGoalActivity() {
         startActivity(new Intent(getActivity(), SetGoalActivity.class));
     }

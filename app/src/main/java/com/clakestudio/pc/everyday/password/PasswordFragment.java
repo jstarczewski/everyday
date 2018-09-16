@@ -69,6 +69,11 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         presenter.startForgotPasswordActivity();
     }

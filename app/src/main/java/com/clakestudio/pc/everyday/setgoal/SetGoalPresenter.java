@@ -25,6 +25,11 @@ public class SetGoalPresenter implements SetGoalContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void setGoal(String string) {
         if (string.isEmpty())
             view.showEmptyGoalToast();

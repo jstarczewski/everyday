@@ -62,6 +62,11 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 

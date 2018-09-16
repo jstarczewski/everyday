@@ -69,6 +69,11 @@ public class SetGoalFragment extends Fragment implements SetGoalContract.View, V
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void showStartSettingsActivity() {
         startActivity(new Intent(getActivity(), SettingsActivity.class));
         if (getActivity() != null)

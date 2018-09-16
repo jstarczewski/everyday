@@ -29,6 +29,11 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void saveIsPasswordSet(boolean isSet) {
         if (!isSet)
             settingsRepository.setPassword(Settings.NOT_SET.toString());

@@ -85,6 +85,11 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void startCountdownTimer(int min) {
         countDownTimer = new CountDownTimer(min * 60 * 1000, 1000) {
             @Override

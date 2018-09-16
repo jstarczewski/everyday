@@ -39,9 +39,7 @@ public interface ShowDaysContract {
         void addNewDay();
 
         void editCurrentDay(Day day, int index, int size);
-        // start with database
 
-        //       void openDayDetails(@NonNull Day requestedDay);
         void loadShowSettingsActivity();
 
         List<Day> getDays();

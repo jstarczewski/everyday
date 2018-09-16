@@ -16,6 +16,11 @@ public class PasswordPresenter implements PasswordContract.Presenter {
 
     }
 
+    @Override
+    public void stop() {
+
+    }
+
     PasswordPresenter(SettingsRepository settingsRepository, PasswordContract.View view) {
         this.settingsRepository = settingsRepository;
         this.view = view;
@@ -27,7 +32,8 @@ public class PasswordPresenter implements PasswordContract.Presenter {
         if (password.length() == 4 && password.equals(settingsRepository.getPassword()))
             view.showStartShowGoalActivity();
         else {
-            view.showWrongPasswordToast();
+            if (password.length() == 4)
+                view.showWrongPasswordToast();
         }
     }
 

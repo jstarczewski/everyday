@@ -147,6 +147,11 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     }
 
     @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void showSetReminderTimeDialog() {
         if (getActivity() != null && getActivity().getSupportFragmentManager() != null)
             timePickerFragment.show(getActivity().getSupportFragmentManager(), "timePicker");

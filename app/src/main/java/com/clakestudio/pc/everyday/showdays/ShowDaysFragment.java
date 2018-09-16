@@ -115,13 +115,18 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         daysPresenter = presenter;
     }
 
-/*
     @Override
-    public void showDays() {
-        AsyncShowDays asyncShowDays = new AsyncShowDays(this.showDaysAdapter);
-        asyncShowDays.execute(daysPresenter);
+    public void stop() {
+
     }
-*/
+
+    /*
+        @Override
+        public void showDays() {
+            AsyncShowDays asyncShowDays = new AsyncShowDays(this.showDaysAdapter);
+            asyncShowDays.execute(daysPresenter);
+        }
+    */
     @Override
     public void showDays(List<Day> days) {
         showDaysAdapter.replaceData((ArrayList<Day>) days);
@@ -152,7 +157,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     @Override
     public void showDayAlreadyAddedToast() {
-        Toast.makeText(getContext(), "Not about today already added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Todays note already added", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -224,7 +229,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
             showDaysViewHolder.cvDay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()), showDaysViewHolder.getAdapterPosition(), days.size());
+                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()), showDaysViewHolder.getAdapterPosition(), days.size()-1);
                 }
             });
 
