@@ -244,6 +244,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             }
             case R.id.btCancel: {
                 presenter.save(dialogToolbar.getTitle().toString(), Settings.NOT_SET.toString(), etDialogChangeGoal.getText().toString());
+                break;
             }
         }
 

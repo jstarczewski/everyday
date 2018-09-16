@@ -58,9 +58,10 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void saveFocusDurationTime(boolean isChecked, int time) {
-        if (isChecked)
+        if (isChecked) {
             settingsRepository.setFocusDurationTime(time);
-        view.showChangeFocusDurationTime(time);
+            view.showChangeFocusDurationTime(time);
+        }
     }
 
     @Override
