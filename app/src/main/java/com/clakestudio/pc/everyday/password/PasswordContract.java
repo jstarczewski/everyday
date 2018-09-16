@@ -11,9 +11,9 @@ public interface PasswordContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showShowGoalActivity();
+        void showStartShowGoalActivity();
 
-        void showForgotPasswordActivity();
+        void showStartForgotPasswordActivity();
 
         void showWrongPasswordToast();
 
@@ -23,6 +23,8 @@ public interface PasswordContract {
     interface Presenter extends BasePresenter {
 
         void checkPasswordCorrectness(String password);
+
+        void startForgotPasswordActivity();
 
     }
 

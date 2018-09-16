@@ -20,7 +20,7 @@ import com.clakestudio.pc.everyday.showgoal.ShowGoalActivity;
 
 public class PasswordFragment extends Fragment implements PasswordContract.View, View.OnClickListener, TextWatcher {
 
-    private PasswordPresenter passwordPresenter;
+    private PasswordPresenter presenter;
     private EditText etPassword;
 
     public PasswordFragment() {
@@ -65,23 +65,23 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
 
     @Override
     public void setPresenter(PasswordContract.Presenter presenter) {
-        passwordPresenter = (PasswordPresenter) presenter;
+        this.presenter = (PasswordPresenter) presenter;
     }
 
     @Override
     public void onClick(View v) {
-        showForgotPasswordActivity();
+        presenter.startForgotPasswordActivity();
     }
 
     @Override
-    public void showShowGoalActivity() {
+    public void showStartShowGoalActivity() {
         startActivity(new Intent(getActivity(), ShowGoalActivity.class));
         if (getActivity() != null)
             getActivity().finish();
     }
 
     @Override
-    public void showForgotPasswordActivity() {
+    public void showStartForgotPasswordActivity() {
         startActivity(new Intent(getActivity(), ForgotPasswordActivity.class));
         if (getActivity() != null)
             getActivity().finish();
@@ -104,7 +104,7 @@ public class PasswordFragment extends Fragment implements PasswordContract.View,
 
     @Override
     public void afterTextChanged(Editable s) {
-        passwordPresenter.checkPasswordCorrectness(etPassword.getText().toString());
+        presenter.checkPasswordCorrectness(etPassword.getText().toString());
     }
 
 }
