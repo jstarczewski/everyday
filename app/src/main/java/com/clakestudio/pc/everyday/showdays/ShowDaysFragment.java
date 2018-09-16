@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.adddays.AddDayActivity;
@@ -75,8 +76,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
         DayItemListener dayItemListener = new DayItemListener() {
             @Override
-            public void onDayClicked(Day day) {
-                daysPresenter.editCurrentDay(day);
+            public void onDayClicked(Day day, int index, int size) {
+                daysPresenter.editCurrentDay(day, index, size);
             }
         };
 
@@ -122,14 +123,14 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     }
 
     @Override
-    public void showAddNewDay(int dayId) {
+    public void showStartAddDayActivityToAddDay(int dayId) {
         Intent intent = new Intent(getContext(), CountdownActivity.class);
         intent.putExtra("dayId", dayId);
         startActivity(intent);
     }
 
     @Override
-    public void showEditCurrentDay(int dayId, String title, String note) {
+    public void showStartAddDayActivityToEditDay(int dayId, String title, String note) {
         Intent intent = new Intent(getContext(), AddDayActivity.class);
         intent.putExtra("dayId", dayId);
         intent.putExtra("title", title);
@@ -138,7 +139,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     }
 
     @Override
-    public void showSettingsActivity() {
+    public void showStartSettingsActivity() {
         startActivity(new Intent(getContext(), SettingsActivity.class));
         if (getActivity() != null)
             getActivity().finish();
@@ -146,15 +147,12 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     @Override
     public void showDayAlreadyAddedToast() {
-
+        Toast.makeText(getContext(), "Not about today already added", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
-        if (showDaysAdapter.getDays().isEmpty())
-            daysPresenter.addNewDay();
-        else
-            daysPresenter.checkIfDayAlreadyAdded((showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
+        daysPresenter.addDay(showDaysAdapter.getDays().isEmpty(), (showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
     }
 
     /**
@@ -221,9 +219,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
             showDaysViewHolder.cvDay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // click only on the last item
-                    if (showDaysViewHolder.getAdapterPosition() == days.size() - 1)
-                        dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()));
+                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()), showDaysViewHolder.getAdapterPosition(), days.size());
                 }
             });
 
@@ -246,7 +242,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     public interface DayItemListener {
 
-        void onDayClicked(Day day);
+        void onDayClicked(Day day, int index, int size);
 
     }
 
@@ -263,7 +259,6 @@ class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day
     AsyncShowDays(ShowDaysFragment.ShowDaysAdapter showDaysAdapter) {
         showDaysAdapterWeakReference = new WeakReference<ShowDaysFragment.ShowDaysAdapter>(showDaysAdapter);
     }
-
 
 
     @Override

@@ -40,17 +40,11 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
     public void checkIfDayAlreadyAdded(String date) {
         String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
         Log.e("dates", currentDate + " --- " + date);
-        if (date!=null && currentDate.equals(date)) {
+        if (date != null && currentDate.equals(date)) {
             view.showDayAlreadyAddedToast();
-        }
-        else {
+        } else {
             addNewDay();
         }
-    }
-
-    @Override
-    public void result(int requestCode, int resultCode) {
-
     }
 
     @Override
@@ -62,22 +56,35 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
     @Override
     public void addNewDay() {
         //dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
-        view.showAddNewDay(settingsRepository.getCurrentDay());
+        view.showStartAddDayActivityToAddDay(settingsRepository.getCurrentDay());
     }
 
     @Override
-    public void editCurrentDay(Day day) {
-        view.showEditCurrentDay(Integer.valueOf(day.getDayId()), day.getTitle(), day.getNote());
+    public void editCurrentDay(Day day, int index, int size) {
+        if (index == size)
+            view.showStartAddDayActivityToEditDay(Integer.valueOf(day.getDayId()), day.getTitle(), day.getNote());
+        else {
+            view.showDayAlreadyAddedToast();
+        }
     }
 
     @Override
     public void loadShowSettingsActivity() {
-        view.showSettingsActivity();
+        view.showStartSettingsActivity();
     }
 
     @Override
     public List<Day> getDays() {
         return dayRepository.getDays();
+    }
+
+    @Override
+    public void addDay(boolean isFirstDay, String date) {
+        if (isFirstDay)
+            addNewDay();
+        else {
+            checkIfDayAlreadyAdded(date);
+        }
     }
 
 }

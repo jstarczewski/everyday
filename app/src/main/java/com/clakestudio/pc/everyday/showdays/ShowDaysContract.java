@@ -21,11 +21,11 @@ public interface ShowDaysContract {
 
         void showDays();
 
-        void showAddNewDay(int currentDay);
+        void showStartAddDayActivityToAddDay(int currentDay);
 
-        void showEditCurrentDay(int dayId, String tittle, String note);
+        void showStartAddDayActivityToEditDay(int dayId, String tittle, String note);
 
-        void showSettingsActivity();
+        void showStartSettingsActivity();
 
         void showDayAlreadyAddedToast();
     }
@@ -34,19 +34,19 @@ public interface ShowDaysContract {
 
         void checkIfDayAlreadyAdded(String date);
 
-        void result(int requestCode, int resultCode);
-
         void loadDays();
 
         void addNewDay();
 
-        void editCurrentDay(Day day);
+        void editCurrentDay(Day day, int index, int size);
         // start with database
 
         //       void openDayDetails(@NonNull Day requestedDay);
         void loadShowSettingsActivity();
 
         List<Day> getDays();
+
+        void addDay(boolean isFirstDay, String date);
     }
 
 }
