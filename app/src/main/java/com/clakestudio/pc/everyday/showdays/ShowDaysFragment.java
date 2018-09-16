@@ -115,11 +115,16 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         daysPresenter = presenter;
     }
 
-
+/*
     @Override
     public void showDays() {
         AsyncShowDays asyncShowDays = new AsyncShowDays(this.showDaysAdapter);
         asyncShowDays.execute(daysPresenter);
+    }
+*/
+    @Override
+    public void showDays(List<Day> days) {
+        showDaysAdapter.replaceData((ArrayList<Day>) days);
     }
 
     @Override
@@ -248,27 +253,3 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
 }
 
-/**
- * -> to another file to prevent memory leakse (by making it staic later)
- */
-
-class AsyncShowDays extends AsyncTask<ShowDaysContract.Presenter, Void, List<Day>> {
-
-    private WeakReference<ShowDaysFragment.ShowDaysAdapter> showDaysAdapterWeakReference;
-
-    AsyncShowDays(ShowDaysFragment.ShowDaysAdapter showDaysAdapter) {
-        showDaysAdapterWeakReference = new WeakReference<ShowDaysFragment.ShowDaysAdapter>(showDaysAdapter);
-    }
-
-
-    @Override
-    protected List<Day> doInBackground(ShowDaysContract.Presenter... presenter) {
-        return presenter[0].getDays();
-    }
-
-    @Override
-    protected void onPostExecute(List<Day> days) {
-        super.onPostExecute(days);
-        showDaysAdapterWeakReference.get().replaceData((ArrayList<Day>) days);
-    }
-}

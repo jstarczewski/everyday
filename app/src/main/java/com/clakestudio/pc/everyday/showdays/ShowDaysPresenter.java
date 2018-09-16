@@ -1,8 +1,8 @@
 package com.clakestudio.pc.everyday.showdays;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.clakestudio.pc.everyday.data.AsyncAccessor;
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
@@ -23,7 +23,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
     private final ShowDaysContract.View view;
     private SettingsRepository settingsRepository;
 
-    public ShowDaysPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull ShowDaysContract.View view) {
+    public ShowDaysPresenter(DayRepository dayRepository, SettingsRepository settingsRepository, ShowDaysContract.View view) {
         this.dayRepository = dayRepository;
         this.view = view;
         this.settingsRepository = settingsRepository;
@@ -49,7 +49,20 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public void loadDays() {
-        view.showDays();
+
+        /**
+         * Public interface AsyncAccessor easily lets us to get access to list from database and
+         * does not include android packages into presenter
+         *
+         * */
+
+        dayRepository.getDays(new AsyncAccessor() {
+            @Override
+            public void getDays(List<Day> dayList) {
+                view.showDays(dayList);
+            }
+        });
+
     }
 
 
@@ -75,7 +88,8 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter {
 
     @Override
     public List<Day> getDays() {
-        return dayRepository.getDays();
+//          return dayRepository.getDays();
+        return null;
     }
 
     @Override

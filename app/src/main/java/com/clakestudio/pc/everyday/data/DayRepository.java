@@ -2,6 +2,7 @@ package com.clakestudio.pc.everyday.data;
 
 import android.os.AsyncTask;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -11,9 +12,6 @@ import java.util.List;
 public class DayRepository {
 
     private final DayDao dayDao;
-    private List<Day> daysList;
-    private Accessible accessible;
-    private Boolean isUpdated = false;
     private static DayRepository INSTANCE = null;
 
     private DayRepository(DayDao dayDao) {
@@ -28,8 +26,13 @@ public class DayRepository {
         return INSTANCE;
     }
 
-    public List<Day> getDays() {
+    private List<Day> getDays() {
         return dayDao.getDayList();
+    }
+
+    public void getDays(AsyncAccessor asyncAccessor) {
+        AsyncGetDays asyncGetDays = new AsyncGetDays(dayDao, asyncAccessor);
+        asyncGetDays.execute();
     }
 
     public Day getDayById(String dayId) {
@@ -41,12 +44,8 @@ public class DayRepository {
     }
 
     public void addNewDay(final Day day) {
-        (new Thread() {
-            @Override
-            public void run() {
-                dayDao.insertDay(day);
-            }
-        }).start();
+        AsyncAddNewDay asyncAddNewDay = new AsyncAddNewDay(dayDao);
+        asyncAddNewDay.execute(day);
     }
 
     public int deleteDayById(String dayId) {
@@ -57,37 +56,55 @@ public class DayRepository {
         dayDao.updateDay(title, note, dayId);
     }
 
-    /**
-     * Synchronization with the main thread if you post back results to the user interface -> we are not updating the UI
-     * No default for canceling the thread -> now a long task, does not take much time gonna test what is going to happen after lots of data
-     * No default thread pooling -> I should create one
-     * No default for handling configuration changes in Android -> that is a problem but in this activity we cannot change the orientation
-     */
-
 }
 
 /**
- * Do not know wheter this approach with acynctask is good -> gonna do more research in case of memory leaks etc
+ * Do not know whether this approach with acynctask is good -> gonna do more research in case of memory leaks etc
+ * - > created weak references
+ * - > basically this asyncTasks runs only in ShowDaysActivity and dayInfo are passed to other activities by Intent
+ * -> the passing data by Intent approach is actually not the best solution because we are simply decomposing objects, but in this particular
+ * -> use case (aka application) we do that once or twice so it is not that annoying
  **/
 
 
-class GetAccessDays extends AsyncTask<List<Day>, Void, List<Day>> {
+class AsyncGetDays extends AsyncTask<Void, Void, List<Day>> {
 
-    private Accessible accessible;
-    private DayDao dayDao;
+    private WeakReference<AsyncAccessor> asyncAccessorWeakReference;
+    private WeakReference<DayDao> dayDaoWeakReference;
 
-    GetAccessDays(DayDao dayDao, Accessible accessible) {
-        this.dayDao = dayDao;
-        this.accessible = accessible;
+    AsyncGetDays(DayDao dayDao, AsyncAccessor asyncAccessor) {
+        asyncAccessorWeakReference = new WeakReference<>(asyncAccessor);
+        dayDaoWeakReference = new WeakReference<>(dayDao);
     }
 
     @Override
-    protected List<Day> doInBackground(List<Day>... days) {
-        return dayDao.getDayList();
+    protected List<Day> doInBackground(Void... voids) {
+        return this.dayDaoWeakReference.get().getDayList();
     }
 
     @Override
     protected void onPostExecute(List<Day> days) {
-        accessible.getAccessDays(days);
+        asyncAccessorWeakReference.get().getDays(days);
+    }
+}
+
+/**
+ * Weak reference, not a long running task
+ *
+ * */
+
+
+class AsyncAddNewDay extends AsyncTask<Day, Void, Void> {
+
+    private WeakReference<DayDao> dayDaoWeakReference;
+
+    public AsyncAddNewDay(DayDao dayDao) {
+        dayDaoWeakReference = new WeakReference<>(dayDao);
+    }
+
+    @Override
+    protected Void doInBackground(Day... days) {
+        dayDaoWeakReference.get().insertDay(days[0]);
+        return null;
     }
 }

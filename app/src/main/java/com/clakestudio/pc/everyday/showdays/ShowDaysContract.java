@@ -19,7 +19,7 @@ public interface ShowDaysContract {
     interface View extends BaseView<Presenter> {
 
 
-        void showDays();
+        void showDays(List<Day> days);
 
         void showStartAddDayActivityToAddDay(int currentDay);
 
