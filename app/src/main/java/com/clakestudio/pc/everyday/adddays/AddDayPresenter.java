@@ -1,7 +1,6 @@
 package com.clakestudio.pc.everyday.adddays;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
@@ -9,7 +8,6 @@ import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Random;
 
 /**
  * Created by Jan on 9/1/2018.
@@ -51,7 +49,7 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     @Override
     public void saveDay(String[] dayInfoArray) {
         dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
-        settingsRepository.increateCurrentDayCount();
+        settingsRepository.incrementCurrentDayCount();
         view.showDays();
     }
 }

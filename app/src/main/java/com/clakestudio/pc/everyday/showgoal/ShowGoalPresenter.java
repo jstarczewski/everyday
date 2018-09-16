@@ -30,6 +30,11 @@ public class ShowGoalPresenter implements ShowGoalContract.Presenter {
 
     @Override
     public void loadCountdown() {
-        view.startCountDownTimer();
+        view.showStartCountdown();
+    }
+
+    @Override
+    public void startDaysActivity() {
+        view.showStartDaysActivity();
     }
 }

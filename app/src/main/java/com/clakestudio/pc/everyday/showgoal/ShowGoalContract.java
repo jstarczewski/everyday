@@ -11,9 +11,9 @@ public interface ShowGoalContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showShowDaysActivity();
+        void showStartDaysActivity();
 
-        void startCountDownTimer();
+        void showStartCountdown();
 
         void showGoal(String goal);
     }
@@ -23,6 +23,8 @@ public interface ShowGoalContract {
         void loadGoal();
 
         void loadCountdown();
+
+        void startDaysActivity();
 
     }
 

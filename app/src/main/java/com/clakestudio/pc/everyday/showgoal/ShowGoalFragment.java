@@ -16,31 +16,11 @@ import android.widget.TextView;
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ShowGoalFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ShowGoalFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShowGoalFragment extends Fragment implements ShowGoalContract.View {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
 
     private ShowGoalContract.Presenter presenter;
     private CountDownTimer countDownTimer;
     private TextView tvGoal;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     public ShowGoalFragment() {
         // Required empty public constructor
@@ -66,13 +46,6 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -81,7 +54,6 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -93,6 +65,12 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /**
+         * As long as countDownTimer is an Android component it is moved into lifecycle and UI layer
+         * 
+         * */
+
+
         countDownTimer = new CountDownTimer(3000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -101,7 +79,7 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
 
             @Override
             public void onFinish() {
-                showShowDaysActivity();
+                presenter.startDaysActivity();
             }
         };
         presenter.start();
@@ -109,13 +87,13 @@ public class ShowGoalFragment extends Fragment implements ShowGoalContract.View 
     }
 
     @Override
-    public void showShowDaysActivity() {
+    public void showStartDaysActivity() {
         startActivity(new Intent(getContext(), ShowDaysActivity.class));
         getActivity().finish();
     }
 
     @Override
-    public void startCountDownTimer() {
+    public void showStartCountdown() {
         if (countDownTimer != null)
             countDownTimer.start();
     }

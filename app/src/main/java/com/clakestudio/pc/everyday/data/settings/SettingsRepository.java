@@ -1,12 +1,19 @@
 package com.clakestudio.pc.everyday.data.settings;
 
-import android.content.Context;
 
 /**
  * Created by Jan on 9/6/2018.
  */
 
 public class SettingsRepository {
+
+    /**
+     * Settings repository created to provide basic "settings" -> options that need to be stored something
+     * Everything is currently stored in sharedPreferences but in case of so called online stored the module
+     * only needs to implement Settable interface and implement methods properly
+     *
+     * */
+
 
     private Settable settable;
     private static SettingsRepository settingsRepository;
@@ -76,7 +83,7 @@ public class SettingsRepository {
         return settable.getCurrentDay();
     }
 
-    public void increateCurrentDayCount() {
+    public void incrementCurrentDayCount() {
         settable.increaseCurrentDay();
     }
 
