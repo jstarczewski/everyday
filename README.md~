@@ -15,3 +15,4 @@ Right now bugs are being solved. What I plan to do with Everyday!
 * Create tests both with JUnit and Mockito
 * Publish App on the google play store
 * Refactor everything to reduce boilprate code 
+* Add RXJava to practice Reactive approach to problems
