@@ -36,7 +36,7 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     @Override
     public void stop() {
-
+        view.stop();
     }
 
     @Override

@@ -82,6 +82,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     @Override
     public void onDetach() {
         super.onDetach();
+        addDayPresenter.stop();
     }
 
     @Override
@@ -92,6 +93,12 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     @Override
     public void stop() {
 
+        /**
+         * After some research seems like there is no need to set listeners to null
+         *
+         * */
+
+        floatingActionButton.setOnClickListener(null);
     }
 
     @Override

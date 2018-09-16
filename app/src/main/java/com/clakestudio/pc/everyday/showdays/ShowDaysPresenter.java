@@ -38,7 +38,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
 
     @Override
     public void stop() {
-
+        view.stop();
     }
 
     @Override

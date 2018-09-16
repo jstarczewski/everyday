@@ -31,7 +31,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
 
     private ShowDaysContract.Presenter daysPresenter;
-
+    private DayItemListener dayItemListener;
+    private FloatingActionButton fab;
     private ShowDaysAdapter showDaysAdapter;
 
     public ShowDaysFragment() {
@@ -62,7 +63,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         View v = inflater.inflate(R.layout.fragment_show_days, container, false);
         recyclerView = v.findViewById(R.id.recyclerView);
         if (getActivity() != null) {
-            FloatingActionButton fab = getActivity().findViewById(R.id.fab);
+            fab = getActivity().findViewById(R.id.fab);
             fab.setOnClickListener(this);
         }
         return v;
@@ -74,10 +75,9 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         recyclerView.setLayoutManager(linearLayoutManager);
         ArrayList<Day> days = new ArrayList<>();
 
-        DayItemListener dayItemListener = new DayItemListener() {
+        dayItemListener = new DayItemListener() {
             @Override
             public void onDayClicked(Day day, int index, int size) {
-                daysPresenter.editCurrentDay(day, index, size);
             }
         };
 
@@ -118,6 +118,13 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     @Override
     public void stop() {
 
+        /**
+         * Do not know whether this is needed
+         * */
+
+        if (fab != null)
+            fab.setOnClickListener(null);
+        dayItemListener = null;
     }
 
     /*
@@ -163,6 +170,11 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     @Override
     public void onClick(View v) {
         daysPresenter.addDay(showDaysAdapter.getDays().isEmpty(), (showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
+    }
+
+    @Override
+    public void onDayClicked(Day day, int index, int size) {
+        daysPresenter.editCurrentDay(day, index, size);
     }
 
     /**
@@ -229,7 +241,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
             showDaysViewHolder.cvDay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()), showDaysViewHolder.getAdapterPosition(), days.size()-1);
+                    dayItemListener.onDayClicked(days.get(showDaysViewHolder.getAdapterPosition()), showDaysViewHolder.getAdapterPosition(), days.size() - 1);
                 }
             });
 
