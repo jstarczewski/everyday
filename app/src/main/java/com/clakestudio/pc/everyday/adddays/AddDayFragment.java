@@ -60,7 +60,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         // addDayPresenter.loadCurrentDayInfo(getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE).getInt("currentDay", 0):;
 
         if (getActivity() != null && getActivity().getIntent() != null) {
-            int dayId = getActivity().getIntent().getExtras().getInt("dayId", 0);
+            int dayId = getActivity().getIntent().getExtras().getInt("dayId", 1);
             String title = getActivity().getIntent().getExtras().getString("title", "");
             String note = getActivity().getIntent().getExtras().getString("note", "");
             addDayPresenter.loadDayInfo(dayId, title, note);
