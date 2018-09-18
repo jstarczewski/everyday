@@ -8,6 +8,7 @@ import com.clakestudio.pc.everyday.data.DayRepository;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
     @Override
     public void addNewDay() {
         //dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
-        view.showStartAddDayActivityToAddDay(settingsRepository.getCurrentDay()+1);
+        view.showStartAddDayActivityToAddDay(settingsRepository.getCurrentDay() + 1);
     }
 
     @Override
@@ -91,11 +92,12 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
     }
 
     @Override
-    public void addDay(boolean isFirstDay, String date) {
+    public void addDay(boolean isFirstDay, ArrayList<Day> days) {
         if (isFirstDay)
             addNewDay();
         else {
-            checkIfDayAlreadyAdded(date);
+            if (days != null)
+                checkIfDayAlreadyAdded(days.get(days.size() - 1).getDate());
         }
     }
 

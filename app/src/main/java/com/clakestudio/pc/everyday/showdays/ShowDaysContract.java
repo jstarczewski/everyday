@@ -44,7 +44,7 @@ public interface ShowDaysContract {
 
         List<Day> getDays();
 
-        void addDay(boolean isFirstDay, String date);
+        void addDay(boolean isFirstDay, ArrayList<Day> days);
     }
 
 }
