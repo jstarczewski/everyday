@@ -7,10 +7,14 @@ This is the v2 (2018) version of my DayOne (app created back in 2017). Both Apps
 * implement RecyclerView different way to ease displaying data 
 * use AsyncTasks with weak references to do small tasks on the background thread
 * use interfaces more complex way to ease development process
-* use BroadcastRecievers and AlarmManagers to create and deliver simple local notifications at certain time of a day  
+* use BroadcastRecievers and AlarmManagers to create and deliver simple local notifications at certain time of a da
+## TO-DO
+* Services for notifications to "load" them after booting device
+* Notification channel to get notifications on Android 8+
+* MediaPlayer focus-end sound to fix
+
 ## Future of Everyday!
 Right now bugs are being solved. What I plan to do with Everyday!
-* Refactor the code and use some dependency injection frameworks (ButterKnife and Dagger2) to prove my basic understanding of them. <b> abandoned, because project is nearly finished and those changes will not ease development process (at this stage) </b>
 * Create a fake data source so the <i>Repository patter</i> implemented within the app will finally do his thang
 * Create tests both with JUnit and Mockito
 * Publish App on the google play store
