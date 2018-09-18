@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:gravity="top"
-                android:hint="go go"
+                android:hint="@string/a_journey_of_thousand_miles_begins_with_a_single_step"
                 android:inputType="textMultiLine" />
 
         </LinearLayout>

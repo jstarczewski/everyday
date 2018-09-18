@@ -83,6 +83,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
     public void onDetach() {
         super.onDetach();
         addDayPresenter.stop();
+
     }
 
     @Override
@@ -127,5 +128,4 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         if (getActivity() != null)
             getActivity().finish();
     }
-
 }

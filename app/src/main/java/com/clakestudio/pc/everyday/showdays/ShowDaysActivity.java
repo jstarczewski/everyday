@@ -64,10 +64,4 @@ public class ShowDaysActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(this, ShowDaysActivity.class));
-        finish();
-    }
 }

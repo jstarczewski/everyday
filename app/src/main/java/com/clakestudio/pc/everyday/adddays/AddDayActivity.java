@@ -1,5 +1,6 @@
 package com.clakestudio.pc.everyday.adddays;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -8,6 +9,7 @@ import com.clakestudio.pc.everyday.data.DayDatabase;
 import com.clakestudio.pc.everyday.data.DayRepository;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
+import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
 public class AddDayActivity extends BaseActivity {
@@ -39,5 +41,10 @@ public class AddDayActivity extends BaseActivity {
 */
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, ShowDaysActivity.class));
+        finish();
+    }
 }
