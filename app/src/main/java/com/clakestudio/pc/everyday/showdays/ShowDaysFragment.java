@@ -144,6 +144,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         Intent intent = new Intent(getContext(), CountdownActivity.class);
         intent.putExtra("dayId", dayId);
         startActivity(intent);
+        if (getActivity()!=null)
+            getActivity().finish();
     }
 
     @Override
@@ -153,6 +155,8 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
         intent.putExtra("title", title);
         intent.putExtra("note", note);
         startActivity(intent);
+        if (getActivity()!=null)
+            getActivity().finish();
     }
 
     @Override
@@ -169,12 +173,7 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
 
     @Override
     public void onClick(View v) {
-        daysPresenter.addDay(showDaysAdapter.getDays().isEmpty(), (showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount() - 1).getDate());
-    }
-
-    @Override
-    public void onDayClicked(Day day, int index, int size) {
-        daysPresenter.editCurrentDay(day, index, size);
+        daysPresenter.addDay(showDaysAdapter.getDays().isEmpty(), (showDaysAdapter.getDays()).get(showDaysAdapter.getItemCount()).getDate());
     }
 
     /**

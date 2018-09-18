@@ -127,4 +127,5 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         if (getActivity() != null)
             getActivity().finish();
     }
+
 }

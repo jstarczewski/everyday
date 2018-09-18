@@ -67,7 +67,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
     @Override
     public void addNewDay() {
         //dayRepository.addNewDay(new Day("1", "30.08.2018", "Whats is you why", "This time mate"));
-        view.showStartAddDayActivityToAddDay(settingsRepository.getCurrentDay());
+        view.showStartAddDayActivityToAddDay(settingsRepository.getCurrentDay()+1);
     }
 
     @Override
