@@ -4,10 +4,11 @@
     <item
         android:drawable="@color/colorPrimaryDark"/>
 
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/front"/>
-    </item>
+    <item
+        android:gravity="center"
+        android:width="224dp"
+        android:height="224dp"
+        android:drawable="@drawable/front"
+        />
 
 </layer-list>
