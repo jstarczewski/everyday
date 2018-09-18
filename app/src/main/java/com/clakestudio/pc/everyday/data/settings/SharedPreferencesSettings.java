@@ -97,12 +97,12 @@ public class SharedPreferencesSettings implements Settable {
 
     @Override
     public int getCurrentDay() {
-        return sharedPreferences.getInt(Settings.CURRENT_DAY.toString(), 0);
+        return sharedPreferences.getInt(Settings.CURRENT_DAY.toString(), 1);
     }
 
     @Override
     public void increaseCurrentDay() {
-        sharedPreferences.edit().putInt(Settings.CURRENT_DAY.toString(), sharedPreferences.getInt(Settings.CURRENT_DAY.toString(), 0) + 1).apply();
+        sharedPreferences.edit().putInt(Settings.CURRENT_DAY.toString(), sharedPreferences.getInt(Settings.CURRENT_DAY.toString(), 1) + 1).apply();
     }
 
     @Override
