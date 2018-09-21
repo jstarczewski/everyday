@@ -10,9 +10,8 @@ This is the v2 (2018) version of my DayOne (app created back in 2017). Both Apps
 * use BroadcastRecievers and AlarmManagers to create and deliver simple local notifications at certain time of a day  
 ## Future of Everyday!
 Right now bugs are being solved. What I plan to do with Everyday!
-* Refactor the code and use some dependency injection frameworks (ButterKnife and Dagger2) to prove my basic understanding of them.
+* Refactor the code and use some dependency injection frameworks (ButterKnife and Dagger2) to prove my basic understanding of them. <b> abandoned, because project is nearly finished and those changes will not ease development process (at this stage) </b>
 * Create a fake data source so the <i>Repository patter</i> implemented within the app will finally do his thang
 * Create tests both with JUnit and Mockito
 * Publish App on the google play store
-* Refactor everything to reduce boilprate code 
-* Add RXJava to practice Reactive approach to problems
+* Refactor everything to reduce boilprate code
