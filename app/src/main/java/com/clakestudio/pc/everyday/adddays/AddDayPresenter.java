@@ -20,8 +20,6 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     private DayRepository dayRepository;
     private AddDayContract.View view;
     private SettingsRepository settingsRepository;
-
-
     private boolean isNewDay = false;
 
     public AddDayPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull AddDayContract.View view) {
