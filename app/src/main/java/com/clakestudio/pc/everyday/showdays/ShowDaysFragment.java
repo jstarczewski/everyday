@@ -144,6 +144,9 @@ public class ShowDaysFragment extends Fragment implements ShowDaysContract.View,
     public void showStartAddDayActivityToAddDay(int dayId) {
         Intent intent = new Intent(getContext(), CountdownActivity.class);
         intent.putExtra("dayId", dayId);
+        /*
+        * Data is not going out of CountDownActivity ->
+        * */
         intent.putExtra("isNewDay", true);
         startActivity(intent);
         if (getActivity() != null)

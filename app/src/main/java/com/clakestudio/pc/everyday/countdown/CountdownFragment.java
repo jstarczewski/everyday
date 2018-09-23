@@ -117,6 +117,15 @@ public class CountdownFragment extends Fragment implements CountdownContract.Vie
     public void showStartAddDayActivity() {
         Intent intent = new Intent(getContext(), AddDayActivity.class);
         intent.putExtra("dayId", dayId);
+
+        /**
+         * Right now hardcoding isNewDay to true is a working solution
+         * In future updates when "focus mode" will be introduced it will be changed
+         *
+         * */
+
+
+        intent.putExtra("isNewDay", true);
         startActivity(intent);
         if (getActivity() != null)
             getActivity().finish();

@@ -58,6 +58,7 @@ public class AddDayPresenter implements AddDayContract.Presenter {
             settingsRepository.incrementCurrentDayCount();
         view.showStartShowDaysActivity();
     }
+
     @Override
     public void setIsNewDay(boolean newDay) {
         isNewDay = newDay;

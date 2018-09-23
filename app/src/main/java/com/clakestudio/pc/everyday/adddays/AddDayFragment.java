@@ -64,8 +64,9 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
             int dayId = getActivity().getIntent().getExtras().getInt("dayId", 1);
             String title = getActivity().getIntent().getExtras().getString("title", "");
             String note = getActivity().getIntent().getExtras().getString("note", "");
-            Boolean isNewDay = getActivity().getIntent().getBooleanExtra("isNewDay", false);
+            Boolean isNewDay = getActivity().getIntent().getExtras().getBoolean("isNewDay", false);
             Log.e("tag", " " + dayId + " -> " + title + " ->" + note);
+            Log.e("isNewDay", "->"+isNewDay);
             addDayPresenter.setIsNewDay(isNewDay);
             addDayPresenter.loadDayInfo(dayId, title, note);
         }
