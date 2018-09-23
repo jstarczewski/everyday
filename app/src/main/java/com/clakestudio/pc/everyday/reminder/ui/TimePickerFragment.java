@@ -12,6 +12,7 @@ import android.support.v4.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.TimePicker;
 
 
@@ -76,6 +77,9 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
 
         setCalendar(hourOfDay, minute);
+
+        Log.e("Calendar", calendar.toString());
+
         Context context = getContext();
         Intent intent = new Intent(context, ReminderReceiver.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -118,6 +122,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         //           alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
 //            settingsRepository.setReminder(true);
 
+        AlarmUtils.cancelAlarm(context, sender);
         settingsRepository.setReminderTime(calendar.getTimeInMillis());
         AlarmUtils.setAlarm(context, calendar.getTimeInMillis(), sender);
 

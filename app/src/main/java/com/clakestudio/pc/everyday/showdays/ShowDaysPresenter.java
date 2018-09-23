@@ -46,11 +46,11 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
     public void checkIfDayAlreadyAdded(String date) {
         String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
         Log.e("dates", currentDate + " --- " + date);
-    //    if (date != null && currentDate.equals(date)) {
+        if (date != null && currentDate.equals(date)) {
             view.showDayAlreadyAddedToast();
-      //  } else {
+        } else {
             addNewDay();
-      //  }
+        }
     }
 
     @Override
