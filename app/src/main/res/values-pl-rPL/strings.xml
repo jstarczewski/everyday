@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Everyday!</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="what_your_why_is">Dlaczego tego chcesz ?!</string>
+    <string name="before">Przed przejściem dalej zapoznaj się z tekstem poniżej.</string>
+    <string name="app_info">Aplikacja nie gwarantuje tego, że osiągniesz sukces, ale może Ci w tym pomóc. Będziesz pracował nad zmianą swojego nastawienia względem wyznaczonego celu i zycia.</string>
+    <string name="method">Zgodnie z \"Najdziwniejszym sekretem sukcesu\" autorstwa Earl\'a Nightingale\'a, kluczem do osiągniecia celu jest zmiana swojego myślenia względem go. Skup się na tym co masz zrobić codziennie. Spędzaj 3 minuty (lub więcej), codziennie mysląc o swoim celu, co możesz dzisiaj zrobić, by byc o krok bliżej. Zaplanuj to i zapisz w krótkiej notatce. Progresywnie zapisujac notatki tworzysz przegląd wszystkich kroków, które pcozyniłes na kanwie poprzednich dni. Popraw swoje życie wdrażając prosty nawyk - skupienie, plan, akcja i sprwadź jak wszystko wokół się zmienia.</string>
+    <string name="how_to">Każdego dnia skupija się na swoim celu</string>
+    <string name="goal">Teraz zastanów się nad swoim celem i przejdź dalej!</string>
+    <string name="goin">Nie zapomnij o ciągłym rozwoju względem swojego celu. Karteczki na notatki wypełniaj tym czym chcesz, nie tylko swoimi uczuciami ale także wiedzą, która zdobywasz codziennie. Nie da się usunać karteczki z notatką, tylko wystartowanie z zera od początku może wyczyścić notatki. Pammiętaj, że jesteś tylko człowiekiem i nie pozwół aby jeden zły dzień wpłynął na cały postęp jaki zrobiłeś. Pamiętaj by iść do przodu, jeżeli się rozwijasz to nie przegrałeś.</string>
+    <string name="your_goal">Twój cel</string>
+    <string name="describe_your_goal_clearly">Opisz jasno swój cel</string>
+    <string name="understood">rozumiem</string>
+    <string name="set_your_goal">Wyznacz swój cel</string>
+    <string name="procceed">Dotknij, by przejść dalej</string>
+    <string name="enter_your_goal_here">Wpisz swój cel tutaj</string>
+    <string name="forgot_password">Dotknij, jężeli nie pamiętasz hasła</string>
+    <string name="tap_to_procceed">Dotknij, by przejść dalej</string>
+    <string name="enter_your_password_here">hasło</string>
+    <string name="incorrect_goal">Nieporwany cel</string>
+    <string name="focus_duration_min">Czasu skupienia(min)</string>
+    <string name="reminder_time">Czas otrzymania przypominacza</string>
+    <string name="settings_goal">Cel</string>
+    <string name="password">hasło</string>
+    <string name="everyday_focus_reminder">Codzienny przypominacz</string>
+    <string name="change_password">Zmień hasło</string>
+    <string name="enter_new_password_here">Wpisz nowe hasło tutaj</string>
+    <string name="change_your_goal">Zmień swój cel</string>
+    <string name="think_a_while_about_it">Zastanów się przez chwilę</string>
+    <string name="cancel">Odrzuć</string>
+    <string name="a_journey_of_thousand_miles_begins_with_a_single_step">Każda podróż zaczyna się od pojedynczego kroku</string>
+</resources>
