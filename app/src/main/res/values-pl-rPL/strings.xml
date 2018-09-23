@@ -22,7 +22,7 @@
     <string name="focus_duration_min">Czasu skupienia(min)</string>
     <string name="reminder_time">Czas otrzymania przypominacza</string>
     <string name="settings_goal">Cel</string>
-    <string name="password">hasło</string>
+    <string name="password">Hasło</string>
     <string name="everyday_focus_reminder">Codzienny przypominacz</string>
     <string name="change_password">Zmień hasło</string>
     <string name="enter_new_password_here">Wpisz nowe hasło tutaj</string>
@@ -30,4 +30,5 @@
     <string name="think_a_while_about_it">Zastanów się przez chwilę</string>
     <string name="cancel">Odrzuć</string>
     <string name="a_journey_of_thousand_miles_begins_with_a_single_step">Każda podróż zaczyna się od pojedynczego kroku</string>
+    <string name="change">Zmień </string>
 </resources>
