@@ -42,11 +42,14 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
         view.stop();
     }
 
+    private boolean isToday(String date) {
+        String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
+        return date != null && currentDate.equals(date);
+    }
+
     @Override
     public void checkIfDayAlreadyAdded(String date) {
-        String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
-        Log.e("dates", currentDate + " --- " + date);
-        if (date != null && currentDate.equals(date)) {
+        if (isToday(date)) {
             view.showDayAlreadyAddedToast();
         } else {
             addNewDay();
@@ -73,7 +76,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
 
     @Override
     public void editCurrentDay(Day day, int index, int size) {
-        if (index == size)
+        if (index == size && isToday(day.getDate()))
             view.showStartAddDayActivityToEditDay(Integer.valueOf(day.getDayId()), day.getTitle(), day.getNote());
         else {
             view.showDayAlreadyAddedToast();
