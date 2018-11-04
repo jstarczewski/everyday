@@ -253,6 +253,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             }
         }
 
+        presenter.refresh();
     }
 
 
@@ -299,6 +300,8 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
 
         }
+
+        presenter.refresh();
     }
 
     @Override

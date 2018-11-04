@@ -23,10 +23,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void start() {
-        checkIfPasswordIsSet();
-        checkIfReminderIsSet();
-        determineCheckBoxVisibility();
+        refresh();
     }
+
 
     @Override
     public void stop() {
@@ -36,7 +35,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     @Override
     public void saveIsPasswordSet(boolean isSet) {
         if (!isSet)
-            settingsRepository.setPassword(Settings.NOT_SET.toString());
+            setPasswordToNotSet();
         else {
             view.showStartChangePasswordDialog();
         }
@@ -94,7 +93,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void setPasswordToNotSet() {
-
+        settingsRepository.setPassword(Settings.NOT_SET.toString());
     }
 
     @Override
@@ -135,7 +134,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void refresh() {
-        this.start();
+        checkIfPasswordIsSet();
+        checkIfReminderIsSet();
+        determineCheckBoxVisibility();
     }
 
 }
