@@ -2,6 +2,9 @@ package com.clakestudio.pc.everyday.data.settings;
 
 /**
  * Created by Jan on 9/6/2018.
+ * Interface created for class that will handle
+ * settings within app. Currently settings are
+ * stored in SharedPreferences
  */
 
 public interface Settable {

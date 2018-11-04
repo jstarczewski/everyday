@@ -8,9 +8,9 @@ package com.clakestudio.pc.everyday.data.settings;
 public class SettingsRepository {
 
     /**
-     * Settings repository created to provide basic "settings" -> options that need to be stored something
-     * Everything is currently stored in sharedPreferences but in case of so called online stored the module
-     * only needs to implement Settable interface and implement methods properly
+     * Settings repository created to provide basic "settings" -> options that need to be stored somewhere
+     * Everything is currently stored in sharedPreferences but in case of so called online storage or offline database storage,
+     * the module only needs to implement Settable interface and implement methods properly
      *
      * */
 
