@@ -19,7 +19,10 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.clakestudio.pc.everyday.R;
+import com.clakestudio.pc.everyday.data.settings.Settable;
 import com.clakestudio.pc.everyday.data.settings.Settings;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
+import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.reminder.AfterDismissListener;
 import com.clakestudio.pc.everyday.reminder.ui.TimePickerFragment;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
@@ -214,7 +217,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
     @Override
     public void showDismissDialog() {
         alertDialog.dismiss();
-        presenter.refresh();
     }
 
     @Override
@@ -244,23 +246,20 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
                 break;
             }
             case R.id.btConfirmChange: {
-                presenter.save(dialogToolbar.getTitle().toString(), etDialogChangePassword.getText().toString(), etDialogChangeGoal.getText().toString());
+                presenter.save(dialogToolbar.getTitle().toString(), etDialogChangePassword.getText().toString(), etDialogChangeGoal.getText().toString(), getString(R.string.change_password));
                 break;
             }
             case R.id.btCancel: {
-                presenter.save(dialogToolbar.getTitle().toString(), Settings.NOT_SET.toString(), etDialogChangeGoal.getText().toString());
+                presenter.save(dialogToolbar.getTitle().toString(), Settings.NOT_SET.toString(), etDialogChangeGoal.getText().toString(), getString(R.string.change_password));
                 break;
             }
         }
-
-        presenter.refresh();
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
     }
 
     @Override
@@ -300,13 +299,10 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
 
 
         }
-
-        presenter.refresh();
     }
 
     @Override
     public void afterDismiss() {
-        presenter.refresh();
     }
 
 }

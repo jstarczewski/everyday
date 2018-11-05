@@ -2,6 +2,7 @@ package com.clakestudio.pc.everyday.settings;
 
 import com.clakestudio.pc.everyday.BasePresenter;
 import com.clakestudio.pc.everyday.BaseView;
+import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
 /**
  * Created by Jan on 9/6/2018.
@@ -56,7 +57,7 @@ public interface SettingsContract {
 
         void determineCheckBoxVisibility();
 
-        void save(String saveWhat, String value, String value2);
+        void save(String saveWhat, String value, String value2, String pattern);
 
         void startShowDaysActivity();
 
@@ -65,6 +66,7 @@ public interface SettingsContract {
         void startChangePasswordDialog();
 
         void refresh();
+
     }
 
 }

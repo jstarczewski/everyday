@@ -1,6 +1,9 @@
 package com.clakestudio.pc.everyday.settings;
 
 
+import android.content.res.Resources;
+
+import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.Settings;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
@@ -107,8 +110,15 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     }
 
     @Override
-    public void save(String saveWhat, String value, String value2) {
-        if (saveWhat.equals("Change password"))
+    public void save(String saveWhat, String value, String value2, String pattern1) {
+
+        /**
+         * There we have our bad boy :)
+         *  The bug was caused because I hardcoded "Change password" in equals
+         *  when language changes, the String argument in equals should too
+         * */
+
+        if (saveWhat.equals(pattern1))
             saveNewPassword(value);
         else {
             if (!(value.equals(Settings.NOT_SET.toString())))
@@ -138,5 +148,6 @@ public class SettingsPresenter implements SettingsContract.Presenter {
         checkIfReminderIsSet();
         determineCheckBoxVisibility();
     }
+
 
 }
