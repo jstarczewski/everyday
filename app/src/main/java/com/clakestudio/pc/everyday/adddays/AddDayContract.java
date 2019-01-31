@@ -10,7 +10,7 @@ import com.clakestudio.pc.everyday.data.Day;
 
 public class AddDayContract {
 
-    interface View extends BaseView<Presenter> {
+    public interface View extends BaseView<Presenter> {
 
         void showCurrentDayInfo(String dayInfo, String tittle, String note);
 
@@ -20,7 +20,7 @@ public class AddDayContract {
 
     }
 
-    interface Presenter extends BasePresenter {
+    public interface Presenter extends BasePresenter {
 
         void loadDayInfo(int dayId, String title, String note);
 

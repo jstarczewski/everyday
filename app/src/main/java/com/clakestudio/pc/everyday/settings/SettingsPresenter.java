@@ -109,6 +109,11 @@ public class SettingsPresenter implements SettingsContract.Presenter {
         view.showChangeFocusDurationTime(getFocusDurationTime());
     }
 
+    /**
+     * TO-DO
+     * Whole save method need reimplementation, because it seems to messy
+     * */
+
     @Override
     public void save(String saveWhat, String value, String value2, String pattern1) {
 

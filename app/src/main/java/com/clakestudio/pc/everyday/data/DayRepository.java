@@ -30,7 +30,7 @@ public class DayRepository {
         return dayDao.getDayList();
     }
 
-    public void getDays(AsyncAccessor asyncAccessor) {
+    public void getDays(final AsyncAccessor asyncAccessor) {
         AsyncGetDays asyncGetDays = new AsyncGetDays(dayDao, asyncAccessor);
         asyncGetDays.execute();
     }
@@ -92,7 +92,6 @@ class AsyncGetDays extends AsyncTask<Void, Void, List<Day>> {
  * Weak reference, not a long running task
  *
  * */
-
 
 class AsyncAddNewDay extends AsyncTask<Day, Void, Void> {
 

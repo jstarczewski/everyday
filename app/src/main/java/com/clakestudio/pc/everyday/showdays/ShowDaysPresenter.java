@@ -65,6 +65,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
          *
          * */
         dayRepository.getDays(this);
+
     }
 
 

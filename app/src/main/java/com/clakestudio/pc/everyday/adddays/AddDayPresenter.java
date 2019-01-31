@@ -63,4 +63,8 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     public void setIsNewDay(boolean newDay) {
         isNewDay = newDay;
     }
+
+    public boolean isNewDay() {
+        return isNewDay;
+    }
 }

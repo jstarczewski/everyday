@@ -279,30 +279,13 @@ public class SettingsFragment extends Fragment implements SettingsContract.View,
             default: {
                 presenter.saveFocusDurationTime(isChecked, Integer.valueOf(buttonView.getTag().toString()));
             }
-            /*
-           case R.id.cbDurationOne: {
-                presenter.saveFocusDurationTime(1);
-                break;
-            }
-            case R.id.cbDurationThree: {
-                presenter.saveFocusDurationTime(3);
-                break;
-            }
-            case R.id.cbDurationFive: {
-                presenter.saveFocusDurationTime(5);
-                break;
-            }
-            case R.id.cbDurationTen: {
-                presenter.saveFocusDurationTime(10);
-                break;
-            }*/
-
 
         }
     }
 
     @Override
     public void afterDismiss() {
+        presenter.refresh();
     }
 
 }
