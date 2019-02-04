@@ -24,7 +24,7 @@ public class AddDayContract {
 
         void loadDayInfo(int dayId, String title, String note);
 
-        void saveDay(String[] dayInfoArray);
+        void saveDay(Day day);
 
         void setIsNewDay(boolean isNewDay);
     }

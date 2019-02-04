@@ -1,6 +1,7 @@
 package com.clakestudio.pc.everyday.adddays;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 
 import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.data.DayRepository;
@@ -21,11 +22,20 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     private AddDayContract.View view;
     private SettingsRepository settingsRepository;
     private boolean isNewDay = false;
+    private SimpleDateFormat simpleDateFormat;
+    private Calendar calendar;
 
     public AddDayPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull AddDayContract.View view) {
         this.dayRepository = dayRepository;
         this.view = view;
         this.settingsRepository = settingsRepository;
+
+        /**
+         * Should be injected
+         * */
+
+        simpleDateFormat = new SimpleDateFormat(pattern);
+        calendar = Calendar.getInstance();
         view.setPresenter(this);
     }
 
@@ -42,18 +52,21 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     @Override
     public void loadDayInfo(int dayId, String title, String note) {
-        String date = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
+        String date = simpleDateFormat.format(calendar.getTime());
         //  if (title.equals("") && note.equals("")) {
         //     view.showNewDayInfo("Day " + dayId + " / " + date);
         // } else {
+        /**
+         * Translation -> Day = Dzień
+         * */
         view.showCurrentDayInfo("Day " + dayId + " / " + date, title, note);
         //
         //  }
     }
 
     @Override
-    public void saveDay(String[] dayInfoArray) {
-        dayRepository.addNewDay(new Day(dayInfoArray[0], dayInfoArray[1], dayInfoArray[2], dayInfoArray[3]));
+    public void saveDay(Day day) {
+        dayRepository.addNewDay(day);
         if (isNewDay)
             settingsRepository.incrementCurrentDayCount();
         view.showStartShowDaysActivity();
@@ -66,5 +79,10 @@ public class AddDayPresenter implements AddDayContract.Presenter {
 
     public boolean isNewDay() {
         return isNewDay;
+    }
+
+    @VisibleForTesting
+    public String provideDateString() {
+        return simpleDateFormat.format(calendar.getTime());
     }
 }

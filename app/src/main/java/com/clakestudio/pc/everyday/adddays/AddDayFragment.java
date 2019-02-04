@@ -2,21 +2,17 @@ package com.clakestudio.pc.everyday.adddays;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.clakestudio.pc.everyday.R;
-import com.clakestudio.pc.everyday.data.Day;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 public class AddDayFragment extends Fragment implements AddDayContract.View {
@@ -65,8 +61,6 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
             String title = getActivity().getIntent().getExtras().getString("title", "");
             String note = getActivity().getIntent().getExtras().getString("note", "");
             Boolean isNewDay = getActivity().getIntent().getExtras().getBoolean("isNewDay", false);
-            Log.e("tag", " " + dayId + " -> " + title + " ->" + note);
-            Log.e("isNewDay", "->"+isNewDay);
             addDayPresenter.setIsNewDay(isNewDay);
             addDayPresenter.loadDayInfo(dayId, title, note);
         }
@@ -74,7 +68,7 @@ public class AddDayFragment extends Fragment implements AddDayContract.View {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addDayPresenter.saveDay(DaysDataFormatter.getDayInfo(toolbarTitle, etTitle.getText().toString(), etNote.getText().toString()));
+                addDayPresenter.saveDay(InputToDayCreator.create(toolbarTitle, etTitle.getText().toString(), etNote.getText().toString()));
             }
         });
     }
