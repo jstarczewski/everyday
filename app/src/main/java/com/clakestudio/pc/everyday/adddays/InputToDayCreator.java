@@ -16,7 +16,7 @@ class InputToDayCreator {
          * Day bug spotted -> not char at 4, because it can be day 11, 12
          * */
 
-        dayInfoArray[0] = String.valueOf(dayInfo.charAt(4));
+        dayInfoArray[0] = String.valueOf(dayInfo.substring(4, dayInfo.indexOf("/")-1));
         dayInfoArray[1] = dayInfo.substring(dayInfo.indexOf("/")+2, dayInfo.length());
         dayInfoArray[2] = title;
         dayInfoArray[3] = note;
