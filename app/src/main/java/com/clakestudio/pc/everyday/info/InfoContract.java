@@ -9,7 +9,7 @@ import com.clakestudio.pc.everyday.BaseView;
 
 public class InfoContract {
 
-    interface View extends BaseView<Presenter> {
+    public interface View extends BaseView<Presenter> {
 
         void showStartSetGoalActivity();
 
