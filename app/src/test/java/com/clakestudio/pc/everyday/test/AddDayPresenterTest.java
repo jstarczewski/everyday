@@ -12,6 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static org.junit.Assert.*;
 
 public class AddDayPresenterTest {
@@ -31,7 +34,8 @@ public class AddDayPresenterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        presenter = new AddDayPresenter(dayRepository, settingsRepository, view);
+        String pattern = "dd MM yyyy";
+        presenter = new AddDayPresenter(dayRepository, settingsRepository, view, new SimpleDateFormat(pattern), Calendar.getInstance());
 
     }
 

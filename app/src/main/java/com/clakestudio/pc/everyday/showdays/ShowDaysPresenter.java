@@ -20,14 +20,17 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
 
 
     private final DayRepository dayRepository;
-    private static final String pattern = "dd MM yyyy";
     private final ShowDaysContract.View view;
     private SettingsRepository settingsRepository;
+    private SimpleDateFormat simpleDateFormat;
+    private Calendar calendar;
 
-    public ShowDaysPresenter(DayRepository dayRepository, SettingsRepository settingsRepository, ShowDaysContract.View view) {
+    public ShowDaysPresenter(DayRepository dayRepository, SettingsRepository settingsRepository, ShowDaysContract.View view, SimpleDateFormat simpleDateFormat, Calendar calendar) {
         this.dayRepository = dayRepository;
         this.view = view;
         this.settingsRepository = settingsRepository;
+        this.simpleDateFormat = simpleDateFormat;
+        this.calendar = calendar;
         view.setPresenter(this);
     }
 
@@ -43,8 +46,8 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
     }
 
     private boolean isToday(String date) {
-        String currentDate = (new SimpleDateFormat(pattern)).format(Calendar.getInstance().getTime());
-        return date != null && currentDate.equals(date);
+        String currentDate = simpleDateFormat.format(calendar.getTime());
+        return currentDate.equals(date);
     }
 
     @Override

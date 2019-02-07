@@ -16,8 +16,6 @@ import java.util.Calendar;
 
 public class AddDayPresenter implements AddDayContract.Presenter {
 
-    private static final String pattern = "dd MM yyyy";
-
     private DayRepository dayRepository;
     private AddDayContract.View view;
     private SettingsRepository settingsRepository;
@@ -25,17 +23,12 @@ public class AddDayPresenter implements AddDayContract.Presenter {
     private SimpleDateFormat simpleDateFormat;
     private Calendar calendar;
 
-    public AddDayPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull AddDayContract.View view) {
+    public AddDayPresenter(@NonNull DayRepository dayRepository, SettingsRepository settingsRepository, @NonNull AddDayContract.View view, SimpleDateFormat simpleDateFormat, Calendar calendar) {
         this.dayRepository = dayRepository;
         this.view = view;
         this.settingsRepository = settingsRepository;
-
-        /**
-         * Should be injected
-         * */
-
-        simpleDateFormat = new SimpleDateFormat(pattern);
-        calendar = Calendar.getInstance();
+        this.simpleDateFormat = simpleDateFormat;
+        this.calendar = calendar;
         view.setPresenter(this);
     }
 

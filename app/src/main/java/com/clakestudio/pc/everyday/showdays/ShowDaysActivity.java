@@ -13,9 +13,14 @@ import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class ShowDaysActivity extends BaseActivity {
 
     private ShowDaysPresenter showDaysPresenter;
+    // This should actually change depends on region
+    private static final String pattern = "dd MM yyyy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +36,12 @@ public class ShowDaysActivity extends BaseActivity {
         }
 
 
-
         showDaysPresenter = new ShowDaysPresenter((DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao())),
                 SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this))
-                ,showDaysFragment);
+                ,showDaysFragment
+                , new SimpleDateFormat(pattern)
+                , Calendar.getInstance()
+        );
 
 
     }

@@ -12,15 +12,20 @@ import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
 import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 import com.clakestudio.pc.everyday.utils.BaseActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class AddDayActivity extends BaseActivity {
 
     private AddDayPresenter addDayPresenter;
+    private static final String pattern = "dd MM yyyy";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_day);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         AddDayFragment addDayFragment = (AddDayFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
@@ -28,9 +33,12 @@ public class AddDayActivity extends BaseActivity {
             addDayFragment = AddDayFragment.newInstance();
             BaseActivity.addFragmentToActivity(getSupportFragmentManager(), addDayFragment, R.id.contentFrame);
         }
-        int dayId = getIntent().getExtras().getInt("dayId", -1);
-            addDayPresenter = new AddDayPresenter(DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao()),
-                    SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this)), addDayFragment);
+        addDayPresenter = new AddDayPresenter(DayRepository.getInstance(DayDatabase.getInstance(getApplicationContext()).dayDao()),
+                SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(this))
+                , addDayFragment
+                , new SimpleDateFormat(pattern)
+                , Calendar.getInstance()
+        );
 /*
         if (dayId!=-1) {
             addDayPresenter.loadCurrentDayInfo(getIntent().getExtras().getString("title"), getIntent().getExtras().getString("note"), dayId);
