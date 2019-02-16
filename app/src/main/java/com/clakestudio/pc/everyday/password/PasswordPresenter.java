@@ -21,7 +21,7 @@ public class PasswordPresenter implements PasswordContract.Presenter {
 
     }
 
-    PasswordPresenter(SettingsRepository settingsRepository, PasswordContract.View view) {
+    public PasswordPresenter(SettingsRepository settingsRepository, PasswordContract.View view) {
         this.settingsRepository = settingsRepository;
         this.view = view;
         view.setPresenter(this);

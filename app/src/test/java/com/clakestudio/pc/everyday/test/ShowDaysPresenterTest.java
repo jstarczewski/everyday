@@ -1,10 +1,15 @@
-package com.clakestudio.pc.everyday.showdays;
+package com.clakestudio.pc.everyday.test;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ShowDaysPresenterTest {
+
+    @Before
+    public void setUp() throws Exception {
+    }
 
     @Test
     public void checkIfDayAlreadyAdded() {
