@@ -46,8 +46,7 @@ public class ShowDaysPresenter implements ShowDaysContract.Presenter, AsyncAcces
     }
 
     private boolean isToday(String date) {
-        String currentDate = simpleDateFormat.format(calendar.getTime());
-        return currentDate.equals(date);
+        return simpleDateFormat.format(calendar.getTime()).equals(date);
     }
 
     @Override
