@@ -11,12 +11,8 @@ This is the v2 (2018) version of my DayOne (app created back in 2017). Both Apps
 * use BroadcastRecievers and AlarmManagers to create and deliver simple local notifications at certain time of a day
 ## TO-DO
 * Services for notifications to "load" them after booting device
-* Notification channel to get notifications on Android 8+
-* MediaPlayer focus-end sound to fix
 
 ## Future of Everyday!
 Right now bugs are being solved. What I plan to do with Everyday!
 * Create a fake data source so the <i>Repository patter</i> implemented within the app will finally do his thang
-* Create tests both with JUnit and Mockito
 * Publish App on the google play store
-* Refactor everything to reduce boilprate code
