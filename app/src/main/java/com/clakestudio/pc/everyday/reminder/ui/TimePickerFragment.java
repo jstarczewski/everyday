@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -48,6 +49,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     private Calendar calendar;
     private SettingsRepository settingsRepository;
     private AfterDismissListener afterDismissListener;
+    private AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
 
     @NonNull
     @Override
@@ -80,10 +83,23 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         Log.e("Calendar", calendar.toString());
 
+
+        Context context = getContext();
+        if (context != null) {
+            alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, ReminderReceiver.class);
+            pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            settingsRepository.setReminderTime(calendar.getTimeInMillis());
+        }
+
+
+
+/*
         Context context = getContext();
         Intent intent = new Intent(context, ReminderReceiver.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-/*
+
         AlarmManager am = null;
         if (context != null) {
             am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -121,11 +137,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         // if (alarmManager != null) {
         //           alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
 //            settingsRepository.setReminder(true);
-
+/*
         AlarmUtils.cancelAlarm(context, sender);
         settingsRepository.setReminderTime(calendar.getTimeInMillis());
         AlarmUtils.setAlarm(context, calendar.getTimeInMillis(), sender);
-
+*/
     }
 
     private void setCalendar(int hourOfDay, int minute) {

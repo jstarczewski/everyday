@@ -18,16 +18,14 @@ public final class AlarmUtils {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
             //    alarmManager.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pendingIntent);
-        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            alarmManager.setRepeating(AlarmManager.RTC, time, AlarmManager.INTERVAL_DAY, pendingIntent);
+        else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
 //            alarmManager.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC, time, AlarmManager.INTERVAL_DAY, pendingIntent);
         else {
             if (alarmManager != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    //alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pendingIntent);
-                }
+                //alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+                alarmManager.setInexactRepeating(AlarmManager.RTC, time, AlarmManager.INTERVAL_DAY, pendingIntent);
             }
         }
     }

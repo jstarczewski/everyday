@@ -126,16 +126,9 @@ public class ShowDaysPresenterTest {
         Mockito.verify(view, Mockito.never()).showStartAddDayActivityToAddDay(currentDay);
     }
 
-    @Test
-    public void addDayIsNotFirstDayAndDaysNotNull() {
+    /**
+     * Test case when day are null is impossible because ifFirstDay == days.isEmpty()
+     * */
 
-        presenter.addDay(false, new ArrayList<Day>());
-        Mockito.verify(view, Mockito.never()).showStartAddDayActivityToAddDay(currentDay);
-
-        /**
-         * Will trigger checkIfDayAlreadyAdded which is tested in other test method
-         * */
-
-    }
 
 }

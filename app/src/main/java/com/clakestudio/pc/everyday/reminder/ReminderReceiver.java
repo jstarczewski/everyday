@@ -1,11 +1,13 @@
 package com.clakestudio.pc.everyday.reminder;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.clakestudio.pc.everyday.R;
@@ -27,7 +29,13 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(context));
 
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logosplash)
+                .setContentTitle("Focus time")
+                .setContentText(textContent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
+        /*
         if (!settingsRepository.isReminderSet()) {
             Intent notificationIntent = new Intent(context, ReminderReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -54,7 +62,28 @@ public class ReminderReceiver extends BroadcastReceiver {
             Intent notificationIntent = new Intent(context, ReminderReceiver.class);
             PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmUtils.setAlarm(context, settingsRepository.getReminderTime() + 20000, sender);
-        }*/
         }
+
+        }*/
     }
+
+    private void createNotificationChanngel() {
+
+
+
+    }
+   /*
+    private void createNotificationChannel() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }*/
 }
