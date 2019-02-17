@@ -80,68 +80,15 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
 
         setCalendar(hourOfDay, minute);
-
-        Log.e("Calendar", calendar.toString());
-
-
         Context context = getContext();
         if (context != null) {
             alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, ReminderReceiver.class);
             pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 60 * 1000 * 5, pendingIntent);
             settingsRepository.setReminderTime(calendar.getTimeInMillis());
         }
 
-
-
-/*
-        Context context = getContext();
-        Intent intent = new Intent(context, ReminderReceiver.class);
-        PendingIntent sender = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager am = null;
-        if (context != null) {
-            am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        }
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {        // KITKAT and later
-                if (am != null) {
-                    am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-                }
-            } else {
-                if (am != null) {
-                    am.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
-                }
-            }
-            intent = new Intent("android.intent.action.ALARM_CHANGED");
-            intent.putExtra("alarmSet", true);
-            if (context != null) {
-                context.sendBroadcast(intent);
-            }
-          /*  SimpleDateFormat fmt = new SimpleDateFormat("E HH:mm");
-            Settings.System.putString(context.getContentResolver(),
-                    Settings.System.NEXT_ALARM_FORMATTED,
-                    fmt.format(c.getTime()));*/
-        /*} else {
-            Intent showIntent = new Intent(context, SplashActivity.class);
-            PendingIntent showOperation = PendingIntent.getActivity(context, 0, showIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), showOperation);
-            if (am != null) {
-                am.setAlarmClock(alarmClockInfo, sender);
-            }
-        }
-        settingsRepository.setReminder(true);*/
-
-
-        // if (alarmManager != null) {
-        //           alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, sender);
-//            settingsRepository.setReminder(true);
-/*
-        AlarmUtils.cancelAlarm(context, sender);
-        settingsRepository.setReminderTime(calendar.getTimeInMillis());
-        AlarmUtils.setAlarm(context, calendar.getTimeInMillis(), sender);
-*/
     }
 
     private void setCalendar(int hourOfDay, int minute) {
