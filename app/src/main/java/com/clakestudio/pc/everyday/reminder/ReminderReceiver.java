@@ -1,17 +1,17 @@
 package com.clakestudio.pc.everyday.reminder;
 
-import android.app.Notification;
-import android.app.NotificationManager;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 import com.clakestudio.pc.everyday.R;
 import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 import com.clakestudio.pc.everyday.data.settings.SharedPreferencesSettings;
-import com.clakestudio.pc.everyday.utils.SplashActivity;
+import com.clakestudio.pc.everyday.showdays.ShowDaysActivity;
 
 /**
  * Created by Jan on 9/7/210018.
@@ -20,41 +20,46 @@ import com.clakestudio.pc.everyday.utils.SplashActivity;
 
 public class ReminderReceiver extends BroadcastReceiver {
 
-    private static final String CHANNEL_ID = "REMINDER";
+    private static final String CHANNEL_ID = "EVERYDAY_REMINDER";
+    private static final int notificationId = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
         SettingsRepository settingsRepository = SettingsRepository.getInstance(SharedPreferencesSettings.getInstance(context));
 
-
-        if (!settingsRepository.isReminderSet()) {
-            Intent notificationIntent = new Intent(context, ReminderReceiver.class);
-            PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmUtils.cancelAlarm(context, sender);
-        } else {
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            Intent repeatingIntent = new Intent(context, SplashActivity.class);
-            repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.logosplash)
-                    .setContentTitle("Focus time !")
-                    .setContentText("It is time to focus on your goal")
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent)
-                    .setWhen(System.currentTimeMillis())
-                    .build();
-            if (notificationManager != null && settingsRepository.isReminderSet()) {
-                notificationManager.notify(100, notification);
-            }
-
-        /*if (settingsRepository.isReminderSet()) {
-            Intent notificationIntent = new Intent(context, ReminderReceiver.class);
-            PendingIntent sender = PendingIntent.getBroadcast(context, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmUtils.setAlarm(context, settingsRepository.getReminderTime() + 20000, sender);
-        }*/
+        if (!settingsRepository.isReminderSet())
+            cancelScheduledActions(context);
+        else {
+            fireNotification(context, getPreparedNotificationAsBuilder(context));
         }
+    }
+
+    private void cancelScheduledActions(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.cancel(PendingIntent.getBroadcast(context, 0, new Intent(context, ReminderReceiver.class), 0));
+        }
+    }
+
+    private NotificationCompat.Builder getPreparedNotificationAsBuilder(Context context) {
+
+        Intent notificationIntent = new Intent(context, ShowDaysActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+
+        return new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.logosplash)
+                .setContentTitle("Focus time")
+                .setContentText("It is time to focus on your goal")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+    }
+
+    private void fireNotification(Context context, NotificationCompat.Builder builder) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(notificationId, builder.build());
     }
 }

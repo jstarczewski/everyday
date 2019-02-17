@@ -8,6 +8,10 @@ import com.clakestudio.pc.everyday.data.settings.SettingsRepository;
 
 public class CountdownPresenter implements CountdownContract.Presenter {
 
+    /**
+     * Logic in CountdownPresenter is straightforward and does not need to be tested
+     * */
+
     private SettingsRepository settingsRepository;
     private CountdownContract.View view;
 
